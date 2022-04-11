@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS  friends,user_prizes,prizes,family_account,family_users,reading_activity,author_book,genre_book,user_book,users,author,genre,book;
 DROP SEQUENCE IF EXISTS seq_user_id;
 
 CREATE SEQUENCE seq_user_id
@@ -21,8 +21,8 @@ CREATE TABLE genre (
 );
 
 CREATE TABLE book (
-	isbn varchar(13) PRIMARY KEY,
-	title varchar(100) NOT NULL,
+	isbn int PRIMARY KEY,
+	title varchar(100) NOT NULL
 );
 
 CREATE TABLE author_book (
@@ -66,7 +66,7 @@ CREATE TABLE reading_activity (
 	record_id serial PRIMARY KEY,
 	isbn int NOT NULL,
 	date DATE NOT NULL,
-	reader NOT NULL,
+	reader int NOT NULL,
 	format varchar(50),
 	minutes int NOT NULL DEFAULT(0),
 	notes varchar(400),
@@ -84,7 +84,7 @@ CREATE TABLE family_account (
 
 CREATE TABLE family_users (
 	family_id int NOT NULL,
-	user_id int NOT NULL
+	user_id int NOT NULL,
 
 	CONSTRAINT fk_family_id FOREIGN KEY (family_id) REFERENCES family_account (family_id),
 	CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
@@ -123,6 +123,7 @@ CREATE TABLE friends(
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
+
 
 
 COMMIT TRANSACTION;
