@@ -98,6 +98,7 @@ CREATE TABLE prizes (
 	milestone int DEFAULT(0),
 	user_group varchar(20),
 	max_prizes int DEFAULT(1),
+	prizes_available int DEFAULT(max_prizes),
 	start_date DATE,
 	end_date DATE,
 
@@ -118,7 +119,9 @@ CREATE TABLE friends(
 	user_1 int NOT NULL,
 	user_2 int NOT NULL,
 
-	CONSTRAINT chk_not_same_user CHECK (user_1 != user_2)
+	CONSTRAINT chk_not_same_user CHECK (user_1 != user_2),
+	CONSTRAINT fk_user_1 FOREIGN KEY (user_1) REFERENCES users (user_id),
+	CONSTRAINT fk_user_2 FOREIGN KEY (user_2) REFERENCES users (user_id)
 );
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
