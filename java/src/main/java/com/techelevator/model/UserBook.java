@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 public class UserBook {
+    private String username;
     private int userId;
     private String firstName;
     private String lastName;
@@ -8,6 +9,10 @@ public class UserBook {
     private String title;
     private int minutes;
     private boolean completed;
+
+    private String authors;
+    private String description;
+    private String bookCoverUrl;
 
 
     public int getUserId() {
