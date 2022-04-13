@@ -77,7 +77,7 @@ public class JdbcBookDao implements BookDao {
                      "JOIN book USING (isbn) " +
                      "WHERE user_id = (SELECT user_id FROM users WHERE username = ?);";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
         while(results.next()) {
             Book book = mapRowToBook(results);
