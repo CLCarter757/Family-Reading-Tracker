@@ -1,8 +1,7 @@
 package com.techelevator.controller;
 
-import com.techelevator.ApiService.ApiBook;
+import com.techelevator.model.ApiBook;
 import com.techelevator.ApiService.ApiBookService;
-import com.techelevator.ApiService.ApiResponse;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

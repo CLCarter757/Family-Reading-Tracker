@@ -1,11 +1,11 @@
 package com.techelevator.ApiService;
 
 
+import com.techelevator.model.ApiBook;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Component
