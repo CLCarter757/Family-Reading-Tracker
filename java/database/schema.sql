@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS  friends,user_prizes,prizes,family_account,family_users,reading_activity,author_book,genre_book,user_book,users,author,genre,book;
+DROP TABLE IF EXISTS  friends,user_prizes,prizes,family_account,reading_activity,user_book,users;
 DROP SEQUENCE IF EXISTS seq_user_id;
 
 CREATE SEQUENCE seq_user_id
@@ -8,38 +8,6 @@ CREATE SEQUENCE seq_user_id
   NO MAXVALUE
   NO MINVALUE
   CACHE 1;
-
-CREATE TABLE author (
-	author_id serial PRIMARY KEY,
-	first_name varchar(50) NOT NULL,
-	last_name varchar(50) NOT NULL
-);
-
-CREATE TABLE genre (
-	genre_id serial PRIMARY KEY,
-	genre_name varchar(50) NOT NULL
-);
-
-CREATE TABLE book (
-	isbn int PRIMARY KEY,
-	title varchar(100) NOT NULL
-);
-
-CREATE TABLE author_book (
-	author_id int NOT NULL,
-	isbn int NOT NULL,
-
-	CONSTRAINT fk_author_id FOREIGN KEY (author_id) REFERENCES author (author_id),
-	CONSTRAINT fk_isbn FOREIGN KEY (isbn) REFERENCES book (isbn)
-);
-
-CREATE TABLE genre_book (
-	genre_id int NOT NULL,
-	isbn int NOT NULL,
-
-	CONSTRAINT fk_genre_id FOREIGN KEY (genre_id) REFERENCES genre (genre_id),
-	CONSTRAINT fk_isbn FOREIGN KEY (isbn) REFERENCES book (isbn)
-);
 
 CREATE TABLE users (
 	user_id int DEFAULT nextval('seq_user_id'::regclass) NOT NULL,
@@ -52,26 +20,30 @@ CREATE TABLE users (
 );
 
 CREATE TABLE user_book (
+	user_book_id serial PRIMARY KEY,
 	user_id int NOT NULL,
 	isbn int NOT NULL,
 	minutes int NOT NULL DEFAULT(0),
 	completed boolean NOT NULL DEFAULT(false),
+	authors varchar(500),
+	title varchar(100) NOT NULL,
+	book_cover_url varchar(500),
+	description varchar(2000),
 
 	CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users (user_id),
-	CONSTRAINT fk_isbn FOREIGN KEY (isbn) REFERENCES book (isbn),
 	CONSTRAINT chk_minutes_positive CHECK (minutes >= 0)
 );
 
 CREATE TABLE reading_activity (
 	record_id serial PRIMARY KEY,
-	isbn int NOT NULL,
+	user_book_id int NOT NULL,
 	date DATE NOT NULL,
 	reader int NOT NULL,
 	format varchar(50),
 	minutes int NOT NULL DEFAULT(0),
 	notes varchar(400),
 
-	CONSTRAINT fk_isbn FOREIGN KEY (isbn) REFERENCES book (isbn),
+	CONSTRAINT fk_isbn FOREIGN KEY (user_book_id) REFERENCES user_book (user_book_id),
 	CONSTRAINT fk_reader FOREIGN KEY (reader) REFERENCES users (user_id),
 	CONSTRAINT chk_minutes_positive CHECK (minutes >= 0),
 	CONSTRAINT chk_date_not_future CHECK (date <= CURRENT_DATE)
@@ -82,13 +54,7 @@ CREATE TABLE family_account (
 	family_name varchar(50)
 );
 
-CREATE TABLE family_users (
-	family_id int NOT NULL,
-	user_id int NOT NULL,
 
-	CONSTRAINT fk_family_id FOREIGN KEY (family_id) REFERENCES family_account (family_id),
-	CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
-);
 
 CREATE TABLE prizes (
 	prize_id serial PRIMARY KEY,
@@ -98,7 +64,7 @@ CREATE TABLE prizes (
 	milestone int DEFAULT(0),
 	user_group varchar(20),
 	max_prizes int DEFAULT(1),
-	prizes_available int ,
+	prizes_available int,
 	start_date DATE,
 	end_date DATE,
 
