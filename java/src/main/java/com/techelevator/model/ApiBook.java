@@ -1,4 +1,4 @@
-package com.techelevator.ApiService;
+package com.techelevator.model;
 
 public class ApiBook {
     private String isbn;

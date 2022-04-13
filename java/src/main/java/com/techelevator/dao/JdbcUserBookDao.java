@@ -6,26 +6,34 @@ import com.techelevator.model.UserBook;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcBookDao implements BookDao {
+public class JdbcUserBookDao implements UserBookDao {
 
     private JdbcTemplate jdbcTemplate;
-    public JdbcBookDao(JdbcTemplate jdbcTemplate) {
+    public JdbcUserBookDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public Book addBook(String username, Book book) {
-        String sql = "INSERT INTO book (isbn, title) " +
-                     "VALUES (?, ?);";
+    public Integer addBook(String username, UserBook book) {
 
-        //SqlRowSet results = jdbcTemplate.queryForObject(sql);
+        String sql = "INSERT INTO user_book (user_id, isbn, authors, title, book_cover_url, description) " +
+                "VALUES ((SELECT username FROM users WHERE username = ?), ?, ?, ?, ?, ?);" +
+                "RETURNING user_book_id";
 
-        return null;
+        Integer userBookId = jdbcTemplate.queryForObject(sql, Integer.class, book.getUsername(), book.getIsbn(),
+                book.getAuthors(), book.getTitle(), book.getBookCoverUrl(), book.getDescription());
+
+        return userBookId;
     }
 
     @Override

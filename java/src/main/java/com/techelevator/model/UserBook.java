@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 public class UserBook {
+    private String username;
     private int userId;
     private String firstName;
     private String lastName;
@@ -8,7 +9,41 @@ public class UserBook {
     private String title;
     private int minutes;
     private boolean completed;
+    private String authors;
+    private String description;
+    private String bookCoverUrl;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(String authors) {
+        this.authors = authors;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getBookCoverUrl() {
+        return bookCoverUrl;
+    }
+
+    public void setBookCoverUrl(String bookCoverUrl) {
+        this.bookCoverUrl = bookCoverUrl;
+    }
 
     public int getUserId() {
         return userId;
