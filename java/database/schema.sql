@@ -98,7 +98,7 @@ CREATE TABLE prizes (
 	milestone int DEFAULT(0),
 	user_group varchar(20),
 	max_prizes int DEFAULT(1),
-	prizes_available int DEFAULT(max_prizes),
+	prizes_available int,
 	start_date DATE,
 	end_date DATE,
 
