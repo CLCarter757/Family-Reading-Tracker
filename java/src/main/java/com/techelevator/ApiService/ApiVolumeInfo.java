@@ -1,9 +1,11 @@
 package com.techelevator.ApiService;
 
+import java.util.List;
+
 public class ApiVolumeInfo {
- //   private IndustryIdentifier industryIdentifiers;
+    private IndustryIdentifier[] industryIdentifiers;
     private String description;
-//    private String [] authors;
+    private List<String> authors;
     private String title;
     private ImageLink imageLinks;
 
@@ -17,14 +19,14 @@ public class ApiVolumeInfo {
     }
 
 
-//
-//    public IndustryIdentifier getIndustryIdentifiers() {
-//        return industryIdentifiers;
-//    }
-//
-//    public void setIndustryIdentifiers(IndustryIdentifier industryIdentifiers) {
-//        this.industryIdentifiers = industryIdentifiers;
-//    }
+
+    public IndustryIdentifier[] getIndustryIdentifiers() {
+        return industryIdentifiers;
+    }
+
+    public void setIndustryIdentifiers(IndustryIdentifier[] industryIdentifiers) {
+        this.industryIdentifiers = industryIdentifiers;
+    }
 
     public String getDescription() {
         return description;
@@ -34,13 +36,13 @@ public class ApiVolumeInfo {
         this.description = description;
     }
 
-//    public String[] getAuthors() {
-//        return authors;
-//    }
-//
-//    public void setAuthors(String[] authors) {
-//        this.authors = authors;
-//    }
+    public List<String> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<String> authors) {
+        this.authors = authors;
+    }
 
     public String getTitle() {
         return title;

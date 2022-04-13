@@ -1,13 +1,13 @@
 package com.techelevator.ApiService;
 
 public class IndustryIdentifier {
-    private int[] identifier;
+    private String identifier;
 
-    public int[] getIdentifier() {
+    public String getIdentifier() {
         return identifier;
     }
 
-    public void setIdentifier(int[] identifier) {
+    public void setIdentifier(String identifier) {
         this.identifier = identifier;
     }
 }
