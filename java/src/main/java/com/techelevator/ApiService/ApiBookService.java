@@ -26,8 +26,7 @@ public class ApiBookService {
            if(item.getVolumeInfo().getAuthors()==null)continue;
            book.setAuthors(item.getVolumeInfo().getAuthors().get(0));
 
-           if(item.getVolumeInfo().getImageLinks().getThumbnail()==null||
-                   item.getVolumeInfo().getImageLinks()==null)continue;
+           if(item.getVolumeInfo().getImageLinks()==null||item.getVolumeInfo().getImageLinks().getThumbnail()==null)continue;
            book.setBookCoverUrl(item.getVolumeInfo().getImageLinks().getThumbnail());
 
            if(item.getVolumeInfo().getDescription()==null)continue;
