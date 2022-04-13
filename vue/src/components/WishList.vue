@@ -1,8 +1,8 @@
 <template>
     <section>
-        <h2>Reading List</h2>
+        <h2>Wish List</h2>
         <div class="reading-list">
-            <book-card :book="book" :key="book.isbn"/>
+            <book-card v-for="book in $store.state.list" v-bind:key="book.isbn" :book="book"/>
         </div>
     </section>
 </template>
@@ -11,7 +11,7 @@
 import BookCard from '@/components/BookCard.vue';
 
 export default {
-    name:"reading-list",
+    name: 'wish-list',
     components: {
         BookCard
     }
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style>
-.best-seller-list {
+.reading-list {
     display:flex;
     justify-content: space-evenly;
     flex-wrap: wrap;

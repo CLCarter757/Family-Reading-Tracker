@@ -1,10 +1,10 @@
 <template>
   <div class="card" v-bind:class="{ read: book.read }">
     <h2 class="book-title">{{ book.title }}</h2>
-    <img v-if="book.isbn" v-bind:src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'" />
+    <img class="img" v-if="book.isbn" v-bind:src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'" />
     <h3 class="book-author">{{ book.author }}</h3>
     <div class="button-container">
-        <button class="log-reading">Log Reading</button>
+        <router-link to="/form" tag="button">Log Reading</router-link>
     </div>
     <div class="button-container" v-if="! enableAdd">
         <button class="mark-read" v-on:click.prevent="setRead(true)" v-if=" ! book.read">Mark Read</button>
@@ -25,13 +25,7 @@ export default {
         }
     },
     methods: {
-        setRead(value) {
-            this.$store.commit('SET_READ_STATUS', {book: this.book, value: value});
-        },
-        addToReadingList(book) {
-            let addedBook = Object.assign({ read: false }, book);
-            this.$store.commit('SAVE_BOOK', addedBook);
-        }
+
     }
 }
 </script>
@@ -41,12 +35,12 @@ export default {
     border: 2px solid black;
     border-radius: 10px;
     width: 250px;
-    height: 550px;
+    height: 450px;
     margin: 20px;
 }
 
 .card.read {
-    background-color: lightgray;
+    background-color: lightgoldenrodyellow;
 }
 
 .card .book-title {
@@ -55,5 +49,9 @@ export default {
 
 .card .book-author {
     font-size: 1rem;
+}
+
+.img {
+    height: 200px;
 }
 </style>
