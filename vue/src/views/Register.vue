@@ -32,6 +32,15 @@
         v-model="user.confirmPassword"
         required
       />
+      <form required>
+        <label for="role">Family Role:</label>
+        <select name="role" id="role" v-model="user.role">
+          <option value="admin">Parent</option>
+          <option value="user">Child</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Submit">
+      </form>
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
@@ -51,7 +60,7 @@ export default {
         username: '',
         password: '',
         confirmPassword: '',
-        role: 'user',
+        role: '',
       },
       registrationErrors: false,
       registrationErrorMsg: 'There were problems registering this user.',
@@ -86,8 +95,11 @@ export default {
       this.registrationErrors = false;
       this.registrationErrorMsg = 'There were problems registering this user.';
     },
+
   },
 };
 </script>
 
-<style></style>
+<style>
+
+</style>
