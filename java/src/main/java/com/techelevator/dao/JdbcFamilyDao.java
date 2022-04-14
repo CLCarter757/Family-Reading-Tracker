@@ -19,13 +19,15 @@ public class JdbcFamilyDao implements FamilyDao{
 
     @Override
     public Family createFamily(String userName,Family family) throws Exception {
-        String sql="SELECT family_id FROM users WHERE username=? AND role='parent'";
-        Integer checkFamilyId = jdbcTemplate.queryForObject(sql,Integer.class,userName);
-        if(checkFamilyId!=null){
-            String sqlForFamilyId="INSERT INTO family_account (family_name) VALUES ? RETURNING family_id";
+        String sql="SELECT family_id FROM users WHERE username=?";
+        Integer checkFamilyId = jdbcTemplate.queryForObject(sql, Integer.class, userName);
+        if (checkFamilyId == null) {
+            String sqlForFamilyId="INSERT INTO family_account (family_name) VALUES (?) RETURNING family_id";
             Integer familyId= jdbcTemplate.queryForObject(sqlForFamilyId,Integer.class,family.getFamilyName());
             family.setFamilyId(familyId);
-            return family;
+            String sqlUpdateUser="UPDATE users SET family_id=?  WHERE username=?";
+            jdbcTemplate.update(sqlUpdateUser, familyId, userName);
+            return getFamily(userName);
         }
         throw new Exception("error");
 
@@ -53,7 +55,7 @@ public class JdbcFamilyDao implements FamilyDao{
         Integer checkFamilyId = jdbcTemplate.queryForObject(sql,Integer.class,parentUserName);
         if(checkFamilyId!=null){
 
-            String sqlForFamilyId="UPDATE users SET family_id=?  WHERE user_name=? RETURNING family_id";
+            String sqlForFamilyId="UPDATE users SET family_id=?  WHERE username=?";
              jdbcTemplate.update(sqlForFamilyId,checkFamilyId,childUserName);
 
 
