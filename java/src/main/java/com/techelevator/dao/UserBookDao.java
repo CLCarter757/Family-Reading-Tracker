@@ -23,14 +23,14 @@ public interface UserBookDao {
     boolean deleteMyBook(String username, String isbn) throws Exception;
 
     UserBook updateMyBook(UserBook book, String username, String isbn);
-
-    Book getBook(int isbn);
-
-    List<UserBook> getAllBooksByUsername(String username);
-
-    List<Book> getAllBooksByFamilyId(Family family);
-
-    UserBook getBookByUserId(String username, int isbn);
-
-    Book getBookByIsbn(int isbn);
+//
+//    Book getBook(String isbn);
+//
+//    List<UserBook> getAllBooksByUsername(String username);
+//
+//    List<Book> getAllBooksByFamilyId(Family family);
+//
+//    UserBook getBookByUserId(String username, String isbn);
+//
+//    Book getBookByIsbn(String isbn);
 }
