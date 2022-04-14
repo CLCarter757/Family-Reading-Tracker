@@ -55,7 +55,7 @@ public class JdbcUserBookDao implements UserBookDao {
     }
 
     @Override
-    public UserBook getMyBook(String username, Integer isbn) {
+    public UserBook getMyBook(String username, String isbn) {
         UserBook book = new UserBook();
         String sql = "SELECT user_book_id, user_id, isbn, title, minutes, completed, " +
                 "authors, description, book_cover_url " +
@@ -72,7 +72,7 @@ public class JdbcUserBookDao implements UserBookDao {
     }
 
     @Override
-    public boolean deleteMyBook(String username, Integer isbn) throws Exception {
+    public boolean deleteMyBook(String username, String isbn) throws Exception {
         String sql = "DELETE FROM user_book " +
                 "WHERE isbn = ? and user_id = (SELECT user_id FROM users WHERE username = ?);";
 
@@ -85,7 +85,7 @@ public class JdbcUserBookDao implements UserBookDao {
     }
 
     @Override
-    public UserBook updateMyBook(UserBook book, String username, Integer isbn) {
+    public UserBook updateMyBook(UserBook book, String username, String isbn) {
         String sql = "UPDATE user_book " +
                 "SET " +
                 "minutes = ?, " +
@@ -150,7 +150,7 @@ public class JdbcUserBookDao implements UserBookDao {
         userbook.setAuthors(results.getString("authors"));
         userbook.setUserBookId(results.getInt("user_book_id"));
         userbook.setUserId(results.getInt("user_id"));
-        userbook.setIsbn(results.getInt("isbn"));
+        userbook.setIsbn(results.getString("isbn"));
         userbook.setTitle(results.getString("title"));
         userbook.setMinutes(results.getInt("minutes"));
         userbook.setCompleted(results.getBoolean("completed"));
