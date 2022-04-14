@@ -8,6 +8,7 @@ import store from '../store/index'
 import Log from '../views/Log.vue'
 import Family from '../views/Family.vue'
 import Prizes from '../views/Prizes.vue'
+import SearchBooks from '../views/SearchBooks.vue'
 
 Vue.use(Router)
 
@@ -79,7 +80,15 @@ const router = new Router({
       meta: {
         requiresAuth: false
       },
-  }
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: SearchBooks,
+      meta: {
+        requiresAuth: false
+      },
+    }
   ]
 })
 
