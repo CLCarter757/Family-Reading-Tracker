@@ -20,7 +20,7 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    
+    searchBook: [],
     completed: [
       {
         title: "The Hunger Games",
@@ -89,6 +89,9 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
-    }
+    },
+    ADD_SEARCH_BOOK(state, data){
+      state.searchBook = data;
+    },
   }
 })
