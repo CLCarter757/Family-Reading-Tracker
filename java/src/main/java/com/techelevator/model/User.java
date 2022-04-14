@@ -14,6 +14,26 @@ public class User {
    private String password;
    @JsonIgnore
    private boolean activated;
+
+   public Integer getFamilyId() {
+      return familyId;
+   }
+
+   public void setFamilyId(Integer familyId) {
+      this.familyId = familyId;
+   }
+
+   public String getFamilyRole() {
+      return familyRole;
+   }
+
+   public void setFamilyRole(String familyRole) {
+      this.familyRole = familyRole;
+   }
+
+   private Integer familyId;
+   private String familyRole;
+
    private Set<Authority> authorities = new HashSet<>();
 
    public User() { }
