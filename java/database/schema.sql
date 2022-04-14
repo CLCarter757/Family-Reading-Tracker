@@ -9,6 +9,11 @@ CREATE SEQUENCE seq_user_id
   NO MINVALUE
   CACHE 1;
 
+CREATE TABLE family_account (
+	family_id serial PRIMARY KEY,
+	family_name varchar(50)
+);
+
 CREATE TABLE users (
 	user_id int DEFAULT nextval('seq_user_id'::regclass) NOT NULL,
 	username varchar(50) NOT NULL UNIQUE,
@@ -16,13 +21,17 @@ CREATE TABLE users (
 	last_name varchar(50),
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
-	CONSTRAINT PK_user PRIMARY KEY (user_id)
+
+	family_id int,
+	CONSTRAINT PK_user PRIMARY KEY (user_id),
+	CONSTRAINT fk_family_id FOREIGN KEY (family_id) REFERENCES family_account (family_id)
+
 );
 
 CREATE TABLE user_book (
 	user_book_id serial PRIMARY KEY,
 	user_id int NOT NULL,
-	isbn int NOT NULL,
+	isbn varchar(13) NOT NULL,
 	minutes int NOT NULL DEFAULT(0),
 	completed boolean NOT NULL DEFAULT(false),
 	authors varchar(500),
@@ -43,16 +52,12 @@ CREATE TABLE reading_activity (
 	minutes int NOT NULL DEFAULT(0),
 	notes varchar(400),
 
-	CONSTRAINT fk_isbn FOREIGN KEY (user_book_id) REFERENCES user_book (user_book_id),
+	CONSTRAINT fk_user_book_id FOREIGN KEY (user_book_id) REFERENCES user_book (user_book_id),
 	CONSTRAINT fk_reader FOREIGN KEY (reader) REFERENCES users (user_id),
 	CONSTRAINT chk_minutes_positive CHECK (minutes >= 0),
 	CONSTRAINT chk_date_not_future CHECK (date <= CURRENT_DATE)
 );
 
-CREATE TABLE family_account (
-	family_id serial PRIMARY KEY,
-	family_name varchar(50)
-);
 
 
 

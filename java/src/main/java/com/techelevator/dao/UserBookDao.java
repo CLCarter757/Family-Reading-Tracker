@@ -18,10 +18,10 @@ public interface UserBookDao {
 
     List<UserBook> getUserBookList(String username);
 
-    UserBook getMyBook(String username, Integer isbn);
+    UserBook getMyBook(String username, String isbn);
 
-    boolean deleteMyBook(String username, Integer isbn) throws Exception;
+    boolean deleteMyBook(String username, String isbn) throws Exception;
 
-    UserBook updateMyBook(UserBook book, String username, Integer isbn);
+    UserBook updateMyBook(UserBook book, String username, String isbn);
 
 }
