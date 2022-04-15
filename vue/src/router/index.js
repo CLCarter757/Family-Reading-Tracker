@@ -5,6 +5,10 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
+import Log from '../views/Log.vue'
+import Family from '../views/Family.vue'
+import Prizes from '../views/Prizes.vue'
+import SearchBooks from '../views/SearchBooks.vue'
 
 
 Vue.use(Router)
@@ -54,8 +58,38 @@ const router = new Router({
         requiresAuth: false
       }
     },
-
-    
+    {
+      path: "/form",
+      name: "form",
+      component: Log,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/family',
+      name: 'family',
+      component: Family,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/prizes',
+      name: 'prizes',
+      component: Prizes,
+      meta: {
+        requiresAuth: false
+      },
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: SearchBooks,
+      meta: {
+        requiresAuth: false
+      },
+    }
   ]
 })
 

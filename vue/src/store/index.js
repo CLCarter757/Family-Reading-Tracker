@@ -19,7 +19,59 @@ if(currentToken != null) {
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    searchBook: [],
+    completed: [
+      {
+        title: "The Hunger Games",
+        author: "Suzanne Collins",
+        read: true,
+        isbn: "9780439023481"
+      },
+      {
+        title: "The Giver",
+        author: "Lois Lowry",
+        read: true,
+        isbn: "0385732554"
+      },
+      {
+        title: "A Wrinkle in Time",
+        author: "Madeleine L'Engle",
+        read: true,
+        isbn: "1250153271"
+      },
+      {
+        title: "Red Rising",
+        author: "Pierce Brown",
+        read: true,
+        isbn: "0345539788"
+      }
+    ],
+    reading: [
+      {
+        title: "Harry Potter and the Order of the Phoenix",
+        author: "	J. K. Rowling",
+        isbn: "0747551006"
+      },
+      {
+        title: "Charlotte's Web",
+        author: "E. B. White",
+        isbn: "9780062658753"
+      },
+    ],
+
+    list: [
+      {
+        title: "Coraline",
+        author: "Neil Gaiman",
+        isbn: "	0061139378"
+      },
+      {
+        title: "Hatchet",
+        author: "Gary Paulsen",
+        isbn: "	0027701301"
+      },
+    ],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -37,6 +89,9 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
-    }
+    },
+    ADD_SEARCH_BOOK(state, data){
+      state.searchBook = data;
+    },
   }
 })

@@ -1,14 +1,56 @@
 package com.techelevator.model;
 
 public class UserBook {
+    private int UserBookId;
+    private String username;
     private int userId;
-    private String firstName;
-    private String lastName;
-    private int isbn;
+    private String isbn;
     private String title;
     private int minutes;
     private boolean completed;
+    private String authors;
+    private String description;
+    private String bookCoverUrl;
 
+    public int getUserBookId() {
+        return UserBookId;
+    }
+
+    public void setUserBookId(int userBookId) {
+        UserBookId = userBookId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(String authors) {
+        this.authors = authors;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getBookCoverUrl() {
+        return bookCoverUrl;
+    }
+
+    public void setBookCoverUrl(String bookCoverUrl) {
+        this.bookCoverUrl = bookCoverUrl;
+    }
 
     public int getUserId() {
         return userId;
@@ -18,27 +60,11 @@ public class UserBook {
         this.userId = userId;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 

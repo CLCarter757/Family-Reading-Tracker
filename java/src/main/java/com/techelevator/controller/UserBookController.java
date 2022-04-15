@@ -1,0 +1,69 @@
+package com.techelevator.controller;
+
+import com.techelevator.dao.UserBookDao;
+import com.techelevator.model.LoginDTO;
+import com.techelevator.model.UserBook;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.security.Principal;
+import java.util.List;
+
+@RestController
+@CrossOrigin
+public class UserBookController {
+    private final UserBookDao userBookDao;
+
+    public UserBookController(UserBookDao userBookDao) {
+        this.userBookDao = userBookDao;
+    }
+
+
+    @RequestMapping(value = "/mybooks", method = RequestMethod.POST)
+    public Integer addBook(@Valid @RequestBody UserBook userBook, Principal principal) {
+        return userBookDao.addBook(userBook, principal.getName());
+    }
+
+    @RequestMapping(value = "/mybooks", method = RequestMethod.GET)
+    public List<UserBook> listMyBooks(Principal principal) {
+        return userBookDao.getUserBookList(principal.getName());
+    }
+
+    @RequestMapping(value = "/mybooks/{isbn}", method = RequestMethod.GET)
+    public UserBook getMyBook(Principal principal, @PathVariable Integer isbn) {
+        return null;
+    }
+
+    @RequestMapping(value = "/mybooks/{isbn}", method = RequestMethod.DELETE)
+    public boolean deleteMyBook(Principal principal, @PathVariable Integer isbn) {
+        return false;
+    }
+
+    @RequestMapping(value = "/mybooks/{isbn}", method = RequestMethod.PUT)
+    public UserBook updateMyBook(@Valid @RequestBody UserBook userBook, Principal principal, @PathVariable Integer isbn) {
+        return null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
