@@ -3,6 +3,7 @@
     <h2 class="book-title">{{ book.title }}</h2>
     <img class="img" v-if="book.isbn" v-bind:src="book.bookCoverUrl" />
     <h3 class="book-author">{{ book.authors }}</h3>
+    <button>Add to Wish List</button>
     
     <!-- <button v-if="enableAdd" v-on:click.prevent="addToReadingList(book)">Add to Reading List</button> -->
   </div>
@@ -19,7 +20,7 @@ export default {
         }
     },
     methods: {
-
+        
     }
 }
 </script>

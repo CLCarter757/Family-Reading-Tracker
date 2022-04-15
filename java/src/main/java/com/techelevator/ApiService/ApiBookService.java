@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class ApiBookService {
     private final RestTemplate restTemplate = new RestTemplate();
-    private static final String API_BASE_URL ="https://www.googleapis.com/books/v1/volumes?q=";
+    private static final String API_BASE_URL ="https://www.googleapis.com/books/v1/volumes?maxResults=40&q=";
 
     public List<ApiBook> getBooks(String searchTerm){
         List<ApiBook> apiBooks=new ArrayList<>();

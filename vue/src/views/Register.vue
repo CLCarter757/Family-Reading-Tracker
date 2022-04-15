@@ -35,8 +35,8 @@
       <form required>
         <label for="role">Family Role:</label>
         <select name="role" id="role" v-model="user.role">
-          <option value="admin">Parent</option>
-          <option value="user">Child</option>
+          <option value="parent">Parent</option>
+          <option value="child">Child</option>
         </select>
         <br><br>
         <input type="submit" value="Submit">

@@ -11,10 +11,12 @@
             <input id="search" type=submit value="Search"/>            
         </form>
 
-        <h2>Results</h2>
-        <div class="reading-list">
-            <search-book-card v-for="book in $store.state.searchBook" v-bind:key="book.isbn" :book="book"/>
-        </div>
+        <section v-show="searchResults">
+            <h2 v-show="submitSearch">Results</h2>
+            <div class="reading-list">
+                <search-book-card v-for="book in $store.state.searchBook" v-bind:key="book.isbn" :book="book"/>
+            </div>
+        </section>
     </div>
 </template>
 
@@ -31,6 +33,7 @@ export default {
         return {
            searchType: '',
            searchText: '', 
+           searchResults: false
         }
     },
     methods: {
@@ -40,7 +43,7 @@ export default {
                 .then(response => {
                     this.$store.commit("ADD_SEARCH_BOOK", response.data);
                 })
-            console.log("test");
+            this.searchResults = true;
         }
     }
     

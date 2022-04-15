@@ -21,6 +21,7 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     searchBook: [],
+    books: [],
     completed: [
       {
         title: "The Hunger Games",
