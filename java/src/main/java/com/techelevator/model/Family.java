@@ -3,15 +3,15 @@ package com.techelevator.model;
 import java.util.List;
 
 public class Family {
-    private int familyId;
+    private Integer familyId;
     private String familyName;
     private List<User> familyMembers;
 
-    public int getFamilyId() {
+    public Integer getFamilyId() {
         return familyId;
     }
 
-    public void setFamilyId(int familyId) {
+    public void setFamilyId(Integer familyId) {
         this.familyId = familyId;
     }
 

@@ -11,7 +11,8 @@ import java.util.List;
 @Component
 public class ApiBookService {
     private final RestTemplate restTemplate = new RestTemplate();
-    private static final String API_BASE_URL ="https://www.googleapis.com/books/v1/volumes?q=";
+    private static final String API_BASE_URL ="https://www.googleapis.com/books/v1/volumes?maxResults=40&q=";
+
 
     public List<ApiBook> getBooks(String searchTerm){
         List<ApiBook> apiBooks=new ArrayList<>();
@@ -29,11 +30,12 @@ public class ApiBookService {
            if(item.getVolumeInfo().getImageLinks()==null||item.getVolumeInfo().getImageLinks().getThumbnail()==null)continue;
            book.setBookCoverUrl(item.getVolumeInfo().getImageLinks().getThumbnail());
 
-           if(item.getVolumeInfo().getDescription()==null)continue;
+          if(item.getVolumeInfo().getDescription()==null)continue;
            book.setDescription(item.getVolumeInfo().getDescription());
 
            if(item.getVolumeInfo().getIndustryIdentifiers()==null)continue;
            book.setIsbn(item.getVolumeInfo().getIndustryIdentifiers()[item.getVolumeInfo().getIndustryIdentifiers().length-1].getIdentifier());
+
            apiBooks.add(book);
        }
        return apiBooks;

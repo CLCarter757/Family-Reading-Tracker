@@ -50,23 +50,34 @@ public class JdbcFamilyDao implements FamilyDao{
     }
 
     @Override
-    public Family addFamilyMember(String parentUserName, String childUserName) throws Exception {
-        String sql="SELECT family_id FROM users WHERE username=? AND role='USER_PARENT'";
-        Integer checkFamilyId = jdbcTemplate.queryForObject(sql,Integer.class,parentUserName);
-        if(checkFamilyId!=null){
+    public Family addFamilyMember(Integer familyId, String principalName, User userToAdd) throws Exception {
+        String sql="SELECT family_id FROM users WHERE username=?";
+        Integer checkFamilyId = jdbcTemplate.queryForObject(sql,Integer.class,principalName);
+        if(checkFamilyId!=null && familyId.equals(checkFamilyId)){
 
             String sqlForFamilyId="UPDATE users SET family_id=?  WHERE username=?";
-             jdbcTemplate.update(sqlForFamilyId,checkFamilyId,childUserName);
+             jdbcTemplate.update(sqlForFamilyId,checkFamilyId,userToAdd.getUsername());
 
 
-            return getFamily(parentUserName);
+            return getFamily(principalName);
         }
         throw new Exception("error");
     }
 
     @Override
-    public Family removeFamilyMember(String parentUserName, String childUserName) {
-        return null;
+    public Family removeFamilyMember(Integer familyId, String principalName, User userToRemove) throws Exception {
+        String sql="SELECT family_id FROM users WHERE username=?";
+        Integer checkFamilyId = jdbcTemplate.queryForObject(sql,Integer.class,principalName);
+        if(checkFamilyId!=null && familyId.equals(checkFamilyId)){
+
+            String sqlForFamilyId="UPDATE users SET family_id=?  WHERE username=?";
+            jdbcTemplate.update(sqlForFamilyId,null,userToRemove.getUsername());
+
+
+            return getFamily(principalName);
+        }
+        throw new Exception("error");
+
     }
 
     @Override
