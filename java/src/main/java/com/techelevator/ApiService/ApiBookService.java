@@ -29,11 +29,12 @@ public class ApiBookService {
            if(item.getVolumeInfo().getImageLinks()==null||item.getVolumeInfo().getImageLinks().getThumbnail()==null)continue;
            book.setBookCoverUrl(item.getVolumeInfo().getImageLinks().getThumbnail());
 
-           if(item.getVolumeInfo().getDescription()==null)continue;
+          if(item.getVolumeInfo().getDescription()==null)continue;
            book.setDescription(item.getVolumeInfo().getDescription());
 
            if(item.getVolumeInfo().getIndustryIdentifiers()==null)continue;
            book.setIsbn(item.getVolumeInfo().getIndustryIdentifiers()[item.getVolumeInfo().getIndustryIdentifiers().length-1].getIdentifier());
+
            apiBooks.add(book);
        }
        return apiBooks;
