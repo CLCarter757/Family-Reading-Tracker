@@ -4,13 +4,20 @@ import java.time.LocalDate;
 
 public class ReadingActivity {
     private int recordId;
-    private int isbn;
-    private LocalDate date;
+    private int userBookId;
+    private LocalDate dateCreated;
     private int reader;
     private String format;
     private Long time;
     private String notes;
 
+    public int getUserBookId() {
+        return userBookId;
+    }
+
+    public void setUserBookId(int userBookId) {
+        this.userBookId = userBookId;
+    }
     public int getRecordId() {
         return recordId;
     }
@@ -19,20 +26,12 @@ public class ReadingActivity {
         this.recordId = recordId;
     }
 
-    public int getIsbn() {
-        return isbn;
+    public LocalDate getDateCreated() {
+        return this.dateCreated;
     }
 
-    public void setIsbn(int isbn) {
-        this.isbn = isbn;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDateCreated(LocalDate date) {
+        this.dateCreated = date;
     }
 
     public int getReader() {
@@ -66,4 +65,6 @@ public class ReadingActivity {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
+
 }
