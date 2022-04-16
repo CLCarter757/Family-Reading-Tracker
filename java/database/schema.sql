@@ -69,13 +69,13 @@ CREATE TABLE prizes (
 	milestone int DEFAULT(0),
 	user_group varchar(20),
 	max_prizes int DEFAULT(1),
-	prizes_available int,
+
 	start_date DATE,
 	end_date DATE,
 
 	CONSTRAINT fk_family_id FOREIGN KEY (family_id) REFERENCES family_account (family_id),
-	CONSTRAINT chk_end_date_after_start_date CHECK (start_date <= end_date),
-	CONSTRAINT chk_valid_role CHECK (user_group IN ('parent', 'child', 'both'))
+	CONSTRAINT chk_end_date_after_start_date CHECK (start_date <= end_date)
+
 );
 
 CREATE TABLE user_prizes (
