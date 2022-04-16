@@ -22,6 +22,18 @@ export default new Vuex.Store({
     user: currentUser || {},
     searchBook: [],
     books: [],
+    family: [
+      {
+        username: 'test',
+        firstName: 'bob',
+        role: 'child'
+      },
+      {
+        username: 'test',
+        firstName: 'bob',
+        role: 'child'
+      }
+    ],
     completed: [
       {
         title: "The Hunger Games",
@@ -94,5 +106,8 @@ export default new Vuex.Store({
     ADD_SEARCH_BOOK(state, data){
       state.searchBook = data;
     },
+    // ADD_TO_WISH_LIST(state, data) {
+    //   state.books
+    // }
   }
 })

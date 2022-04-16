@@ -32,12 +32,11 @@ export default {
 
 <style>
 .card {
-  background: linear-gradient(to right, rgb(60, 13, 20) 3px, rgba(255, 255, 255, 0.5) 5px, rgba(255, 255, 255, 0.25) 7px, rgba(255, 255, 255, 0.25) 10px, transparent 12px, transparent 16px, rgba(255, 255, 255, 0.25) 17px, transparent 22px);
-  box-shadow: 0 0 5px -1px black, inset -1px 1px 2px rgba(255, 255, 255, 0.5);
-  margin: auto;
-  border-radius: 0px;
-  width: 389px;
-  height: 500px;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 250px;
+    height: 450px;
+    margin: 20px;
 }
 
 .card.read {

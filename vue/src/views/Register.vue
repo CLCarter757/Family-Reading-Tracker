@@ -5,6 +5,31 @@
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
+      <!-- <div>
+        <label for="firstName" class="sr-only"> First Name</label>
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          placeholder="First Name"
+          v-model="user.firstName"
+          required
+          autofocus
+        />
+      </div>
+      <div>
+        <label for="lastName" class="sr-only">Last Name</label>
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          placeholder="Last Name"
+          v-model="user.lastName"
+          required
+          autofocus
+        />
+      </div> -->
+      <div>
       <label for="username" class="sr-only">Username</label>
       <input
         type="text"
@@ -15,6 +40,8 @@
         required
         autofocus
       />
+      </div>
+      <div>
       <label for="password" class="sr-only">Password</label>
       <input
         type="password"
@@ -24,6 +51,8 @@
         v-model="user.password"
         required
       />
+      </div>
+      <div>
       <input
         type="password"
         id="confirmPassword"
@@ -31,7 +60,8 @@
         placeholder="Confirm Password"
         v-model="user.confirmPassword"
         required
-      />
+      />        
+      </div>
       <form required>
         <label for="role">Family Role:</label>
         <select name="role" id="role" v-model="user.role">
@@ -39,7 +69,6 @@
           <option value="child">Child</option>
         </select>
         <br><br>
-        <input type="submit" value="Submit">
       </form>
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
@@ -57,6 +86,8 @@ export default {
   data() {
     return {
       user: {
+        // firstName: '',
+        // lastName: '',
         username: '',
         password: '',
         confirmPassword: '',

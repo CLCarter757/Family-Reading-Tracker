@@ -7,7 +7,6 @@
                 <option value="isbn">ISBN</option>
             </select>
             <input type="text" v-model="searchText"/>
-            <button id="clear">Clear</button>
             <input id="search" type=submit value="Search"/>            
         </form>
 
@@ -44,6 +43,9 @@ export default {
                     this.$store.commit("ADD_SEARCH_BOOK", response.data);
                 })
             this.searchResults = true;
+        },
+        addBookToLibrary() {
+            
         }
     }
     

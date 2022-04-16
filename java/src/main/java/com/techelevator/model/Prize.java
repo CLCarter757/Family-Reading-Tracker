@@ -2,6 +2,7 @@ package com.techelevator.model;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Prize {
     private int prizeId;
@@ -11,16 +12,16 @@ public class Prize {
     private int milestone;
     private String userGroup;
     private int maxPrizes;
-    private int prizesAvailable;
+    private List<User> winners;
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public int getPrizesAvailable() {
-        return prizesAvailable;
+    public List<User> getWinners() {
+        return winners;
     }
 
-    public void setPrizesAvailable(int prizesAvailable) {
-        this.prizesAvailable = prizesAvailable;
+    public void setWinners(List<User> winners) {
+        this.winners = winners;
     }
 
     public int getPrizeId() {

@@ -3,13 +3,13 @@
     <h2 class="book-title">{{ book.title }}</h2>
     <img class="img" v-if="book.isbn" v-bind:src="book.bookCoverUrl" />
     <h3 class="book-author">{{ book.authors }}</h3>
-    <button>Add to Wish List</button>
-    
-    <!-- <button v-if="enableAdd" v-on:click.prevent="addToReadingList(book)">Add to Reading List</button> -->
+    <button @click="addToWishList">Add to Wish List</button>
+    <!-- working -->
   </div>
 </template>
 
 <script>
+import BookService from '../services/BookService';
 export default {
     name: 'search-book-card',
     props: {
@@ -20,7 +20,23 @@ export default {
         }
     },
     methods: {
-        
+        addToWishList() {
+            const newBook = {
+                userId: Number(this.$store.state.user.id),
+                username: this.$store.state.user.username,
+                title: this.book.title,
+                authors: this.book.authors,
+                isbn: this.book.isbn,
+                description: this.book.description,
+                bookCoverUrl: this.book.bookCoverUrl
+            };
+            BookService.addToWishList(newBook)
+                .then(response => {
+                    if(response.status === 201) {
+                        this.$router.push('/mybooks')
+                    }
+                })
+        }
     }
 }
 </script>
