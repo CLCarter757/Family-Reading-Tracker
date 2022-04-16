@@ -5,16 +5,16 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Prize {
-    private int prizeId;
+    private Integer prizeId;
     private int familyId;
     private String name;
     private String description;
     private int milestone;
     private String userGroup;
     private int maxPrizes;
-    private List<User> winners;
     private LocalDate startDate;
     private LocalDate endDate;
+    private List<User> winners;
 
     public List<User> getWinners() {
         return winners;
@@ -24,11 +24,11 @@ public class Prize {
         this.winners = winners;
     }
 
-    public int getPrizeId() {
+    public Integer getPrizeId() {
         return prizeId;
     }
 
-    public void setPrizeId(int prizeId) {
+    public void setPrizeId(Integer prizeId) {
         this.prizeId = prizeId;
     }
 
