@@ -3,7 +3,8 @@
     <h2 class="book-title">{{ book.title }}</h2>
     <img class="img" v-if="book.isbn" v-bind:src="book.bookCoverUrl" />
     <h3 class="book-author">{{ book.authors }}</h3>
-    <button @click="addToWishList">Add to Wish List</button>
+    <button @click="(inWishList ? removeFromWishList : addToWishList), inWishList=!inWishList">
+        {{ inWishList ? 'Remove From Wish List' : 'Add to Wish List' }}</button>
     <!-- working -->
   </div>
 </template>
@@ -14,9 +15,10 @@ export default {
     name: 'search-book-card',
     props: {
         book: Object,
-        enableAdd: {
-            type: Boolean,
-            default: false
+    },
+    data() {
+        return {
+            inWishList: false
         }
     },
     methods: {
@@ -33,9 +35,23 @@ export default {
             BookService.addToWishList(newBook)
                 .then(response => {
                     if(response.status === 201) {
-                        this.$router.push('/mybooks')
+                        this.$router.push('/mybooks');
                     }
                 })
+        },
+        removeFromWishList() {
+            BookService.deleteFromWishList(this.book.isbn)
+
+        },
+        handleWishListButton() {
+            // if(this.inWishList==false) {
+            //     this.addToWishList;
+            // } 
+            // else {
+            //     this.addToWishList;
+            // }
+            // this.inWishList = !this.inWishList;
+            this.addToWishList;
         }
     }
 }
