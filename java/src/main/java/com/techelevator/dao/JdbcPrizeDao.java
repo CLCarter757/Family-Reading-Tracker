@@ -106,6 +106,10 @@ public class JdbcPrizeDao implements PrizeDao {
         List<User> winners = new ArrayList<>();
         //get list of ReadingActivity for whole family
         //include reading activity between start and end dates
+        String sql = "SELECT * " +
+                "FROM reading_activity " +
+                "WHERE reader IN (SELECT user_id FROM users WHERE family_id = ?) AND " +
+                "date >= ? AND date <= ?;";
         //sum minutes read per user
         //iterate over reading activity, earliest to latest
         //if the user minutes is greater than milestone, add to winners list
