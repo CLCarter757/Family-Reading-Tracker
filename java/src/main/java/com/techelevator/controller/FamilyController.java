@@ -27,7 +27,7 @@ public class FamilyController {
 //        return familyDao.getFamily(principal.getName());
 //    };
     @GetMapping(path = "/myfamily")
-    List<User> getFamilyMembers (@Valid Principal principal){
+    public List<User> getFamilyMembers (@Valid Principal principal){
         return familyDao.getFamilyMembers(principal.getName());
     };
 
