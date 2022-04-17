@@ -3,9 +3,8 @@
     <h2 class="book-title">{{ book.title }}</h2>
     <img class="img" v-if="book.isbn" v-bind:src="book.bookCoverUrl" />
     <h3 class="book-author">{{ book.authors }}</h3>
-    <button @click="(inWishList ? removeFromWishList : addToWishList), inWishList=!inWishList">
-        {{ inWishList ? 'Remove From Wish List' : 'Add to Wish List' }}</button>
-    <!-- working -->
+    <button v-show="inWishList" @click="removeFromWishList">Remove from Wish List</button>
+    <button v-show="!inWishList" @click="addToWishList">Add to Wish List</button>
   </div>
 </template>
 
@@ -34,24 +33,30 @@ export default {
             };
             BookService.addToWishList(newBook)
                 .then(response => {
-                    if(response.status === 201) {
-                        this.$router.push('/mybooks');
+                    if(response.status === 200) {
+                        alert(`${newBook.title} has been added to your Wish List!`)
+                        // this.$router.push('/mybooks');
+                        this.inWishList = true;
                     }
                 })
         },
         removeFromWishList() {
             BookService.deleteFromWishList(this.book.isbn)
-
+                .then(response => {
+                    if(response.status === 200) {
+                        alert(`${this.book.title} has been removed from Wish List.`);
+                        this.inWishList = false;
+                    }
+                })
         },
         handleWishListButton() {
-            // if(this.inWishList==false) {
-            //     this.addToWishList;
-            // } 
-            // else {
-            //     this.addToWishList;
-            // }
-            // this.inWishList = !this.inWishList;
-            this.addToWishList;
+            if(this.inWishList==false) {
+                this.addToWishList;
+            } 
+            else {
+                this.removeFromWishList;
+            }
+            this.inWishList = !this.inWishList;
         }
     }
 }

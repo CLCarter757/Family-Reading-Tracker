@@ -21,7 +21,7 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     searchBook: [],
-    books: [],
+    userBooks: [],
     family: [
       {
         username: 'test',
@@ -106,8 +106,8 @@ export default new Vuex.Store({
     ADD_SEARCH_BOOK(state, data){
       state.searchBook = data;
     },
-    // ADD_TO_WISH_LIST(state, data) {
-    //   state.books
-    // }
+    SET_USER_BOOKS(state, data) {
+      state.userBooks = data;
+    }
   }
 })

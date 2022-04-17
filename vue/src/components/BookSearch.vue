@@ -44,9 +44,6 @@ export default {
                 })
             this.searchResults = true;
         },
-        addBookToLibrary() {
-            
-        }
     }
     
 }

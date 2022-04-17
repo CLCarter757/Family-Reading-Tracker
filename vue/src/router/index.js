@@ -89,11 +89,6 @@ const router = new Router({
         requiresAuth: false
       },
     },
-    {
-      path: '/mybooks/:userId/book/create',
-      name: 'AddToWishList',
-      component: SearchBooks
-    }
   ]
 })
 
