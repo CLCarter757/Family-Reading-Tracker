@@ -1,31 +1,69 @@
 <template>
-  <div class="card" v-bind:class="{ read: book.read }">
+  <div class="card" v-bind:class="{ read: book.completed }">
     <h2 class="book-title">{{ book.title }}</h2>
-    <img class="img" v-if="book.isbn" v-bind:src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'" />
-    <h3 class="book-author">{{ book.author }}</h3>
+    <img class="img" v-if="book.isbn" v-bind:src="book.bookCoverUrl" />
+    <h3 class="book-author">{{ book.authors }}</h3>
     <div class="button-container">
         <router-link to="/form" tag="button">Log Reading</router-link>
     </div>
-    <div class="button-container" v-if="! enableAdd">
-        <button class="mark-read" v-on:click.prevent="setRead(true)" v-if=" ! book.read">Mark Read</button>
-        <button class="mark-unread" v-on:click.prevent="setRead(false)" v-if="book.read">Mark Unread</button>
+    <div class="button-container">
+        <button class="mark-read" v-on:click.prevent="setCompleted(true)" v-if=" ! book.completed">Mark Read</button>
+        <button class="mark-unread" v-on:click.prevent="setCompleted(false)" v-if="book.completed">Mark Unread</button>
     </div>
-    <button v-if="enableAdd" v-on:click.prevent="addToReadingList(book)">Add to Reading List</button>
+    <div class="icons">
+        <input class="fav" type="image" src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/256/star-icon.png"/>
+        <input class="delete" type="image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzlT0YnCM0rL_IiBOB1Fbm2c81cr2wZZFcVw&usqp=CAU"/>
+    </div>
   </div>
 </template>
 
 <script>
+import BookService from '../services/BookService';
 export default {
     name: 'book-card',
     props: {
         book: Object,
-        enableAdd: {
-            type: Boolean,
-            default: false
-        }
     },
+    
     methods: {
-
+        setCompleted(value) {
+            const updatedBook = {
+                userId: Number(this.$store.state.user.id),
+                username: this.$store.state.user.username,
+                title: this.book.title,
+                authors: this.book.authors,
+                isbn: this.book.isbn,
+                minutes: this.book.minutes,
+                description: this.book.description,
+                bookCoverUrl: this.book.bookCoverUrl,
+                completed: value
+            };
+            BookService.updateBook(updatedBook)
+                .then(response => {
+                    if(response.status === 200) {
+                        this.$forceUpdate();
+                        console.log("test");
+                    }
+                })
+                .catch(error => {
+                    this.handleErrorResponse(error, "updating");
+                    this.$router.go();
+                });
+        },
+        handleErrorResponse(error, verb) {
+            if (error.response) {
+                this.errorMsg =
+                "Error " + verb + " book. Response received was '" +
+                error.response.statusText +
+                "'.";
+            } else if (error.request) {
+                this.errorMsg =
+                "Error " + verb + " book. Server could not be reached.";
+            } else {
+                this.errorMsg =
+                "Error " + verb + " book. Request could not be created.";
+            }
+            }
     }
 }
 </script>
@@ -53,5 +91,17 @@ export default {
 
 .img {
     height: 200px;
+}
+.fav {
+    height: 30px;
+    padding: 10px;
+}
+.delete {
+    height: 30px;
+    padding: 10px;
+}
+.icons{
+    display: flex;
+    justify-content: space-between;
 }
 </style>

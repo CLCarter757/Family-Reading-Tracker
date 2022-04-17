@@ -1,14 +1,26 @@
 <template>
-    <div class="book-list">
-        <book-card v-for="book in $store.state.completed" v-bind:key="book.isbn" :book="book"/>
-    </div>
+    <section>
+        <h2>Currently Reading</h2>
+        <div class="reading-list">
+            <book-card v-for="book in reading()" v-bind:key="book.isbn" :book="book"/>
+        </div>
+        <h2>Wish List</h2>
+        <div class="reading-list">
+            <book-card v-for="book in wishList()" v-bind:key="book.isbn" :book="book"/>
+        </div>        
+        <h2>Finished Reading</h2>
+        <div class="reading-list">
+            <book-card v-for="book in completed()" v-bind:key="book.isbn" :book="book"/>
+        </div>
+    </section>
 </template>
 
 <script>
 import BookCard from '@/components/BookCard.vue';
+import BookService from '../services/BookService';
 
 export default {
-    name: 'books-completed',
+    name: 'list-books',
     components: {
         BookCard
     },
@@ -17,8 +29,40 @@ export default {
             books: []
         }
     },
+
     methods: {
-        
-    }
+        retrieveBooks() {
+            BookService.listMyBooks()
+                .then(response => {
+                    this.$store.commit("SET_USER_BOOKS", response.data);
+                });
+        },
+        wishList() {
+            return this.$store.state.userBooks.filter(
+                book => book.minutes === 0 && book.completed === false
+            );
+        },
+        completed() {
+            return this.$store.state.userBooks.filter(
+                book => book.completed == true
+            );
+        },
+        reading() {
+            return this.$store.state.userBooks.filter(
+                book => book.minutes > 0 && book.completed == false
+            );
+        }
+    },
+    created() {
+        this.retrieveBooks();
+    },
 }
 </script>
+
+<style>
+.reading-list {
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+</style>
