@@ -40,7 +40,7 @@ export default {
                 .then(response => {
                     if(response.status === 200) {
                         alert(`${newBook.title} has been added to your Wish List!`)
-                        this.$router.push('/');
+                        // this.$router.go();
                         this.inWishList = true;
                     }
                 })

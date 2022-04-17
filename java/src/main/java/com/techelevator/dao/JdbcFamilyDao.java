@@ -84,6 +84,7 @@ public class JdbcFamilyDao implements FamilyDao{
     public Family getFamily(String userName) {
         String sql="SELECT family_id FROM users WHERE username=? ";
         Integer checkFamilyId = jdbcTemplate.queryForObject(sql,Integer.class,userName);
+
         String sqlForFamilyName="SELECT family_name FROM family_account WHERE family_id=? ";
         String checkFamilyName = jdbcTemplate.queryForObject(sqlForFamilyName,String.class,checkFamilyId);
 
@@ -100,8 +101,27 @@ public class JdbcFamilyDao implements FamilyDao{
         family.setFamilyName(checkFamilyName);
         family.setFamilyMembers(listUsers);
 
-
         return family;
+    }
+
+    @Override
+    public List<User> getFamilyMembers(String username) {
+        String sql = "SELECT family_id " +
+                     "FROM users " +
+                     "WHERE username = ?;";
+        Integer familyID = jdbcTemplate.queryForObject(sql,Integer.class, username);
+
+        String familySql = "SELECT * " +
+                           "FROM users " +
+                           "WHERE family_id = ?;";
+        SqlRowSet results= jdbcTemplate.queryForRowSet(familySql, familyID);
+        List<User> familyMembers=new ArrayList<>();
+        while(results.next()){
+            User user = mapRowToUser(results);
+            familyMembers.add(user);
+        }
+
+        return familyMembers;
     }
 
     private User mapRowToUser(SqlRowSet rs) {

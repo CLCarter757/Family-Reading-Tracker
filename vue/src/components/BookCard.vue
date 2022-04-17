@@ -10,6 +10,10 @@
         <button class="mark-read" v-on:click.prevent="setCompleted(true)" v-if=" ! book.completed">Mark Read</button>
         <button class="mark-unread" v-on:click.prevent="setCompleted(false)" v-if="book.completed">Mark Unread</button>
     </div>
+    <div class="icons">
+        <input class="fav" type="image" src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/256/star-icon.png"/>
+        <input class="delete" type="image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzlT0YnCM0rL_IiBOB1Fbm2c81cr2wZZFcVw&usqp=CAU"/>
+    </div>
   </div>
 </template>
 
@@ -87,5 +91,17 @@ export default {
 
 .img {
     height: 200px;
+}
+.fav {
+    height: 30px;
+    padding: 10px;
+}
+.delete {
+    height: 30px;
+    padding: 10px;
+}
+.icons{
+    display: flex;
+    justify-content: space-between;
 }
 </style>

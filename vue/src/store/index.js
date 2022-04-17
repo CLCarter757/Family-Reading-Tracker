@@ -22,18 +22,17 @@ export default new Vuex.Store({
     user: currentUser || {},
     searchBook: [],
     userBooks: [],
-    family: [
-      {
-        username: 'test',
-        firstName: 'bob',
-        role: 'child'
-      },
-      {
-        username: 'test',
-        firstName: 'bob',
-        role: 'child'
-      }
-    ],
+    family: [],
+      // {
+      //   username: 'test',
+      //   firstName: 'bob',
+      //   role: 'child'
+      // },
+      // {
+      //   username: 'test',
+      //   firstName: 'bob',
+      //   role: 'child'
+      // }
     // completed: [
     //   {
     //     title: "The Hunger Games",
@@ -109,9 +108,8 @@ export default new Vuex.Store({
     SET_USER_BOOKS(state, data) {
       state.userBooks = data;
     },
-    // UPDATE_COMPLETED_STATUS(state, data) {
-    //   const bookToUpdate = state.userBooks.find(book => book.id === data.isbn);
-    //   bookToUpdate.status = data.status;
-    // },
+    SET_FAMILY(state, data) {
+      state.family = data;
+    }
   }
 })

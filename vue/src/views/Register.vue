@@ -5,30 +5,18 @@
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
-      <!-- <div>
-        <label for="firstName" class="sr-only"> First Name</label>
+      <div>
+        <label for="name" class="sr-only">Name</label>
         <input
           type="text"
           id="name"
           class="form-control"
-          placeholder="First Name"
-          v-model="user.firstName"
+          placeholder="name"
+          v-model="user.name"
           required
           autofocus
         />
       </div>
-      <div>
-        <label for="lastName" class="sr-only">Last Name</label>
-        <input
-          type="text"
-          id="name"
-          class="form-control"
-          placeholder="Last Name"
-          v-model="user.lastName"
-          required
-          autofocus
-        />
-      </div> -->
       <div>
       <label for="username" class="sr-only">Username</label>
       <input
@@ -86,8 +74,7 @@ export default {
   data() {
     return {
       user: {
-        // firstName: '',
-        // lastName: '',
+        name: '',
         username: '',
         password: '',
         confirmPassword: '',

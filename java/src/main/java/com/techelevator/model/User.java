@@ -9,31 +9,14 @@ import java.util.Set;
 public class User {
 
    private Long id;
+   private String name;
    private String username;
    @JsonIgnore
    private String password;
    @JsonIgnore
    private boolean activated;
-
-   public Integer getFamilyId() {
-      return familyId;
-   }
-
-   public void setFamilyId(Integer familyId) {
-      this.familyId = familyId;
-   }
-
-   public String getFamilyRole() {
-      return familyRole;
-   }
-
-   public void setFamilyRole(String familyRole) {
-      this.familyRole = familyRole;
-   }
-
    private Integer familyId;
    private String familyRole;
-
    private Set<Authority> authorities = new HashSet<>();
 
    public User() { }
@@ -52,6 +35,14 @@ public class User {
 
    public void setId(Long id) {
       this.id = id;
+   }
+
+   public String getName() {
+      return name;
+   }
+
+   public void setName(String name) {
+      this.name = name;
    }
 
    public String getUsername() {
@@ -76,6 +67,22 @@ public class User {
 
    public void setActivated(boolean activated) {
       this.activated = activated;
+   }
+
+   public Integer getFamilyId() {
+      return familyId;
+   }
+
+   public void setFamilyId(Integer familyId) {
+      this.familyId = familyId;
+   }
+
+   public String getFamilyRole() {
+      return familyRole;
+   }
+
+   public void setFamilyRole(String familyRole) {
+      this.familyRole = familyRole;
    }
 
    public Set<Authority> getAuthorities() {
