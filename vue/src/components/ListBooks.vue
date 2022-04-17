@@ -1,8 +1,16 @@
 <template>
     <section>
+        <h2>Currently Reading</h2>
+        <div class="reading-list">
+            <book-card v-for="book in reading()" v-bind:key="book.isbn" :book="book"/>
+        </div>
         <h2>Wish List</h2>
         <div class="reading-list">
-            <book-card v-for="book in wishList" v-bind:key="book.isbn" :book="book"/>
+            <book-card v-for="book in wishList()" v-bind:key="book.isbn" :book="book"/>
+        </div>        
+        <h2>Finished Reading</h2>
+        <div class="reading-list">
+            <book-card v-for="book in completed()" v-bind:key="book.isbn" :book="book"/>
         </div>
     </section>
 </template>
@@ -31,7 +39,7 @@ export default {
         },
         wishList() {
             return this.$store.state.userBooks.filter(
-                book => book.minutes === 0
+                book => book.minutes === 0 && book.completed === false
             );
         },
         completed() {

@@ -15,5 +15,8 @@ export default {
 
     listMyBooks() {
         return axios.get('/mybooks')
+    },
+    updateBook(book) {
+        return axios.put(`/mybooks/${book.isbn}`, book)
     }
 }

@@ -17,7 +17,7 @@ export default {
     },
     data() {
         return {
-            inWishList: false
+            inWishList: this.checkAlreadyInWishList()
         }
     },
     methods: {
@@ -31,14 +31,20 @@ export default {
                 description: this.book.description,
                 bookCoverUrl: this.book.bookCoverUrl
             };
+            const length = this.$store.state.userBooks.filter(
+                book => book.isbn === newBook.isbn).length;
+            if(length > 0){
+                alert(`${ newBook.title } is already in your Wish List.`)
+            } else {
             BookService.addToWishList(newBook)
                 .then(response => {
                     if(response.status === 200) {
                         alert(`${newBook.title} has been added to your Wish List!`)
-                        // this.$router.push('/mybooks');
+                        this.$router.push('/');
                         this.inWishList = true;
                     }
                 })
+            }
         },
         removeFromWishList() {
             BookService.deleteFromWishList(this.book.isbn)
@@ -57,7 +63,15 @@ export default {
                 this.removeFromWishList;
             }
             this.inWishList = !this.inWishList;
-        }
+        },
+        checkAlreadyInWishList() {
+            const length = this.$store.state.userBooks.filter(
+                b => b.isbn === this.book.isbn).length;
+            return length > 0;
+        }  
+    },
+    computed: {
+
     }
 }
 </script>

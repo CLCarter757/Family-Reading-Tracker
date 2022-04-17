@@ -41,8 +41,8 @@ public class UserBookController {
     }
 
     @RequestMapping(value = "/mybooks/{isbn}", method = RequestMethod.PUT)
-    public UserBook updateMyBook(@Valid @RequestBody UserBook userBook, Principal principal, @PathVariable Integer isbn) {
-        return null;
+    public UserBook updateMyBook(@Valid @RequestBody UserBook userBook, Principal principal, @PathVariable String isbn) {
+        return userBookDao.updateMyBook(userBook, principal.getName(), isbn);
     }
 
 
