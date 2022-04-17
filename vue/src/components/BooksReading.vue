@@ -1,5 +1,4 @@
-<template>
-    <section>
+<template><section>
         <h2>Currently Reading</h2>
         <div class="reading-list">
             <book-card v-for="book in $store.state.reading" v-bind:key="book.isbn" :book="book"/>

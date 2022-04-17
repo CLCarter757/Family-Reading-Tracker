@@ -106,4 +106,12 @@ router.beforeEach((to, from, next) => {
   }
 });
 
+router.afterEach(() => { const Stickedtooltips = document.querySelectorAll(".vs-tooltip"); 
+for (const tooltip of Stickedtooltips) { 
+  tooltip.remove();
+ } 
+});
+
+
+
 export default router;

@@ -1,17 +1,36 @@
 <template>
-  <div class="card" v-bind:class="{ read: book.read }">
-    <h2 class="book-title">{{ book.title }}</h2>
+  <div v-bind:class="{ read: book.read }">
+      <vs-tooltip color="#9369a8" border-thick interactivity>
+      <vs-card class="card">
+          <template #title>
+    <h3>{{ book.title.length > 18 ? book.title.substring(0,15) + '...' : book.title }}</h3>
+          </template>
+          <template #img>
     <img class="img" v-if="book.isbn" v-bind:src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'" />
-    <h3 class="book-author">{{ book.author }}</h3>
+          </template>
+          <template #text>
+    <h4 class="book-author">{{ book.author }}</h4>
+    </template>
+    <template #interactions>
     <div class="button-container">
-        <router-link to="/form" tag="button">Log Reading</router-link>
+        <vs-button size="small" to="/form">Log Reading
+        </vs-button>
     </div>
-    <div class="button-container" v-if="! enableAdd">
-        <button class="mark-read" v-on:click.prevent="setRead(true)" v-if=" ! book.read">Mark Read</button>
-        <button class="mark-unread" v-on:click.prevent="setRead(false)" v-if="book.read">Mark Unread</button>
+    <div v-if="! enableAdd">
+        <vs-button size="small" class="mark-read" v-on:click.prevent="setRead(true)" v-if=" ! book.read" >Mark Read</vs-button> 
+        <vs-button class="mark-unread" v-on:click.prevent="setRead(false)" v-if="book.read">Mark Unread</vs-button>
     </div>
-    <button v-if="enableAdd" v-on:click.prevent="addToReadingList(book)">Add to Reading List</button>
-  </div>
+    <vs-button v-if="enableAdd" v-on:click.prevent="addToReadingList(book)">Add to Reading List</vs-button>
+    </template>
+      </vs-card>
+      <template #tooltip shadow interactivity>
+          <p>
+         {{book.details}}
+         </p>
+      </template>
+      
+      </vs-tooltip>
+    </div>
 </template>
 
 <script>
@@ -25,33 +44,21 @@ export default {
         }
     },
     methods: {
-
     }
 }
 </script>
 
 <style>
+
 .card {
-    border: 2px solid black;
-    border-radius: 10px;
-    width: 250px;
-    height: 450px;
+    width: 200px;
     margin: 20px;
 }
-
 .card.read {
     background-color: lightgoldenrodyellow;
 }
 
-.card .book-title {
-    font-size: 1.5rem;
-}
 
-.card .book-author {
-    font-size: 1rem;
-}
+       
 
-.img {
-    height: 200px;
-}
 </style>

@@ -15,7 +15,10 @@
         <div class="reading-list">
             <search-book-card v-for="book in $store.state.searchBook" v-bind:key="book.isbn" :book="book"/>
         </div>
+        
     </div>
+
+    
 </template>
 
 <script>
@@ -25,7 +28,8 @@ import SearchBookCard from '../components/SearchBookCard.vue';
 export default {
     name: 'book-search',
     components: {
-        SearchBookCard
+         SearchBookCard
+      
     },
     data() {
         return {

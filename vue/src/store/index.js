@@ -51,6 +51,7 @@ export default new Vuex.Store({
       {
         title: "Harry Potter and the Order of the Phoenix",
         author: "	J. K. Rowling",
+        details: "A book about wizards",
         isbn: "0747551006"
       },
       {
@@ -91,6 +92,24 @@ export default new Vuex.Store({
       axios.defaults.headers.common = {};
     },
     ADD_SEARCH_BOOK(state, data){
+      data = data.filter((book) => {
+        for (let search of state.list) {
+          if (search.isbn == book.isbn) return false;
+        }
+
+        for (let search of state.reading) {
+          if (search.isbn == book.isbn) return false;
+        }
+
+        for (let search of state.completed) {
+          if (search.isbn == book.isbn) return false;
+        }
+        return true;
+      });
+      //  还需要completed reading
+      // 已经在wishlist了，note一下，已经在wishlist了
+      // log reading activity时间
+
       state.searchBook = data;
     },
   }
