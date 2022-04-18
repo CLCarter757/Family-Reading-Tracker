@@ -1,23 +1,23 @@
 <template>
   <form class="log-reading-form">
-    <div>
-        <input class="title-input" type="text" placeholder="Title" v-model="book.title" />
+    <!-- <div>
+        <input class="title-input" type="text" placeholder="Title" v-model="readingActivity.title" />
     </div>  
     <div>
         
-        <input class="author-input" type="text" placeholder="Author" v-model="book.author" />
+        <input class="author-input" type="text" placeholder="Author" v-model="readingActivity.author" />
     </div> 
     <div>
-        <input class="isbn-input" type="text" placeholder="ISBN" v-model="book.isbn" />
-    </div>  
+        <input class="isbn-input" type="text" placeholder="ISBN" v-model="readingActivity.isbn" />
+    </div>   -->
     <div>
-        <input class="format-input" type="text" placeholder="Format" v-model="book.format" />
+        <input class="format-input" type="text" placeholder="Format" v-model="readingActivity.format" />
     </div>      
     <div>
-        <input class="minutes-input" type="text" placeholder="Minutes" v-model="book.minutes" />
+        <input class="minutes-input" type="text" placeholder="Minutes" v-model="readingActivity.minutes" />
     </div>    
     <div>
-        <input class="notes-input" type="text" placeholder="Notes" v-model="book.notes" />
+        <input class="notes-input" type="text" placeholder="Notes" v-model="readingActivity.notes" />
     </div>    
     <div>
         <button>Save</button>
@@ -36,6 +36,14 @@ export default {
                 isbn: '',
                 format: '',
                 minutes: '',
+                notes: ''
+            },
+            readingActivity: {
+                userBookId: '',
+                dateCreated: '',
+                reader: '',
+                format: '',
+                time: '',
                 notes: ''
             }
         }

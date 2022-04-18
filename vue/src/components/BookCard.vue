@@ -4,7 +4,7 @@
     <img class="img" v-if="book.isbn" v-bind:src="book.bookCoverUrl" />
     <h3 class="book-author">{{ book.authors }}</h3>
     <div class="button-container">
-        <router-link to="/form" tag="button">Log Reading</router-link>
+        <router-link :to="{ name:'form', params:{ reader:this.book.userId, userBookId:this.book.userBookId } }" tag="button">Log Reading</router-link>
     </div>
     <div class="button-container">
         <button class="mark-read" v-on:click.prevent="setCompleted(true)" v-if=" ! book.completed">Mark Read</button>
