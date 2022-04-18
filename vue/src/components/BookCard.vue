@@ -4,7 +4,7 @@
     <img class="img" v-if="book.isbn" v-bind:src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'" />
     <h3 class="book-author">{{ book.author }}</h3>
     <div class="button-container">
-        <router-link to="/form" tag="button">Log Reading</router-link>
+        <router-link :to="{ path:'/form', params:{ userBookId:this.book.userBookId, reader:this.book.userId } }" tag="button">Log Reading</router-link>
     </div>
     <div class="button-container" v-if="! enableAdd">
         <button class="mark-read" v-on:click.prevent="setRead(true)" v-if=" ! book.read">Mark Read</button>

@@ -15,5 +15,9 @@ export default {
 
     searchBooks(searchType, searchText) {
         return axios.get(`/books?q=${searchType}:${searchText}`)
+    },
+
+    submitReadingActivity(id, readingActivity){
+        return axios.post(`users/${id}/activities`, readingActivity)
     }
 }
