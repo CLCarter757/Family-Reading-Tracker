@@ -74,7 +74,7 @@ public class JdbcUserBookDao implements UserBookDao {
     @Override
     public boolean deleteMyBook(String username, String isbn) throws Exception {
         String sql = "DELETE FROM user_book " +
-                "WHERE isbn = ? and user_id = (SELECT user_id FROM users WHERE username = ?);";
+                "WHERE isbn = ? AND user_id = (SELECT user_id FROM users WHERE username = ?);";
 
         try {
             jdbcTemplate.update(sql, isbn, username);
@@ -87,10 +87,9 @@ public class JdbcUserBookDao implements UserBookDao {
     @Override
     public UserBook updateMyBook(UserBook book, String username, String isbn) {
         String sql = "UPDATE user_book " +
-                "SET " +
-                "minutes = ?, " +
+                "SET minutes = ?, " +
                 "completed = ? " +
-                "WHERE isbn = ? and user_id = (SELECT user_id FROM users WHERE username = ?);";
+                "WHERE isbn = ? AND user_id = (SELECT user_id FROM users WHERE username = ?);";
 
             jdbcTemplate.update(sql, book.getMinutes(), book.isCompleted(), isbn, username);
             return getMyBook(username, isbn);

@@ -17,8 +17,7 @@ CREATE TABLE family_account (
 CREATE TABLE users (
 	user_id int DEFAULT nextval('seq_user_id'::regclass) NOT NULL,
 	username varchar(50) NOT NULL UNIQUE,
-	first_name varchar(50),
-	last_name varchar(50),
+	name varchar(50),
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
 
