@@ -29,7 +29,7 @@ public class JdbcFamilyDao implements FamilyDao{
             jdbcTemplate.update(sqlUpdateUser, familyId, userName);
             return getFamily(userName);
         }
-        throw new Exception("error");
+        throw new Exception("nope");
 
     }
 
@@ -128,6 +128,7 @@ public class JdbcFamilyDao implements FamilyDao{
         User user = new User();
         user.setId(rs.getLong("user_id"));
         user.setUsername(rs.getString("username"));
+        user.setName(rs.getString("name"));
         user.setAuthorities(rs.getString("role"));
         user.setFamilyRole(rs.getString("role"));
         user.setFamilyId(rs.getInt("family_id"));

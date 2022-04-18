@@ -23,5 +23,8 @@ export default {
     
     updateBook(book) {
         return axios.put(`/mybooks/${book.isbn}`, book)
+    },
+    deleteBook(isbn) {
+        return axios.delete(`/mybooks/${isbn}`)
     }
 }

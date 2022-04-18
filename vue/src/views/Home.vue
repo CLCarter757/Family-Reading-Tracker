@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>{{ this.$store.state.user.username }}'s Library</h1>
+    <h1>{{ this.$store.state.user.name }}'s Library</h1>
     <list-books/>
   </div>
 </template>

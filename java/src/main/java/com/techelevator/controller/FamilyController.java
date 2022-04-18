@@ -34,12 +34,13 @@ public class FamilyController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping (path = "/myfamily")
     @PreAuthorize("hasRole('ROLE_PARENT')")
-    public Family createFamily(Principal principal,@Valid @RequestBody Family family) throws Exception {
+    public Family createFamily(@Valid Principal principal, @RequestBody Family family) throws Exception {
        return familyDao.createFamily(principal.getName(),family);
     }
 
     @PutMapping (path = "/myfamily/{familyId}")
-   public Family addFamilyMember (@Valid Principal principal,  @PathVariable Integer familyId, @RequestBody User userToAdd) throws Exception {
+    @PreAuthorize("hasRole('ROLE_PARENT')")
+    public Family addFamilyMember (@Valid Principal principal,  @PathVariable Integer familyId, @RequestBody User userToAdd) throws Exception {
         return familyDao.addFamilyMember(familyId,principal.getName(),userToAdd);
 
    }
