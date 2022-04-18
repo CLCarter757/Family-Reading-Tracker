@@ -1,4 +1,5 @@
 <template>
+
   <!-- <div class="card" >
     <h2 class="book-title">{{ book.title }}</h2>
     <img class="img" v-if="book.isbn" v-bind:src="book.bookCoverUrl" />
@@ -37,7 +38,10 @@
       </template>
       
       </vs-tooltip>
+      
+    
     </div>
+    
 </template>
 
 <script>
@@ -76,4 +80,6 @@ export default {
 /* .img {
     height: 200px;
 } */
+
+
 </style>

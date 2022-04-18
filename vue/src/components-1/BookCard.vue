@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:class="{ read: book.read }">
+
       <vs-tooltip color="#9369a8" border-thick interactivity>
       <vs-card class="card">
           <template #title>
@@ -26,11 +26,11 @@
       <template #tooltip shadow interactivity>
           <p>
          {{book.details}}
+         <i class="fa fa-thumbs-up" aria-hidden="true"></i>
          </p>
       </template>
-      
       </vs-tooltip>
-    </div>
+  
 </template>
 
 <script>
@@ -53,10 +53,17 @@ export default {
 .card {
     width: 200px;
     margin: 20px;
+    
 }
 .card.read {
     background-color: lightgoldenrodyellow;
 }
+
+.img {
+    size: 50%;
+}
+
+
 
 
        

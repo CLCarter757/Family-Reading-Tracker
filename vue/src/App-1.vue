@@ -63,4 +63,11 @@ export default {
 div .vs-navbar {
   height: 70px !important;
 }
+
+div .vs-button {
+  display: block;
+  
+}
+
+
 </style>

@@ -48,17 +48,33 @@ export default new Vuex.Store({
       }
     ],
     reading: [
+
       {
-        title: "Harry Potter and the Order of the Phoenix",
+        title: "Fantastic Beasts: The Crimes of Grindelwald",
         author: "	J. K. Rowling",
         details: "A book about wizards",
-        isbn: "0747551006"
+        isbn: "1338263897"
+      },
+
+      {
+        title: "Harry Potter and the Half-Blood Prince",
+        author: "	J. K. Rowling",
+        details: "A book about wizards",
+        isbn: "0545582997"
       },
       {
         title: "Charlotte's Web",
         author: "E. B. White",
+        details: "A story of a livestock pig named Wilbur and his friendship with a barn spider named Charlotte. ",
         isbn: "9780062658753"
       },
+
+      {
+        title: "Atomic Habits",
+        author: "James Clear",
+        isbn: "9780735211308"
+      },
+
     ],
 
     list: [
@@ -72,6 +88,12 @@ export default new Vuex.Store({
         author: "Gary Paulsen",
         isbn: "	0027701301"
       },
+
+      {
+        title: "Wonder",
+        author: "R. J. Palacio",
+        isbn:"0375869026"
+      }
     ],
   },
   mutations: {

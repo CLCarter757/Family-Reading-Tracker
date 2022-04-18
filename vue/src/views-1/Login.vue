@@ -1,4 +1,6 @@
 <template>
+<body>
+
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
       <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
@@ -35,6 +37,8 @@
       <button type="submit">Sign in</button>
     </form>
   </div>
+    
+</body>
 </template>
 
 <script>
@@ -74,3 +78,5 @@ export default {
   }
 };
 </script>
+
+

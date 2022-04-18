@@ -24,7 +24,7 @@ export default {
 
 <style scoped>
  .img {
- background-image: url(https://images.unsplash.com/photo-1649780490583-12122384abda?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2067&q=80);
+ background-image: url(https://images.unsplash.com/photo-1586603328377-f23a9d85fa35?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80);
  height: 200vh;
  width: 100vw;
  }
