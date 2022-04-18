@@ -30,13 +30,15 @@ CREATE TABLE users (
 CREATE TABLE user_book (
 	user_book_id serial PRIMARY KEY,
 	user_id int NOT NULL,
+	title varchar(100) NOT NULL,
+	authors varchar(500),
 	isbn varchar(13) NOT NULL,
 	minutes int NOT NULL DEFAULT(0),
 	completed boolean NOT NULL DEFAULT(false),
-	authors varchar(500),
-	title varchar(100) NOT NULL,
+	favorited boolean DEFAULT(false),
 	book_cover_url varchar(500),
 	description varchar(2000),
+
 
 	CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users (user_id),
 	CONSTRAINT chk_minutes_positive CHECK (minutes >= 0)
