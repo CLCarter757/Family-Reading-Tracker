@@ -39,7 +39,7 @@ public class JdbcUserBookDao implements UserBookDao {
     @Override
     public List<UserBook> getUserBookList(String username) {
         List<UserBook> books = new ArrayList<>();
-        String sql = "SELECT user_book_id, user_id, isbn, title, minutes, completed, " +
+        String sql = "SELECT user_book_id, user_id, isbn, title, minutes, completed, favorited, " +
                 "authors, description, book_cover_url, users.username AS username " +
                 "FROM user_book " +
                 "JOIN users USING (user_id) " +
@@ -74,7 +74,7 @@ public class JdbcUserBookDao implements UserBookDao {
     @Override
     public boolean deleteMyBook(String username, String isbn) throws Exception {
         String sql = "DELETE FROM user_book " +
-                "WHERE isbn = ? and user_id = (SELECT user_id FROM users WHERE username = ?);";
+                "WHERE isbn = ? AND user_id = (SELECT user_id FROM users WHERE username = ?);";
 
         try {
             jdbcTemplate.update(sql, isbn, username);
@@ -87,12 +87,12 @@ public class JdbcUserBookDao implements UserBookDao {
     @Override
     public UserBook updateMyBook(UserBook book, String username, String isbn) {
         String sql = "UPDATE user_book " +
-                "SET " +
-                "minutes = ?, " +
-                "completed = ? " +
-                "WHERE isbn = ? and user_id = (SELECT user_id FROM users WHERE username = ?);";
+                "SET minutes = ?, " +
+                "completed = ?, " +
+                "favorited = ? " +
+                "WHERE isbn = ? AND user_id = (SELECT user_id FROM users WHERE username = ?);";
 
-            jdbcTemplate.update(sql, book.getMinutes(), book.isCompleted(), isbn, username);
+            jdbcTemplate.update(sql, book.getMinutes(), book.isCompleted(), book.isFavorited(), isbn, username);
             return getMyBook(username, isbn);
     }
 
@@ -154,6 +154,7 @@ public class JdbcUserBookDao implements UserBookDao {
         userbook.setTitle(results.getString("title"));
         userbook.setMinutes(results.getInt("minutes"));
         userbook.setCompleted(results.getBoolean("completed"));
+        userbook.setFavorited(results.getBoolean("favorited"));
         userbook.setBookCoverUrl(results.getString("book_cover_url"));
         userbook.setDescription(results.getString("description"));
         return userbook;
