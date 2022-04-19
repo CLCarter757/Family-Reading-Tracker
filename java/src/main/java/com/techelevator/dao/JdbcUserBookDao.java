@@ -39,7 +39,7 @@ public class JdbcUserBookDao implements UserBookDao {
     @Override
     public List<UserBook> getUserBookList(String username) {
         List<UserBook> books = new ArrayList<>();
-        String sql = "SELECT user_book_id, user_id, isbn, title, minutes, completed, favorited, " +
+        String sql = "SELECT user_book_id, user_id, isbn, title, minutes, completed, favorited, rating, " +
                 "authors, description, book_cover_url, users.username AS username " +
                 "FROM user_book " +
                 "JOIN users USING (user_id) " +
@@ -58,7 +58,7 @@ public class JdbcUserBookDao implements UserBookDao {
     public UserBook getMyBook(String username, String isbn) {
         UserBook book = new UserBook();
         String sql = "SELECT user_book_id, user_id, isbn, title, minutes, completed, " +
-                "authors, description, book_cover_url " +
+                "authors, description, book_cover_url, favorited, rating " +
                 "FROM user_book " +
                 "WHERE user_id = (SELECT user_id FROM users WHERE username = ?) " +
                 "AND isbn = ?;";
@@ -89,10 +89,11 @@ public class JdbcUserBookDao implements UserBookDao {
         String sql = "UPDATE user_book " +
                 "SET minutes = ?, " +
                 "completed = ?, " +
-                "favorited = ? " +
+                "favorited = ?, " +
+                "rating = ? " +
                 "WHERE isbn = ? AND user_id = (SELECT user_id FROM users WHERE username = ?);";
 
-            jdbcTemplate.update(sql, book.getMinutes(), book.isCompleted(), book.isFavorited(), isbn, username);
+            jdbcTemplate.update(sql, book.getMinutes(), book.isCompleted(), book.isFavorited(), book.getRating(), isbn, username);
             return getMyBook(username, isbn);
     }
 
@@ -146,7 +147,6 @@ public class JdbcUserBookDao implements UserBookDao {
 
     private UserBook mapRowToUserBook(SqlRowSet results){
         UserBook userbook = new UserBook();
-        userbook.setUsername(results.getString("username"));
         userbook.setAuthors(results.getString("authors"));
         userbook.setUserBookId(results.getInt("user_book_id"));
         userbook.setUserId(results.getInt("user_id"));
@@ -157,6 +157,7 @@ public class JdbcUserBookDao implements UserBookDao {
         userbook.setFavorited(results.getBoolean("favorited"));
         userbook.setBookCoverUrl(results.getString("book_cover_url"));
         userbook.setDescription(results.getString("description"));
+        userbook.setRating(results.getInt("rating"));
         return userbook;
     }
 
