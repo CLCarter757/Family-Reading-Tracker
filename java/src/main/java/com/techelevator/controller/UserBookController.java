@@ -30,6 +30,11 @@ public class UserBookController {
         return userBookDao.getUserBookList(principal.getName());
     }
 
+    @RequestMapping(value = "/myfamily/books", method = RequestMethod.GET)
+    public List<UserBook> listFamilyBooks(@Valid @RequestBody Principal principal) {
+        return userBookDao.getFamilyBooks(principal.getName());
+    }
+
     @RequestMapping(value = "/mybooks/{isbn}", method = RequestMethod.GET)
     public UserBook getMyBook(Principal principal, @PathVariable Integer isbn) {
         return null;

@@ -38,6 +38,7 @@ CREATE TABLE user_book (
 	favorited boolean DEFAULT(false),
 	book_cover_url varchar(500),
 	description varchar(2000),
+	rating int,
 
 
 	CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users (user_id),

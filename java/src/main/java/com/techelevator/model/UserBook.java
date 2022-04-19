@@ -12,6 +12,7 @@ public class UserBook {
     private String description;
     private String bookCoverUrl;
     private boolean favorited;
+    private int rating;
 
     public int getUserBookId() {
         return UserBookId;
@@ -99,5 +100,13 @@ public class UserBook {
 
     public void setFavorited(boolean favorited) {
         this.favorited = favorited;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 }
