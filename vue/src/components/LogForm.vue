@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <p>Reading Activity for {{ this.$route.params.title }}</p>
+        <p>Reading Activity for {{ this.$route.params.book.title }}</p>
 
     
   <form class="log-reading-form" v-on:submit.prevent = "logReading">
@@ -64,9 +64,9 @@ export default {
     methods: {
         logReading() {
             const newReadingActivity = {
-                userBookId: this.$route.params.userBookId,
+                userBookId: this.$route.params.book.userBookId,
                 dateCreated: this.readingActivity.date,
-                reader: this.$route.params.userId,
+                reader: this.$route.params.book.userId,
                 format: this.readingActivity.format,
                 time: Number(this.readingActivity.time),
                 notes: this.readingActivity.notes
@@ -74,7 +74,7 @@ export default {
 
 
             
-            BookService.submitReadingActivity(this.$route.params.userId, newReadingActivity).then((response) => {
+            BookService.submitReadingActivity(this.$route.params.book.userId, newReadingActivity).then((response) => {
                 if(response.status === 201) {
                     alert('Reading Activity Logged!')
 
@@ -86,7 +86,7 @@ export default {
                     };
                     this.$router.push('/');
                     }
-                    this.$router.go();
+                    //this.$router.go();
             })
             
             
