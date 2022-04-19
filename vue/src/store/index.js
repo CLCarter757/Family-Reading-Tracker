@@ -22,6 +22,7 @@ export default new Vuex.Store({
     user: currentUser || {},
     searchBook: [],
     userBooks: [],
+    familyBooks: [],
     family: [],
       // {
       //   username: 'test',
@@ -122,6 +123,9 @@ export default new Vuex.Store({
     },
     SET_FAMILY(state, data) {
       state.family = data;
+    },
+    SET_FAMILY_BOOKS(state, data) {
+      state.familyBooks = data;
     },
     ADD_MEMBER(state, data) {
       state.family.push(data);

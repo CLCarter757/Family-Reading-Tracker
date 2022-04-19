@@ -55,6 +55,30 @@ public class JdbcUserBookDao implements UserBookDao {
     }
 
     @Override
+    public List<UserBook> getFamilyBooks(String username) {
+        String sqlFamilyId = "SELECT family_id " +
+                            "FROM users " +
+                            "WHERE username = ?;";
+
+        Integer familyId = jdbcTemplate.queryForObject(sqlFamilyId, Integer.class, username);
+
+        List<UserBook> books = new ArrayList<>();
+        String sql = "SELECT user_book_id, user_id, isbn, title, minutes, completed, favorited, rating, " +
+                "authors, description, book_cover_url, users.username AS username " +
+                "FROM user_book " +
+                "JOIN users USING (user_id) " +
+                "WHERE users.familyId = ?;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
+
+        while(results.next()) {
+            UserBook book = mapRowToUserBook(results);
+            books.add(book);
+        }
+        return books;
+    }
+
+    @Override
     public UserBook getMyBook(String username, String isbn) {
         UserBook book = new UserBook();
         String sql = "SELECT user_book_id, user_id, isbn, title, minutes, completed, " +

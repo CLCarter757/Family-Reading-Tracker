@@ -12,6 +12,14 @@ import FamilyList from '../components/FamilyList.vue';
 export default {
     components: {
         FamilyList
+    },
+    created() {
+
+    },
+    methods: {
+        retrieveFamilyBooks() {
+            
+        }
     }
 }
 </script>
