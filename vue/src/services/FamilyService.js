@@ -9,5 +9,8 @@ export default {
     },
     addFamily(family) {
         return axios.post('/myfamily', family)
+    },
+    deleteMember(familyId, user) {
+        return axios.delete(`/myfamily/${ familyId }/${ user }`)
     }
 }

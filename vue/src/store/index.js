@@ -22,6 +22,7 @@ export default new Vuex.Store({
     user: currentUser || {},
     searchBook: [],
     userBooks: [],
+    familyBooks: [],
     family: [],
       // {
       //   username: 'test',
@@ -108,8 +109,26 @@ export default new Vuex.Store({
     SET_USER_BOOKS(state, data) {
       state.userBooks = data;
     },
+    UPDATE_BOOK_RATING(state, data){
+      const bookToUpdate = state.userBooks.find(book => book.isbn == data.isbn);
+      bookToUpdate.rating = data.rating;
+    },
+    UPDATE_BOOK_COMPLETED(state, data){
+      const bookToUpdate = state.userBooks.find(book => book.userBookId === data.userBookId);
+      bookToUpdate.completed = data.completed;
+    },
+    UPDATE_BOOK_FAVORITED(state, data){
+      const bookToUpdate = state.userBooks.find(book => book.userBookId === data.userBookId);
+      bookToUpdate.favorited = data.favorited;
+    },
     SET_FAMILY(state, data) {
       state.family = data;
+    },
+    SET_FAMILY_BOOKS(state, data) {
+      state.familyBooks = data;
+    },
+    ADD_MEMBER(state, data) {
+      state.family.push(data);
     }
   }
 })

@@ -27,7 +27,8 @@
             <td>{{ person.familyRole == 'ROLE_PARENT' ? 'Parent' : 'Child' }}</td>
             <td><button>Log Reading</button></td>
             <td>
-              <input class="icon" type="image" src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png"/>
+              <input class="icon" type="image" @click="deleteMember(person)"
+                src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png"/>
             </td>
         </tr>
         <tr>
@@ -64,6 +65,9 @@ export default {
       },
       newMember: {
         username: ''
+      },
+      memberToDelete: {
+        username: 'Terminator',
       }
     }
   },
@@ -85,6 +89,16 @@ export default {
                 this.$router.go();
               }
             })
+      },
+      deleteMember(person) {
+        console.log(person);
+        FamilyService.deleteMember(this.$store.state.user.familyId, person.id)
+          .then(response => {
+            if(response.status === 200) {
+              console.log(person)
+              // this.$router.go();
+            }
+          })
       },
       toggleForm() {
         this.showForm = !this.showForm;
