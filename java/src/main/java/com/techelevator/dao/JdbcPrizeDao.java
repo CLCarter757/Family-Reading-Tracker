@@ -1,14 +1,18 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Prize;
+import com.techelevator.model.ReadingActivity;
 import com.techelevator.model.User;
+import org.springframework.boot.autoconfigure.quartz.QuartzProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class JdbcPrizeDao implements PrizeDao {
@@ -27,7 +31,7 @@ public class JdbcPrizeDao implements PrizeDao {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
         while(results.next()) {
             Prize prize = mapRowToPrize(results);
-            List<User> winners = calculateWinners(prize);
+            List<User> winners = calculateWinners(prize, username);
             prize.setWinners(winners);
             prizes.add(prize);
         }
@@ -38,11 +42,11 @@ public class JdbcPrizeDao implements PrizeDao {
     public Prize getPrizeById(String username, Integer prizeId) throws Exception {
         String sql = "SELECT * " +
                 "FROM prizes " +
-                "WHERE prizeId = ? AND familyId = (SELECT familyId FROM users WHERE username = ?)";
+                "WHERE prize_id = ? AND family_id = (SELECT family_id FROM users WHERE username = ?)";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, prizeId, username);
         if (results.next()) {
             Prize prize = mapRowToPrize(results);
-            List<User> winners = calculateWinners(prize);
+            List<User> winners = calculateWinners(prize, username);
             prize.setWinners(winners);
             return prize;
         }
@@ -102,20 +106,95 @@ public class JdbcPrizeDao implements PrizeDao {
         return prize;
     }
 
-    private List<User> calculateWinners(Prize prize) {
+    private List<User> calculateWinners(Prize prize, String username) {
         List<User> winners = new ArrayList<>();
+        JdbcFamilyDao jdbcFamilyDao = new JdbcFamilyDao(jdbcTemplate);
+        JdbcUserDao jdbcUserDao = new JdbcUserDao(jdbcTemplate);
+        List<User> familyMembers = jdbcFamilyDao.getFamily(username).getFamilyMembers();
+        Map<Long, Long> familyMap = new HashMap<>();
+        for (User user : familyMembers) {
+            if ((user.getFamilyRole().equals("ROLE_PARENT") && (prize.getUserGroup().equals("all") || prize.getUserGroup().equals("parents")))
+            || (user.getFamilyRole().equals("ROLE_CHILD") && (prize.getUserGroup().equals("all") || prize.getUserGroup().equals("children"))))
+            familyMap.put(user.getId(), 0L);
+        }
         //get list of ReadingActivity for whole family
         //include reading activity between start and end dates
+        List<ReadingActivity> familyActivities= new ArrayList<>();
         String sql = "SELECT * " +
                 "FROM reading_activity " +
                 "WHERE reader IN (SELECT user_id FROM users WHERE family_id = ?) AND " +
-                "date >= ? AND date <= ?;";
-        //sum minutes read per user
-        //iterate over reading activity, earliest to latest
-        //if the user minutes is greater than milestone, add to winners list
-        //if maxPrizes == winners list size, stop iterating
-        //return winners list
+                "date >= ? AND date <= ? " +
+                "ORDER BY date";
+
+        SqlRowSet results= jdbcTemplate.queryForRowSet(sql, prize.getFamilyId(), prize.getStartDate(),
+                prize.getEndDate());
+        while(results.next()){
+            familyActivities.add(mapToReadingActivity(results));
+        }
+        int i = 0;
+        //winners.size() < prize.getMaxPrizes() && familyActivities.size() < i
+        while (true) {
+            if (familyActivities.size() == 0) {
+                break;
+            }
+            Long time = familyActivities.get(i).getTime();
+            Long userId = (long)(familyActivities.get(i).getReader());
+            time += familyMap.get(userId);
+
+            if (time >= prize.getMilestone()) {
+                if (!winners.contains(jdbcUserDao.getUserById(userId))) {
+                    winners.add(jdbcUserDao.getUserById(userId));
+                }
+            }
+            i += 1;
+            if (i == familyActivities.size()) {
+                break;
+            }
+            if (winners.size() == prize.getMaxPrizes()) {
+                break;
+            }
+        }
+
+//        List<User> winnersInDb = new ArrayList<>();
+//        String userSql = "SELECT users.* " +
+//                "FROM user_prizes " +
+//                "JOIN users USING (user_id) " +
+//                "WHERE prize_id = ?;";
+//        SqlRowSet resultsWinnerDb = jdbcTemplate.queryForRowSet(userSql, prize.getPrizeId());
+//        while(results.next()) {
+//            User user = mapRowToUser(results);
+//            winnersInDb.add(user);
+//       }
+        //***do we even need the user_prizes table?
+        //what is the point, if we can just calculate the winners based on the reading activity
+        //and the prize tables?
+        //user_prize table seems like extra, useless data we don't need to store***
         return winners;
+    }
+
+    private ReadingActivity mapToReadingActivity(SqlRowSet result){
+        ReadingActivity readingActivity= new ReadingActivity();
+
+        readingActivity.setRecordId(result.getInt("record_id"));
+        readingActivity.setUserBookId(result.getInt("user_book_id"));
+        readingActivity.setDateCreated((result.getDate("date")).toLocalDate());
+        readingActivity.setReader(result.getInt("reader"));
+        readingActivity.setFormat(result.getString("format"));
+        readingActivity.setTime(result.getLong("minutes"));
+        readingActivity.setNotes(result.getString("notes"));
+        return readingActivity;
+
+    }
+
+    private User mapRowToUser(SqlRowSet rs) {
+        User user = new User();
+        user.setId(rs.getLong("user_id"));
+        user.setUsername(rs.getString("username"));
+        user.setAuthorities(rs.getString("role"));
+        user.setFamilyRole(rs.getString("role"));
+        user.setFamilyId(rs.getInt("family_id"));
+
+        return user;
     }
 
 }
