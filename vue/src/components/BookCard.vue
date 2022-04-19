@@ -3,9 +3,7 @@
     <h2 class="book-title">{{ book.title }}</h2>
     <img class="img" v-if="book.isbn" v-bind:src="book.bookCoverUrl" />
     <h3 class="book-author">{{ book.authors }}</h3>
-    <div class="button-container">
-        <router-link :to="{ name:'form', params: {book} }" tag="button">Log Reading</router-link>
-    </div>
+    
     <div class="button-container">
         <button class="mark-read" v-on:click.prevent="setCompleted" v-if="! book.completed">Mark Read</button>
         <div class="rate" v-if="book.completed">
