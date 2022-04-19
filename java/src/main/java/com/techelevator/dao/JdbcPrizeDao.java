@@ -42,7 +42,7 @@ public class JdbcPrizeDao implements PrizeDao {
     public Prize getPrizeById(String username, Integer prizeId) throws Exception {
         String sql = "SELECT * " +
                 "FROM prizes " +
-                "WHERE prizeId = ? AND familyId = (SELECT familyId FROM users WHERE username = ?)";
+                "WHERE prize_id = ? AND family_id = (SELECT family_id FROM users WHERE username = ?)";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, prizeId, username);
         if (results.next()) {
             Prize prize = mapRowToPrize(results);
@@ -131,6 +131,9 @@ public class JdbcPrizeDao implements PrizeDao {
         }
         int i = 0;
         while (winners.size() < prize.getMaxPrizes() && familyActivities.size() <= i+1) {
+            if (familyActivities.size() == 0) {
+                break;
+            }
             Long time = familyActivities.get(i).getTime();
             Long userId = (long)(familyActivities.get(i).getReader());
             time += familyMap.get(userId);
