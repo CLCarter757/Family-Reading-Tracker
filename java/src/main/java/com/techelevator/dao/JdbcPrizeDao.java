@@ -113,6 +113,8 @@ public class JdbcPrizeDao implements PrizeDao {
         List<User> familyMembers = jdbcFamilyDao.getFamily(username).getFamilyMembers();
         Map<Long, Long> familyMap = new HashMap<>();
         for (User user : familyMembers) {
+            if ((user.getFamilyRole().equals("ROLE_PARENT") && (prize.getUserGroup().equals("all") || prize.getUserGroup().equals("parents")))
+            || (user.getFamilyRole().equals("ROLE_CHILD") && (prize.getUserGroup().equals("all") || prize.getUserGroup().equals("children"))))
             familyMap.put(user.getId(), 0L);
         }
         //get list of ReadingActivity for whole family
@@ -130,7 +132,8 @@ public class JdbcPrizeDao implements PrizeDao {
             familyActivities.add(mapToReadingActivity(results));
         }
         int i = 0;
-        while (winners.size() < prize.getMaxPrizes() && familyActivities.size() <= i+1) {
+        //winners.size() < prize.getMaxPrizes() && familyActivities.size() < i
+        while (true) {
             if (familyActivities.size() == 0) {
                 break;
             }
@@ -144,40 +147,28 @@ public class JdbcPrizeDao implements PrizeDao {
                 }
             }
             i += 1;
+            if (i == familyActivities.size()) {
+                break;
+            }
+            if (winners.size() == prize.getMaxPrizes()) {
+                break;
+            }
         }
 
-        String userSql = "SELECT users.* " +
-                "FROM user_prizes " +
-                "JOIN users USING (user_id) " +
-                "WHERE prize_id = ?;";
-//        user_id int DEFAULT nextval('seq_user_id'::regclass) NOT NULL,
-//        username varchar(50) NOT NULL UNIQUE,
-//        first_name varchar(50),
-//        last_name varchar(50),
-//        password_hash varchar(200) NOT NULL,
-//        role varchar(50) NOT NULL,
-//
-//        family_id int,
-
-
-
-
-
-        //check what user ids are in database
-        //compare to winners list
-        //if winner not in database, add them
-
-
-        //MAYBE MAKES MORE SENSE TO
-        //CHECK FOR WINNERS WHENEVER ADDING A READING ACTIVITY
-        //ADD THAT USER TO USER_PRIZE TABLE IF THEY WIN
-        //THIS FUNCTION JUST PULLS FROM USER_PRIZE TABLE AND ADDS WINNERS TO LIST
-
-        //sum minutes read per user
-        //iterate over reading activity, earliest to latest
-        //if the user minutes is greater than milestone, add to winners list
-        //if maxPrizes == winners list size, stop iterating
-        //return winners list
+//        List<User> winnersInDb = new ArrayList<>();
+//        String userSql = "SELECT users.* " +
+//                "FROM user_prizes " +
+//                "JOIN users USING (user_id) " +
+//                "WHERE prize_id = ?;";
+//        SqlRowSet resultsWinnerDb = jdbcTemplate.queryForRowSet(userSql, prize.getPrizeId());
+//        while(results.next()) {
+//            User user = mapRowToUser(results);
+//            winnersInDb.add(user);
+//       }
+        //***do we even need the user_prizes table?
+        //what is the point, if we can just calculate the winners based on the reading activity
+        //and the prize tables?
+        //user_prize table seems like extra, useless data we don't need to store***
         return winners;
     }
 
