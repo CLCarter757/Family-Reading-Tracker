@@ -22,13 +22,13 @@
     </div>
     <div class="icons">
         <input class="fav" type="image" v-on:click.prevent="setFavorited(false)" v-if="book.favorited" 
-            src="https://cdn-icons-png.flaticon.com/512/2107/2107845.png"/>
+            src="RedHeart.png"/>
         <input class="fav" type="image" v-on:click.prevent="setFavorited(true)" v-if="! book.favorited" 
-            src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png"/>
+            src="EmptyHeart.png"/>
         <input class="deleted" type="image" v-on:click.prevent="deleteBook" 
-            src="https://cdn-icons.flaticon.com/png/512/484/premium/484662.png?token=exp=1650248121~hmac=a35d89fcfa081919e0a644fa2a9ff467"/>
+            src="DeleteIcon.png"/>
         <router-link class="deleted" :to="{ name:'form', params:{ reader:this.book.userId, userBookId:this.book.userBookId } }" 
-            tag="img" src="https://cdn-icons.flaticon.com/png/512/2702/premium/2702134.png?token=exp=1650365557~hmac=6ddbf38a97458f40fc8f5bbeb4fb1e84">
+            tag="img" src="LogBook.png">
         </router-link>
     </div>
   </div>
