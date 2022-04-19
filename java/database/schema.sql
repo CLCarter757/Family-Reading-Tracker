@@ -79,13 +79,13 @@ CREATE TABLE prizes (
 
 );
 
-CREATE TABLE user_prizes (
-	user_id int NOT NULL,
-	prize_id int NOT NULL,
-
-	CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users (user_id),
-	CONSTRAINT fk_prize_id FOREIGN KEY (prize_id) REFERENCES prizes (prize_id)
-);
+--CREATE TABLE user_prizes (
+--	user_id int NOT NULL,
+--	prize_id int NOT NULL,
+--
+--	CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users (user_id),
+--	CONSTRAINT fk_prize_id FOREIGN KEY (prize_id) REFERENCES prizes (prize_id)
+--);
 
 CREATE TABLE friends(
 	user_1 int NOT NULL,
