@@ -5,6 +5,7 @@ import com.techelevator.dao.UserDao;
 import com.techelevator.model.Family;
 import com.techelevator.model.ReadingActivity;
 import com.techelevator.model.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,13 +27,15 @@ public class ReadingActivityController {
     @GetMapping(path = "users/{id}/activities")
     List<ReadingActivity> allActivitiesByUserId(@Valid @PathVariable Long id){
         return readingActivityDao.getAllReadingActivityByUserId(id);
-
     }
+
     @GetMapping(path = "users/{id}/activities/{recordId}")
     ReadingActivity getReadingActivity(@PathVariable Long id,@PathVariable int recordId) throws Exception {
         return readingActivityDao.getReadingActivityByRecordId(id,recordId);
 
     }
+
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "users/{id}/activities")
     ReadingActivity addReadingActivity (@Valid @PathVariable Long id ,Principal principal,@RequestBody ReadingActivity activity) throws Exception {
         ReadingActivity activityCreated=null;
