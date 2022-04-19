@@ -8,15 +8,15 @@
     <div class="button-container">
         <button class="mark-read" v-on:click.prevent="setCompleted" v-if="! book.completed">Mark Read</button>
         <div class="rate" v-if="book.completed">
-            <input type="radio" id="star5" name="rate" value="5"/>
+            <input :checked="book.rating == 5" type="radio" id="star5" name="rate" value="5"/>
             <label for="star5" title="text" @click.prevent="setRating(5)">5 stars</label>
-            <input type="radio" id="star4" name="rate" value="4"/>
+            <input :checked="book.rating == 4" type="radio" id="star4" name="rate" value="4"/>
             <label for="star4" title="text" @click.prevent="setRating(4)">4 stars</label>
-            <input type="radio" id="star3" name="rate" value="3"/>
+            <input :checked="book.rating == 3" type="radio" id="star3" name="rate" value="3"/>
             <label for="star3" title="text" @click.prevent="setRating(3)">3 stars</label>
-            <input type="radio" id="star2" name="rate" value="2"/>
+            <input :checked="book.rating == 2" type="radio" id="star2" name="rate" value="2"/>
             <label for="star2" title="text" @click.prevent="setRating(2)">2 stars</label>
-            <input type="radio" id="star1" name="rate" value="1"/>
+            <input :checked="book.rating == 1" type="radio" id="star1" name="rate" value="1"/>
             <label for="star1" title="text" @click.prevent="setRating(1)">1 star</label>
         </div>
     </div>
@@ -44,6 +44,7 @@ export default {
     data() {
         return {
             rating: null,
+            isChecked: true
         }
     },
     
