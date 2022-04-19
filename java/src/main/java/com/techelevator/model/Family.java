@@ -7,6 +7,15 @@ public class Family {
     private String familyName;
     private List<User> familyMembers;
 
+    public Family(Integer familyId, String familyName, List<User> familyMembers) {
+        this.familyId = familyId;
+        this.familyName = familyName;
+        this.familyMembers = familyMembers;
+    }
+
+    public Family(){
+    }
+
     public Integer getFamilyId() {
         return familyId;
     }

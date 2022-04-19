@@ -13,9 +13,14 @@ export default {
         return axios.delete(`/mybooks/${isbn}`)
     },
 
+    submitReadingActivity(id, readingActivity){
+        return axios.post(`users/${id}/activities`, readingActivity)
+    },
+
     listMyBooks() {
         return axios.get('/mybooks')
     },
+    
     updateBook(book) {
         return axios.put(`/mybooks/${book.isbn}`, book)
     },

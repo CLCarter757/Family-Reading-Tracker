@@ -58,7 +58,7 @@ const router = new Router({
       }
     },
     {
-      path: "/form",
+      path: "/form/:reader/:userBookId",
       name: "form",
       component: Log,
       meta: {
