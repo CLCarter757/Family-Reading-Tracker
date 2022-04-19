@@ -110,6 +110,9 @@ export default new Vuex.Store({
     },
     SET_FAMILY(state, data) {
       state.family = data;
+    },
+    ADD_MEMBER(state, data) {
+      state.family.push(data);
     }
   }
 })
