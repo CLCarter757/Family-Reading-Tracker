@@ -28,6 +28,13 @@ public class User {
       if(authorities != null) this.setAuthorities(authorities);
       this.activated = true;
    }
+   public User(Long id, String username, String password, Set<Authority> authorities) {
+      this.id = id;
+      this.username = username;
+      this.password = password;
+      if(authorities != null) this.setAuthorities(authorities);
+      this.activated = true;
+   }
 
    public Long getId() {
       return id;

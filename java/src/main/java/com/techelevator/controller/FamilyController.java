@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.FamilyDao;
+import com.techelevator.dao.UserDao;
 import com.techelevator.model.Family;
 import com.techelevator.model.User;
 import org.springframework.http.HttpStatus;
@@ -15,9 +16,11 @@ import java.util.List;
 @CrossOrigin
 public class FamilyController {
     private final FamilyDao familyDao;
+    private final UserDao userDao;
 
-    public FamilyController(FamilyDao familyDao) {
+    public FamilyController(FamilyDao familyDao, UserDao userDao) {
         this.familyDao = familyDao;
+        this.userDao = userDao;
     }
 
 
@@ -45,9 +48,10 @@ public class FamilyController {
 
    }
 
-    @DeleteMapping (path = "/myfamily/{familyId}")
-    public Family removeFamilyMember (@Valid Principal principal,  @PathVariable Integer familyId, @RequestBody User userToRemove) throws Exception {
-        return familyDao.removeFamilyMember(familyId,principal.getName(),userToRemove);
+    @DeleteMapping (path = "/myfamily/{familyId}/{userId}")
+    @PreAuthorize("hasRole('ROLE_PARENT')")
+    public Family removeFamilyMember (@Valid Principal principal,  @PathVariable Integer familyId, @PathVariable Long userId) throws Exception {
+        return familyDao.removeFamilyMember(familyId,principal.getName(),userDao.getUserById(userId));
 
 
     }

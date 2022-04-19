@@ -8,16 +8,16 @@
     <div class="button-container">
         <button class="mark-read" v-on:click.prevent="setCompleted" v-if="! book.completed">Mark Read</button>
         <div class="rate" v-if="book.completed">
-            <input type="radio" id="star5" name="rate" value="5" @click.prevent="setRating(5)"/>
-            <label for="star5" title="text">5 stars</label>
-            <input type="radio" id="star4" name="rate" value="4" @click.prevent="setRating(4)"/>
-            <label for="star4" title="text">4 stars</label>
-            <input type="radio" id="star3" name="rate" value="3" @click.prevent="setRating(3)"/>
-            <label for="star3" title="text">3 stars</label>
-            <input type="radio" id="star2" name="rate" value="2" @click.prevent="setRating(2)"/>
-            <label for="star2" title="text">2 stars</label>
-            <input type="radio" id="star1" name="rate" value="1" @click.prevent="setRating(1)"/>
-            <label for="star1" title="text">1 star</label>
+            <input type="radio" id="star5" name="rate" value="5"/>
+            <label for="star5" title="text" @click.prevent="setRating(5)">5 stars</label>
+            <input type="radio" id="star4" name="rate" value="4"/>
+            <label for="star4" title="text" @click.prevent="setRating(4)">4 stars</label>
+            <input type="radio" id="star3" name="rate" value="3"/>
+            <label for="star3" title="text" @click.prevent="setRating(3)">3 stars</label>
+            <input type="radio" id="star2" name="rate" value="2"/>
+            <label for="star2" title="text" @click.prevent="setRating(2)">2 stars</label>
+            <input type="radio" id="star1" name="rate" value="1"/>
+            <label for="star1" title="text" @click.prevent="setRating(1)">1 star</label>
         </div>
     </div>
     <div class="icons">
@@ -66,12 +66,11 @@ export default {
                 BookService.updateBook(updatedBook)
                     .then(response => {
                     if(response.status === 200) {
-                        this.$forceUpdate();
+                        this.$store.commit("UPDATE_BOOK_COMPLETED", response.data);
                     }
                     })
                     .catch(error => {
                         this.handleErrorResponse(error, "updating");
-                        this.$router.go();
                     })
             }
         },
@@ -92,7 +91,7 @@ export default {
             BookService.updateBook(updatedBook)
                 .then(response => {
                     if(response.status === 200) {
-                        this.$forceUpdate();
+                        this.$store.commit("UPDATE_BOOK_FAVORITED", response.data)
                     }
                 })
                 .catch(error => {
@@ -115,9 +114,9 @@ export default {
                 rating: value
             };
             BookService.updateBook(updatedBook)
-            .then(response => {
+                .then(response => {
                     if(response.status === 200) {
-                        this.$forceUpdate();
+                        this.$store.commit("UPDATE_BOOK_RATING", response.data)
                     }
                 })
                 .catch(error => {
@@ -203,10 +202,7 @@ button, input {
     display: flex;
     justify-content: center;
 }
-/* *{
-    margin: 0;
-    padding: 0;
-} */
+
 .rate {
     float: left;
     height: 46px;

@@ -92,10 +92,11 @@ export default {
       },
       deleteMember(person) {
         console.log(person);
-        FamilyService.deleteMember(this.$store.state.user.familyId, person)
+        FamilyService.deleteMember(this.$store.state.user.familyId, person.id)
           .then(response => {
             if(response.status === 200) {
-              this.$router.go();
+              console.log(person)
+              // this.$router.go();
             }
           })
       },

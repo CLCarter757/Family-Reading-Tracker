@@ -11,6 +11,6 @@ export default {
         return axios.post('/myfamily', family)
     },
     deleteMember(familyId, user) {
-        return axios.delete(`/myfamily/${ familyId }`, user)
+        return axios.delete(`/myfamily/${ familyId }/${ user }`)
     }
 }
