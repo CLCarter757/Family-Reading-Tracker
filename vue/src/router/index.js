@@ -58,12 +58,13 @@ const router = new Router({
       }
     },
     {
-      path: "/form/:reader/:userBookId",
+      path: "/form/:book",
       name: "form",
       component: Log,
       meta: {
         requiresAuth: false
-      }
+      },
+      props: true
     },
     {
       path: '/family',

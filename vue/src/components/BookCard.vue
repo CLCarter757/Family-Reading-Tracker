@@ -3,8 +3,7 @@
     <h2 class="book-title">{{ book.title }}</h2>
     <img class="img" v-if="book.isbn" v-bind:src="book.bookCoverUrl" />
     <h3 class="book-author">{{ book.authors }}</h3>
-    <div class="button-container">
-    </div>
+    
     <div class="button-container">
         <button class="mark-read" v-on:click.prevent="setCompleted" v-if="! book.completed">Mark Read</button>
         <div class="rate" v-if="book.completed">
@@ -25,9 +24,8 @@
             src="RedHeart.png"/>
         <input class="fav" type="image" v-on:click.prevent="setFavorited(true)" v-if="! book.favorited" 
             src="EmptyHeart.png"/>
-        <input class="deleted" type="image" v-on:click.prevent="deleteBook" 
-            src="DeleteIcon.png"/>
-        <router-link class="deleted" :to="{ name:'form', params:{ reader:this.book.userId, userBookId:this.book.userBookId } }" 
+        <input class="deleted" type="image" v-on:click.prevent="deleteBook" src="DeleteIcon.png"/>
+        <router-link class="deleted" :to="{ name:'form', params: {book} }" 
             tag="img" src="LogBook.png">
         </router-link>
     </div>
