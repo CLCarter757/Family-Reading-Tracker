@@ -5,7 +5,7 @@
     <h3 class="book-author">{{ book.authors }}</h3>
     
     <div class="button-container">
-        <button class="mark-read" v-on:click.prevent="setCompleted" v-if="(this.$store.state.user.familyRole == 'ROLE_PARENT' || this.$store.state.user.id == book.userId) && !book.completed">Mark Read</button>
+        <button class="mark-read button is-primary" v-on:click.prevent="setCompleted" v-if="(this.$store.state.user.familyRole == 'ROLE_PARENT' || this.$store.state.user.id == book.userId) && !book.completed">Mark Read</button>
         <div class="rate" v-if="book.completed">
             <input :checked="book.rating == 5" :class="{'star-color':book.rating >= 5}" type="radio" id="star5" name="rate" value="5"/>
             <label :class="{'star-color':book.rating >= 5}" for="star5" title="text" @click.prevent="setRating(5)">5 stars</label>
@@ -165,15 +165,15 @@ export default {
     margin: 20px;
 }
 
-.card.favorited {
+.favorited {
     background-color: rgb(255, 221, 227);
 }
 
-.card .book-title {
+.book-title {
     font-size: 1.5rem;
 }
 
-.card .book-author {
+.book-author {
     font-size: 1rem;
 }
 
@@ -185,7 +185,7 @@ export default {
     padding: 10px;
 }
 .deleted {
-    height: 30px;
+    height: 60px;
     padding: 10px;
     cursor: pointer;
 }
