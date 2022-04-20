@@ -67,7 +67,7 @@ public class JdbcUserBookDao implements UserBookDao {
                 "authors, description, book_cover_url, users.username AS username " +
                 "FROM user_book " +
                 "JOIN users USING (user_id) " +
-                "WHERE users.familyId = ?;";
+                "WHERE users.family_id = ?;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
 

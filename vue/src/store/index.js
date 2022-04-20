@@ -23,68 +23,7 @@ export default new Vuex.Store({
     searchBook: [],
     userBooks: [],
     familyBooks: [],
-    family: []
-      // {
-      //   username: 'test',
-      //   firstName: 'bob',
-      //   role: 'child'
-      // },
-      // {
-      //   username: 'test',
-      //   firstName: 'bob',
-      //   role: 'child'
-      // }
-    // completed: [
-    //   {
-    //     title: "The Hunger Games",
-    //     author: "Suzanne Collins",
-    //     read: true,
-    //     isbn: "9780439023481"
-    //   },
-    //   {
-    //     title: "The Giver",
-    //     author: "Lois Lowry",
-    //     read: true,
-    //     isbn: "0385732554"
-    //   },
-    //   {
-    //     title: "A Wrinkle in Time",
-    //     author: "Madeleine L'Engle",
-    //     read: true,
-    //     isbn: "1250153271"
-    //   },
-    //   {
-    //     title: "Red Rising",
-    //     author: "Pierce Brown",
-    //     read: true,
-    //     isbn: "0345539788"
-    //   }
-    // ],
-    // reading: [
-    //   {
-    //     title: "Harry Potter and the Order of the Phoenix",
-    //     author: "	J. K. Rowling",
-    //     isbn: "0747551006"
-    //   },
-    //   {
-    //     title: "Charlotte's Web",
-    //     author: "E. B. White",
-    //     isbn: "9780062658753"
-    //   },
-    // ],
-
-    // list: [
-    //   {
-    //     title: "Coraline",
-    //     author: "Neil Gaiman",
-    //     isbn: "	0061139378"
-    //   },
-    //   {
-    //     title: "Hatchet",
-    //     author: "Gary Paulsen",
-    //     isbn: "	0027701301"
-    //   },
-    // ],
+    family: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -129,6 +68,16 @@ export default new Vuex.Store({
     },
     ADD_MEMBER(state, data) {
       state.family.push(data);
-    }
+    },
+    UPDATE_USER_FAMILY(state, data){
+      state.user.familyId = data.familyId;
+      localStorage.setItem('user',JSON.stringify(state.user));
+    },
+    REMOVE_FAMILY_MEMBER(state, data){
+      const personToUpdate = state.family.find(person => person.id === data.id);
+      const index = state.family.indexOf(personToUpdate);
+      state.family.splice(index);
+    },
+
   }
 })

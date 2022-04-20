@@ -13,16 +13,34 @@
         />
         <button type="submit" v-on:click.prevent="createFamily">Submit</button>
     </div>
-    <div class = "table" v-if="this.$store.state.user.familyId">
+    <div class = "table" v-if="this.$store.state.user.familyId && this.$store.state.user.familyRole =='ROLE_CHILD'">
         <tr>
             <th>Name</th>
             <th>Username</th>
             <th>Role</th>
-            <th v-show="this.$store.state.user.familyRole =='ROLE_PARENT'">Add Reading</th>
-            <th v-show="this.$store.state.user.familyRole =='ROLE_PARENT'">Remove</th>
         </tr>
         <tr v-for="person in this.$store.state.family" :key="person.username">
-            <td>{{ person.name }}</td>
+            <td>
+              <router-link :to="`/family/${person.id} `">
+              {{ person.name }} </router-link>
+              </td>
+            <td>{{ person.username }}</td>
+            <td>{{ person.familyRole == 'ROLE_PARENT' ? 'Parent' : 'Child' }}</td>
+        </tr>
+      </div>
+      <div v-if="this.$store.state.user.familyId && this.$store.state.user.familyRole =='ROLE_PARENT'">
+        <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Add Reading</th>
+            <th>Remove</th>
+        </tr>
+        <tr v-for="person in this.$store.state.family" :key="person.username">
+            <td @click="setRouteId(person)">
+              <router-link  :to="`/family/${person.id}`">
+              {{ person.name }} </router-link>
+              </td>
             <td>{{ person.username }}</td>
             <td>{{ person.familyRole == 'ROLE_PARENT' ? 'Parent' : 'Child' }}</td>
             <td><button>Log Reading</button></td>
@@ -66,9 +84,7 @@ export default {
       newMember: {
         username: ''
       },
-      memberToDelete: {
-        username: 'Terminator',
-      }
+      routeId: '',
     }
   },
   created() {
@@ -85,17 +101,17 @@ export default {
           FamilyService.addFamilyMember(this.$store.state.user.familyId, this.newMember)
             .then(response => {
               if(response.status == 200) {
-                alert(`${ this.newMember } has been added to your family.`)
+                alert(`${ this.newMember.username } has been added to your family.`)
                 this.$router.go();
               }
             })
       },
       deleteMember(person) {
-        console.log(person);
+        if(confirm(`Remove this person from your family?`))
         FamilyService.deleteMember(this.$store.state.user.familyId, person.id)
           .then(response => {
             if(response.status === 200) {
-              console.log(person)
+              this.$store.commit("REMOVE_FAMILY_MEMBER", response.data)
               // this.$router.go();
             }
           })
@@ -106,12 +122,16 @@ export default {
       createFamily() {
         FamilyService.addFamily(this.newFamily)
           .then(response => {
-            if(response.status === 200) {
-              this.$router.go();
+            if(response.status === 201) {
+              this.$store.commit("UPDATE_USER_FAMILY", response.data);
+              this.retrieveFamily();
             }
           });
-          this.retrieveFamily();
+      },
+      setRouteId(person){
+        this.routeId = person.id;
       }
+
   }
 
 
