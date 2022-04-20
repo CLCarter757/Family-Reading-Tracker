@@ -25,6 +25,8 @@ public interface UserBookDao {
     UserBook updateMyBook(UserBook book, String username, String isbn);
 
     List<UserBook> getFamilyBooks(String username);
+    UserBook getBookByBookId(int userBookId);
+
 //
 //    Book getBook(String isbn);
 //

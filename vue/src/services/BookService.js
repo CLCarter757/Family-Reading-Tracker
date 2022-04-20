@@ -16,6 +16,9 @@ export default {
     submitReadingActivity(id, readingActivity){
         return axios.post(`users/${id}/activities`, readingActivity)
     },
+    getReadingActivities(id){
+        return axios.get(`users/${id}/activities`)
+    },
 
     listMyBooks() {
         return axios.get('/mybooks')
@@ -29,5 +32,9 @@ export default {
     },
     listFamilyBooks(){
         return axios.get('/myfamily/books')
+    },
+    getBookById(userBookId){
+        return axios.get( `/mybooks/${userBookId}`)
+
     }
 }

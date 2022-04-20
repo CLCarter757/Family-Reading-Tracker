@@ -28,6 +28,11 @@
             <td>{{ person.familyRole == 'ROLE_PARENT' ? 'Parent' : 'Child' }}</td>
         </tr>
       </div>
+      
+      <family-member @click="`/family/${person.id}`"
+      v-for="person in this.$store.state.family" :key="person.username" v-bind:person="person"></family-member>
+
+
       <div v-if="this.$store.state.user.familyId && this.$store.state.user.familyRole =='ROLE_PARENT'">
         <tr>
             <th>Name</th>
@@ -48,7 +53,16 @@
         </tr>
         <tr>
           <div class="add-member">
+
+
+            <div>
+            <button class="simple"  @click="toggleForm" >Add Mamber</button> </div>
+              <!-- <input class="icon" type="image" src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
+                @click="toggleForm">Add Member/> -->
+
               <i class="fa-solid fa-square-plus" @click="toggleForm"/>
+
+
               <input
                   v-show="showForm"
                   type="text"
@@ -68,9 +82,13 @@
 
 <script>
 import FamilyService from '../services/FamilyService.js';
+import FamilyMember from '../components/FamilyMember.vue'
 
 export default {
   name: 'family-list',
+  components:{
+    FamilyMember
+  },
   data() {
     return {
       showForm: false,
@@ -86,6 +104,7 @@ export default {
   created() {
     this.retrieveFamily();
   },
+ 
   methods: {
     retrieveFamily() {
           FamilyService.getFamily()
