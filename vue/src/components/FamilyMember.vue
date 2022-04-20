@@ -3,56 +3,98 @@
     <div class="center list flex-column">
       <div class="card flex-row open">
         <div class="flex-column info">
-          <div class="title">{{ user.name }}</div>
-          <div class="author">{{ }}</div>
-          <div class="author">
-            {{ user.familyRole == "ROLE_PARENT" ? "Parent" : "Child" }}
-          </div>
-          <div class="hidden bottom summary"></div>
+          <div >{{ person.name }}</div>
+          <div >{{person.username}}</div>
+          <div >
+            {{ person.familyRole == "ROLE_PARENT" ? "Parent" : "Child" }}
+          </div><br>
+           <router-link :to="`/family/${person.id} `">
+              Currently Reading </router-link>
         </div>
         <div class="flex-column group">
-          <div class="members">
-            <span class="current">14</span> /
-            <span class="max">30</span>
-          </div>
+          <h3>Most Recent Reading </h3>
+          <h2>Date: {{lastActivity.dateCreated}}</h2>
+          <h2> {{lastActivity.format}}</h2>
+            <h2> Duration:{{lastActivity.time}}</h2>
+        
           <div class="hidden bottom">
-            <button class="simple" >Remove</button>
+            
+            
+            <!-- <button class="simple" >Remove</button> -->
           </div>
+          
         </div>
-        <img
+         <div class="flex-column group">
+          <h3>Notes </h3>
+          <h2></h2>
+          <h2> </h2>
+            <h2></h2>
+            
+        
+          <div class="hidden bottom">
+            
+            
+            <button  @click.prevent="deleteMember(person)" >Remove</button> 
+          </div>
+          
+        </div>
+        
+        <!-- <img
           src="http://i.harperapps.com/covers/9780008108298/y450-293.jpg"
           class="book"
-        />
+        /> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import BookService from '../services/BookService';
+import BookService from "../services/BookService";
+import FamilyService from '../services/FamilyService.js';
 export default {
-  props: ["user"],
-  data(){
-      return{
-          readingActivity:[]
-      }
+  props: ["person"],
+  data() {
+    return {
+      readingActivity: [],
+      lastActivity: {
+       
+      },
+      lastBookRead: {}
+    };
   },
-   created() {
+  created() {
     this.getReadingActivity();
   },
+  computed: {},
 
-  methods:{
-      getReadingActivity(){
-          BookService.getReadingActivities(this.user.id).then(response=>{
-
-              if(response.status === 200) {
-                  this.readingActivity = response.data
-                  console.log('hello')
-              }
+  methods: {
+    getReadingActivity() {
+      BookService.getReadingActivities(this.person.id).then((response) => {
+        if (response.status === 200) {
+          this.readingActivity = response.data;
+          this.lastActivity = this.readingActivity.pop();
+          
+        }
+      });
+    },
+    getBookById(){
+      BookService.getBookById(this.lastActivity.userBookId).then(response=>{
+        this.lastBookRead = response.data
+      })
+    }
+   
+  },
+     deleteMember(person) {
+        if(confirm(`Remove this person from your family?`))
+        FamilyService.deleteMember(this.$store.state.user.familyId, person.id)
+          .then(response => {
+            if(response.status === 200) {
+              this.$store.commit("REMOVE_FAMILY_MEMBER", response.data)
+              // this.$router.go();
+            }
           })
-      }
-  }
-}  
+      },
+};
 </script>
 
 <style scoped>
@@ -146,7 +188,7 @@ button.simple:hover {
   font-weight: bold;
 }
 .title {
-  font-size: 3em;
+  font-size: 2em;
   color: #fff;
   letter-spacing: 1px;
 }
@@ -158,20 +200,5 @@ button.simple:hover {
 
 .group {
   margin-left: auto;
-}
-.members {
-  transition: all 0.1s;
-  padding: 40px;
-  font-family: "Montserrat";
-  color: #ccc;
-  background-color: lighten(5%);
-}
-.current {
-  font-weight: bold;
-  margin-right: 10px;
-}
-.max {
-  opacity: 0.5;
-  margin-left: 10px;
 }
 </style>

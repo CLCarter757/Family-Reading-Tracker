@@ -32,5 +32,9 @@ export default {
     },
     listFamilyBooks(){
         return axios.get('/myfamily/books')
+    },
+    getBookById(userBookId){
+        return axios.get( `/mybooks/${userBookId}`)
+
     }
 }

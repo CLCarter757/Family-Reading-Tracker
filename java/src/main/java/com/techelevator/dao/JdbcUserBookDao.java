@@ -79,6 +79,22 @@ public class JdbcUserBookDao implements UserBookDao {
     }
 
     @Override
+    public UserBook getBookByBookId(int userBookId) {
+        UserBook book = new UserBook();
+        String sql = "SELECT user_book_id, user_id, isbn, title, minutes, completed, " +
+                "authors, description, book_cover_url, favorited, rating " +
+                "FROM user_book " +
+                "WHERE user_book_id=?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userBookId);
+
+        if (results.next()) {
+            book = mapRowToUserBook(results);
+        }
+        return book;
+
+    }
+
+    @Override
     public UserBook getMyBook(String username, String isbn) {
         UserBook book = new UserBook();
         String sql = "SELECT user_book_id, user_id, isbn, title, minutes, completed, " +
