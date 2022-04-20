@@ -73,10 +73,6 @@ export default new Vuex.Store({
     SET_PRIZE_LIST(state, data) {
       state.prizes = data;
     },
-
-
-
-
     UPDATE_USER_FAMILY(state, data){
       state.user.familyId = data.familyId;
       localStorage.setItem('user',JSON.stringify(state.user));
