@@ -24,6 +24,7 @@ export default new Vuex.Store({
     userBooks: [],
     familyBooks: [],
     family: [],
+    prizes: []
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -69,6 +70,13 @@ export default new Vuex.Store({
     ADD_MEMBER(state, data) {
       state.family.push(data);
     },
+    SET_PRIZE_LIST(state, data) {
+      state.prizes = data;
+    },
+
+
+
+
     UPDATE_USER_FAMILY(state, data){
       state.user.familyId = data.familyId;
       localStorage.setItem('user',JSON.stringify(state.user));
@@ -77,7 +85,7 @@ export default new Vuex.Store({
       const personToUpdate = state.family.find(person => person.id === data.id);
       const index = state.family.indexOf(personToUpdate);
       state.family.splice(index);
-    },
+    }
 
   }
 })
