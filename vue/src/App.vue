@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav" class="navbar is-info">
+    <div id="nav" class="navbar is-info">      
       <router-link class="nav button is-info is-focused" v-bind:to="{ name: 'home' }" tag="button">My Library</router-link>&nbsp;&nbsp;
       <router-link class="nav button is-info is-focused" v-bind:to="{ name: 'search' }" tag="button" v-if="$store.state.token != ''">Find Books</router-link>
       <router-link class="nav button is-info is-focused" v-bind:to="{ name: 'family' }" tag="button" v-if="$store.state.token != ''">Family</router-link>&nbsp;&nbsp;
