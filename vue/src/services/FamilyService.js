@@ -12,5 +12,6 @@ export default {
     },
     deleteMember(familyId, user) {
         return axios.delete(`/myfamily/${ familyId }/${ user }`)
-    }
+    },
+    
 }

@@ -19,12 +19,12 @@
             <label for="star1" title="text" @click.prevent="setRating(1)">1 star</label>
         </div>
     </div>
-    <div class="icons">
+    <div class="icons" v-if="this.$store.state.user.familyRole == 'ROLE_PARENT' || this.$store.state.user.id == book.userId">
         <input class="fav" type="image" v-on:click.prevent="setFavorited(false)" v-if="book.favorited" 
             src="RedHeart.png"/>
         <input class="fav" type="image" v-on:click.prevent="setFavorited(true)" v-if="! book.favorited" 
             src="EmptyHeart.png"/>
-        <input class="deleted" type="image" v-on:click.prevent="deleteBook" src="DeleteIcon.png"/>
+        <input v-if="book.minutes === 0" class="deleted" type="image" v-on:click.prevent="deleteBook" src="DeleteIcon.png"/>
         <router-link class="deleted" :to="{ name:'form', params: {book} }" 
             tag="img" src="LogBook.png">
         </router-link>
