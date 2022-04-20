@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>What do you want to read?</h1>
+        <h1 class="title">What do you want to read?</h1>
         <book-search></book-search>
         
         
