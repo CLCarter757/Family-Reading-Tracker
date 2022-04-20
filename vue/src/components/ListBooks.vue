@@ -26,7 +26,7 @@ export default {
     },
     data() {
         return {
-            books: []
+            
         }
     },
 
@@ -34,7 +34,9 @@ export default {
         retrieveBooks() {
             BookService.listMyBooks()
                 .then(response => {
-                    this.$store.commit("SET_USER_BOOKS", response.data);
+                    if(response.status === 200) {
+                        this.$store.commit("SET_USER_BOOKS", response.data);
+                    }
                 });
         },
         wishList() {
