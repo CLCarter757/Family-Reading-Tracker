@@ -157,12 +157,15 @@ export default {
 </script>
 
 <style>
+
 .card {
-    border: 2px solid black;
     border-radius: 10px;
+    backdrop-filter: hue-rotate(30px);
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     width: 250px;
-    height: 450px;
-    margin: 20px;
+    height: 465px;
 }
 
 .favorited {
@@ -181,7 +184,7 @@ export default {
     height: 200px;
 }
 .fav {
-    height: 30px;
+    height: 60px;
     padding: 10px;
 }
 .deleted {
