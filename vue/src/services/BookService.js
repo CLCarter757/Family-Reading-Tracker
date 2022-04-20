@@ -16,6 +16,9 @@ export default {
     submitReadingActivity(id, readingActivity){
         return axios.post(`users/${id}/activities`, readingActivity)
     },
+    getReadingActivities(id){
+        return axios.get(`users/${id}/activities`)
+    },
 
     listMyBooks() {
         return axios.get('/mybooks')

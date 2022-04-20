@@ -23,7 +23,7 @@ export default new Vuex.Store({
     searchBook: [],
     userBooks: [],
     familyBooks: [],
-    family: [],
+    family: []
       // {
       //   username: 'test',
       //   firstName: 'bob',

@@ -41,13 +41,17 @@ public class JdbcReadingActivity implements ReadingActivityDao {
 
     @Override
     public ReadingActivity addReadingActivity(ReadingActivity activity) throws Exception {
+        boolean isUserBookTableUpdated=jdbcTemplate.update("UPDATE  user_book SET minutes=minutes+ (?)",activity.getTime())==1;
         ReadingActivity createdReadingActivity=null;
+        Integer recordId=null;
+        if(isUserBookTableUpdated){
         String sql="INSERT INTO reading_activity (user_book_id,date,reader,format,minutes,notes) " +
                 "VALUES (?,?,?,?,?,?) returning record_id";
+
       //  Date date = Date.valueOf(LocalDate.now());
         Date date = Date.valueOf(activity.getDateCreated());
-        Integer recordId = jdbcTemplate.queryForObject(sql,Integer.class,activity.getUserBookId(),date,activity.getReader(),
-                activity.getFormat(),activity.getTime(),activity.getNotes());
+         recordId = jdbcTemplate.queryForObject(sql,Integer.class,activity.getUserBookId(),date,activity.getReader(),
+                activity.getFormat(),activity.getTime(),activity.getNotes());}
 
         return getReadingActivityByRecordId((long) activity.getReader(),recordId);
     }
