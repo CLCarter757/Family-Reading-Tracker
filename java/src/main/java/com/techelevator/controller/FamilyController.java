@@ -41,7 +41,7 @@ public class FamilyController {
        return familyDao.createFamily(principal.getName(),family);
     }
 
-    @PutMapping (path = "/myfamily/{familyId}")
+    @PostMapping (path = "/myfamily/{familyId}")
     @PreAuthorize("hasRole('ROLE_PARENT')")
     public Family addFamilyMember (@Valid Principal principal,  @PathVariable Integer familyId, @RequestBody User userToAdd) throws Exception {
         return familyDao.addFamilyMember(familyId,principal.getName(),userToAdd);

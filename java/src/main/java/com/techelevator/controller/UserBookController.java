@@ -35,10 +35,17 @@ public class UserBookController {
         return userBookDao.getFamilyBooks(principal.getName());
     }
 
-    @RequestMapping(value = "/mybooks/{isbn}", method = RequestMethod.GET)
-    public UserBook getMyBook(Principal principal, @PathVariable Integer isbn) {
-        return null;
+    @RequestMapping(value = "/mybooks/{UserBookId}", method = RequestMethod.GET)
+    public UserBook getMyBook(Principal principal, @PathVariable Integer UserBookId) {
+
+        return userBookDao.getBookByBookId(UserBookId);
     }
+
+
+
+
+
+
 
     @RequestMapping(value = "/mybooks/{isbn}", method = RequestMethod.DELETE)
     public boolean deleteMyBook(Principal principal, @PathVariable String isbn) throws Exception {

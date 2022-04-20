@@ -28,12 +28,16 @@
             <td>{{ person.familyRole == 'ROLE_PARENT' ? 'Parent' : 'Child' }}</td>
         </tr>
       </div>
+      
+      <family-member @click="`/family/${person.id}`"
+      v-for="person in this.$store.state.family" :key="person.username" v-bind:person="person"></family-member>
+
+
       <div v-if="this.$store.state.user.familyId && this.$store.state.user.familyRole =='ROLE_PARENT'">
         <tr>
             <th>Name</th>
             <th>Username</th>
             <th>Role</th>
-            <th>Add Reading</th>
             <th>Remove</th>
         </tr>
         <tr v-for="person in this.$store.state.family" :key="person.username">
@@ -43,16 +47,22 @@
               </td>
             <td>{{ person.username }}</td>
             <td>{{ person.familyRole == 'ROLE_PARENT' ? 'Parent' : 'Child' }}</td>
-            <td><button>Log Reading</button></td>
             <td>
-              <input class="icon" type="image" @click="deleteMember(person)"
-                src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png"/>
+              <i class="fa-solid fa-x" @click="deleteMember(person)"/>
             </td>
         </tr>
         <tr>
           <div class="add-member">
-              <input class="icon" type="image" src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
-                @click="toggleForm"/>
+
+
+            <div>
+            <button class="simple"  @click="toggleForm" >Add Mamber</button> </div>
+              <!-- <input class="icon" type="image" src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
+                @click="toggleForm">Add Member/> -->
+
+              <i class="fa-solid fa-square-plus" @click="toggleForm"/>
+
+
               <input
                   v-show="showForm"
                   type="text"
@@ -72,9 +82,13 @@
 
 <script>
 import FamilyService from '../services/FamilyService.js';
+import FamilyMember from '../components/FamilyMember.vue'
 
 export default {
   name: 'family-list',
+  components:{
+    FamilyMember
+  },
   data() {
     return {
       showForm: false,
@@ -90,6 +104,7 @@ export default {
   created() {
     this.retrieveFamily();
   },
+ 
   methods: {
     retrieveFamily() {
           FamilyService.getFamily()
@@ -146,13 +161,25 @@ export default {
   th {
     border-radius: 0;
     top: 0;
+    padding: 100px;
+  }
+  td{
     padding: 10px;
   }
   .icon {
-    height: 30px;
+    height: 0px;
     padding: 10px;
 }
 .add-member {
   display: flex
+}
+.fa-x{
+  color: rgb(211, 1, 1);
+  cursor: pointer;
+}
+.fa-square-plus {
+  color: green;
+  height: 100px;
+  cursor: pointer;
 }
 </style>

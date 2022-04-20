@@ -5,18 +5,15 @@
     <h3 class="book-author">{{ book.authors }}</h3>
     
     <div class="button-container">
-        <button class="mark-read button is-primary" v-on:click.prevent="setCompleted" v-if="(this.$store.state.user.familyRole == 'ROLE_PARENT' || this.$store.state.user.id == book.userId) && !book.completed">Mark Read</button>
-        <div class="rate" v-if="book.completed">
-            <input :checked="book.rating == 5" :class="{'star-color':book.rating >= 5}" type="radio" id="star5" name="rate" value="5"/>
-            <label :class="{'star-color':book.rating >= 5}" for="star5" title="text" @click.prevent="setRating(5)">5 stars</label>
-            <input :checked="book.rating == 4" :class="{'star-color':book.rating >= 4}" type="radio" id="star4" name="rate" value="4"/>
-            <label :class="{'star-color':book.rating >= 4}" for="star4" title="text" @click.prevent="setRating(4)">4 stars</label>
-            <input :checked="book.rating == 3" :class="{'star-color':book.rating >= 3}" type="radio" id="star3" name="rate" value="3"/>
-            <label :class="{'star-color':book.rating >= 3}" for="star3" title="text" @click.prevent="setRating(3)">3 stars</label>
-            <input :checked="book.rating == 2" :class="{'star-color':book.rating >= 2}" type="radio" id="star2" name="rate" value="2"/>
-            <label :class="{'star-color':book.rating >= 2}" for="star2" title="text" @click.prevent="setRating(2)">2 stars</label>
-            <input :checked="book.rating == 1" :class="{'star-color':book.rating >= 1}" type="radio" id="star1" name="rate" value="1"/>
-            <label :class="{'star-color':book.rating >= 1}" for="star1" title="text" @click.prevent="setRating(1)">1 star</label>
+        <button class="mark-read button is-success" v-on:click.prevent="setCompleted" v-if="(this.$store.state.user.familyRole == 'ROLE_PARENT' || this.$store.state.user.id == book.userId) && !book.completed">Mark Read</button>
+        <div v-if="book.completed">
+            <span  v-for="n in 5" :key="n">
+                <i
+                class="fa-star fa-2x ml-1"
+                :class="{ fas: book.rating >= n, far: book.rating < n }"
+                @click="setRating(n)"
+                ></i>
+            </span>
         </div>
     </div>
     <div class="icons" v-if="this.$store.state.user.familyRole == 'ROLE_PARENT' || this.$store.state.user.id == book.userId">
@@ -183,63 +180,24 @@ export default {
 .img {
     height: 200px;
 }
-.fav {
-    height: 60px;
+/* .fav {
+    height: 50px;
     padding: 10px;
 }
 .deleted {
-    height: 60px;
+    height: 50px;
     padding: 10px;
     cursor: pointer;
-}
+} */
 .icons{
     display: flex;
     justify-content: space-between;
-}
-button, input {
-    cursor: pointer;
-}
-.button-container{
-    display: flex;
-    justify-content: center;
-}
-
-.rate {
-    float: left;
-    height: 46px;
-    padding: 0 10px;
-}
-.rate:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
-}
-.rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
+    height: 50px;
+    padding: 10px;
     cursor:pointer;
-    font-size:30px;
-    color:#ccc;
 }
-.rate:not(:checked) > label:before {
-    content: '★ ';
-}
-.rate > input:checked ~ label {
-    color: gold;    
-}
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: gold;  
-}
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: gold;
-}
-.star-colored {
-    color: gold;
+.fa-star {
+    color: rgb(243, 210, 23);
+    cursor: pointer;
 }
 </style>
