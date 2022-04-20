@@ -3,25 +3,53 @@
         <div class="is-size-1">Prizes</div>
         <button class="mark-read button is-primary is-small is-fullwidth">Add Prize</button>
         <h2>Prizes Available</h2>
-        <div class="prize">
-            <div v-for="prize in prizesAvailable()" v-bind:key="prize.prizeId" >{{prize.name}}
-                
-            </div>
+        <div class="prize-list">
+            <prize-card 
+            v-for="prize in prizesAvailable" 
+            v-bind:key="prize.prizeId" 
+            :prize = "prize"
+            />   
         </div>
         
         <h2>My Prizes</h2>
+        <div class="prize-list">
+            <prize-card 
+            v-for="prize in prizesWon" 
+            v-bind:key="prize.prizeId" 
+            :prize = "prize"
+            />   
+        </div>
         <h2>Recent Family Prizes Won</h2>
-        <prize></prize>
+        
     </div>
 </template>
 
 <script>
-import Prize from '../components/Prize.vue';
+
 import PrizeService from '../services/PrizeService';
+import PrizeCard from '../components/PrizeCard.vue';
 
 export default ({
     components: {
-        Prize
+        PrizeCard
+    },
+    computed: {
+        prizesAvailable() {
+            return this.$store.state.prizes.filter((prize) => {
+                return prize.maxPrizes > prize.winners.length && 
+                0 == prize.winners.filter((winner) => {
+                    return this.$store.state.user.username == winner.username  
+                }).length;
+        });
+        },
+        prizesWon() {
+            return this.$store.state.prizes.filter((prize) => {
+                return 1 == prize.winners.filter((winner) => {
+                    return this.$store.state.user.username == winner.username  
+                }).length;
+        });
+        }
+
     },
     methods: {
         retrievePrizes() {
@@ -29,15 +57,8 @@ export default ({
                 .then(response => {
                     this.$store.commit("SET_PRIZE_LIST", response.data);
                 });
-        },
-        prizesAvailable() {
-            return this.$store.state.prizes.filter((prize) => {
-                return 0 == prize.winners.filter((winner) => {
-                    return this.$store.state.user.username == winner.username &&
-                    prize.maxPrizes > prize.winners.length;
-                })
-        });
-        },
+        }
+        
 
         //addPrize() {
             // const newPrize = {
@@ -79,3 +100,11 @@ export default ({
     // }
 })
 </script>
+
+<style>
+.prize-list {
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+</style>
