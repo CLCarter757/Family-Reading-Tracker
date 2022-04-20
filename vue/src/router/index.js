@@ -9,6 +9,7 @@ import Log from '../views/Log.vue'
 import Family from '../views/Family.vue'
 import Prizes from '../views/Prizes.vue'
 import SearchBooks from '../views/SearchBooks.vue'
+import FamilyMemberLibrary from '../views/FamilyMemberLibrary.vue'
 
 Vue.use(Router)
 
@@ -90,6 +91,11 @@ const router = new Router({
         requiresAuth: false
       },
     },
+    {
+      path: '/family/:id',
+      name: 'family-library',
+      component: FamilyMemberLibrary
+    }
     
   ]
 })

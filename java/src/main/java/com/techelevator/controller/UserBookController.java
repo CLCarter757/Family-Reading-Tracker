@@ -31,7 +31,7 @@ public class UserBookController {
     }
 
     @RequestMapping(value = "/myfamily/books", method = RequestMethod.GET)
-    public List<UserBook> listFamilyBooks(@Valid @RequestBody Principal principal) {
+    public List<UserBook> listFamilyBooks(Principal principal) {
         return userBookDao.getFamilyBooks(principal.getName());
     }
 

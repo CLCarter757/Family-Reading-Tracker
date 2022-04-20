@@ -26,5 +26,8 @@ export default {
     },
     deleteBook(isbn) {
         return axios.delete(`/mybooks/${isbn}`)
+    },
+    listFamilyBooks(){
+        return axios.get('/myfamily/books')
     }
 }

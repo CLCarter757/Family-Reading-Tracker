@@ -5,28 +5,28 @@
     <h3 class="book-author">{{ book.authors }}</h3>
     
     <div class="button-container">
-        <button class="mark-read" v-on:click.prevent="setCompleted" v-if="! book.completed">Mark Read</button>
+        <!-- <button class="mark-read" v-on:click.prevent="setCompleted" v-if="this.$store.state.user.familyRole == 'ROLE_PARENT' || this.$store.state.user.id == book.userId && !book.completed">Mark Read</button> -->
         <div class="rate" v-if="book.completed">
-            <input :checked="book.rating == 5" type="radio" id="star5" name="rate" value="5"/>
-            <label for="star5" title="text" @click.prevent="setRating(5)">5 stars</label>
-            <input :checked="book.rating == 4" type="radio" id="star4" name="rate" value="4"/>
-            <label for="star4" title="text" @click.prevent="setRating(4)">4 stars</label>
-            <input :checked="book.rating == 3" type="radio" id="star3" name="rate" value="3"/>
-            <label for="star3" title="text" @click.prevent="setRating(3)">3 stars</label>
-            <input :checked="book.rating == 2" type="radio" id="star2" name="rate" value="2"/>
-            <label for="star2" title="text" @click.prevent="setRating(2)">2 stars</label>
-            <input :checked="book.rating == 1" type="radio" id="star1" name="rate" value="1"/>
-            <label for="star1" title="text" @click.prevent="setRating(1)">1 star</label>
+            <input :checked="book.rating == 5" :class="{'star-color':book.rating >= 5}" type="radio" id="star5" name="rate" value="5"/>
+            <label :class="{'star-color':book.rating >= 5}" for="star5" title="text" @click.prevent="setRating(5)">5 stars</label>
+            <input :checked="book.rating == 4" :class="{'star-color':book.rating >= 4}" type="radio" id="star4" name="rate" value="4"/>
+            <label :class="{'star-color':book.rating >= 4}" for="star4" title="text" @click.prevent="setRating(4)">4 stars</label>
+            <input :checked="book.rating == 3" :class="{'star-color':book.rating >= 3}" type="radio" id="star3" name="rate" value="3"/>
+            <label :class="{'star-color':book.rating >= 3}" for="star3" title="text" @click.prevent="setRating(3)">3 stars</label>
+            <input :checked="book.rating == 2" :class="{'star-color':book.rating >= 2}" type="radio" id="star2" name="rate" value="2"/>
+            <label :class="{'star-color':book.rating >= 2}" for="star2" title="text" @click.prevent="setRating(2)">2 stars</label>
+            <input :checked="book.rating == 1" :class="{'star-color':book.rating >= 1}" type="radio" id="star1" name="rate" value="1"/>
+            <label :class="{'star-color':book.rating >= 1}" for="star1" title="text" @click.prevent="setRating(1)">1 star</label>
         </div>
     </div>
-    <div class="icons">
+    <div class="icons" v-if="this.$store.state.user.familyRole == 'ROLE_PARENT' || this.$store.state.user.id == book.userId">
         <input class="fav" type="image" v-on:click.prevent="setFavorited(false)" v-if="book.favorited" 
-            src="RedHeart.png"/>
+            src="/RedHeart.png"/>
         <input class="fav" type="image" v-on:click.prevent="setFavorited(true)" v-if="! book.favorited" 
-            src="EmptyHeart.png"/>
-        <input class="deleted" type="image" v-on:click.prevent="deleteBook" src="DeleteIcon.png"/>
+            src="/EmptyHeart.png"/>
+        <input v-if="book.minutes === 0" class="deleted" type="image" v-on:click.prevent="deleteBook" src="/DeleteIcon.png"/>
         <router-link class="deleted" :to="{ name:'form', params: {book} }" 
-            tag="img" src="LogBook.png">
+            tag="img" src="/LogBook.png">
         </router-link>
     </div>
   </div>
@@ -95,7 +95,6 @@ export default {
                 })
                 .catch(error => {
                     this.handleErrorResponse(error, "updating");
-                    this.$router.go();
                 });
         },
         setRating(value) {
@@ -235,6 +234,9 @@ button, input {
 .rate > input:checked ~ label:hover,
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
+    color: gold;
+}
+.star-colored {
     color: gold;
 }
 </style>
