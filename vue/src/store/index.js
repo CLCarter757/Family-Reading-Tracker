@@ -24,7 +24,44 @@ export default new Vuex.Store({
     userBooks: [],
     familyBooks: [],
     family: [],
-    prizes: []
+    prizes: [
+      {prizeId: 1,
+        familyId: 1,
+          name: "Week 1 Prize",
+          description: "1 chocolate bar if 100 minutes read",
+          milestone: 100,
+          userGroup: "all",
+          maxPrizes: 2,
+          startDate: "2022-04-20",
+          endDate: "2022-04-21",
+          winners: [
+            {
+                id: 3,
+                name: "Mike S",
+                username: 'mjs',
+                familyId: 1,
+                familyRole: "ROLE_PARENT",
+                authorities: [
+                    {
+                        "name": "ROLE_PARENT"
+                    }
+                ]
+            }
+        ]
+      },
+
+    {prizeId: 2,
+      familyId: 1,
+      name: "Week 2 Prize",
+      description: "1 chocolate bar if 100 minutes read",
+      milestone: 100,
+      userGroup: "all",
+      maxPrizes: 2,
+      startDate: "2022-04-23",
+      endDate: "2022-04-25",
+      winners: []
+    }
+  ]
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
