@@ -24,6 +24,7 @@ export default new Vuex.Store({
     userBooks: [],
     familyBooks: [],
     family: [],
+    prizes: []
       // {
       //   username: 'test',
       //   firstName: 'bob',
@@ -129,6 +130,14 @@ export default new Vuex.Store({
     },
     ADD_MEMBER(state, data) {
       state.family.push(data);
+    },
+    SET_PRIZE_LIST(state, data) {
+      state.prizes = data;
     }
+
+
+
+
+
   }
 })

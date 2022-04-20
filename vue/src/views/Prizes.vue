@@ -10,11 +10,24 @@
 </template>
 
 <script lang="ts">
-import Prize from '../components/Prize.vue'
+import Prize from '../components/Prize.vue';
+import PrizeService from '../services/PrizeService';
 
 export default ({
     components: {
         Prize
+    },
+    methods: {
+        retrievePrizes() {
+            PrizeService.listPrizesByFamilyId()
+                .then(response => {
+                    this.$store.commit("SET_PRIZE_LIST", response.data);
+                });
+        }
+
+    },
+    created() {
+        this.retrievePrizes();
     }
 })
 </script>
