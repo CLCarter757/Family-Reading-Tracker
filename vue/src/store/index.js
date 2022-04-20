@@ -71,6 +71,7 @@ export default new Vuex.Store({
     },
     UPDATE_USER_FAMILY(state, data){
       state.user.familyId = data.familyId;
+      localStorage.setItem('user',JSON.stringify(state.user));
     },
     REMOVE_FAMILY_MEMBER(state, data){
       const personToUpdate = state.family.find(person => person.id === data.id);
