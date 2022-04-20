@@ -1,14 +1,14 @@
 <template>
     <section>
-        <h2>Currently Reading</h2>
+        <h2 class ="subtitle has-text-weight-semibold is-underlined">Currently Reading</h2>
         <div class="reading-list">
             <book-card v-for="book in reading()" v-bind:key="book.isbn" :book="book"/>
         </div>
-        <h2>Wish List</h2>
+        <h2 class ="subtitle has-text-weight-semibold is-underlined">Wish List</h2>
         <div class="reading-list">
             <book-card v-for="book in wishList()" v-bind:key="book.isbn" :book="book"/>
         </div>        
-        <h2>Finished Reading</h2>
+        <h2 class ="subtitle has-text-weight-semibold is-underlined">Finished Reading</h2>
         <div class="reading-list">
             <book-card v-for="book in completed()" v-bind:key="book.isbn" :book="book"/>
         </div>

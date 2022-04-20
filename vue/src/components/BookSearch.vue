@@ -1,13 +1,24 @@
 <template>
     <div>
         <form @submit.prevent="submitSearch">
-            <select name="search" id="drop-search" v-model="searchType">
-                <option value="title">Title</option>
-                <option value="author">Author</option>
-                <option value="isbn">ISBN</option>
-            </select>
-            <input type="text" v-model="searchText"/>
-            <input id="search" type=submit value="Search"/>            
+            <div class="control">
+                <div class="select">
+                    <select>
+                    <option value="title">Title</option>
+                    <option value="author">Author</option>
+                    <option value="isbn">ISBN</option>
+                    </select>
+                </div>
+            </div>
+            <p class="control has-icons-left">
+                <input class="input " type="text" v-model="searchText" placeholder="Search">
+                <span class="icon is-left">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </span>
+            </p>
+            <div class="control">
+                <button class="button is-primary">Submit</button>
+            </div>            
         </form>
 
         <section v-show="searchResults">
@@ -44,6 +55,9 @@ export default {
                 })
             this.searchResults = true;
         },
+        addBookToLibrary() {
+            
+        }
     }
     
 }

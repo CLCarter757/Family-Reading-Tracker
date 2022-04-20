@@ -16,7 +16,7 @@
             </span>
         </div>
     </div>
-    <div class="icons" v-if="this.$store.state.user.familyRole == 'ROLE_PARENT' || this.$store.state.user.id == book.userId">
+    <div class="iconz" v-if="this.$store.state.user.familyRole == 'ROLE_PARENT' || this.$store.state.user.id == book.userId">
         <input class="fav" type="image" v-on:click.prevent="setFavorited(false)" v-if="book.favorited" 
             src="/RedHeart.png"/>
         <input class="fav" type="image" v-on:click.prevent="setFavorited(true)" v-if="! book.favorited" 
@@ -160,6 +160,11 @@ export default {
     width: 250px;
     height: 450px;
     margin: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+
 }
 
 .favorited {
@@ -168,16 +173,23 @@ export default {
 
 .book-title {
     font-size: 1.5rem;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    margin-bottom: 10px;
 }
 
 .book-author {
     font-size: 1rem;
+    margin-bottom: 10px;
 }
 
 .img {
     height: 200px;
 }
-/* .fav {
+.fav {
     height: 50px;
     padding: 10px;
 }
@@ -185,13 +197,13 @@ export default {
     height: 50px;
     padding: 10px;
     cursor: pointer;
-} */
-.icons{
+}
+.iconz{
     display: flex;
     justify-content: space-between;
     height: 50px;
     padding: 10px;
-    cursor:pointer;
+    cursor: pointer;
 }
 .fa-star {
     color: rgb(243, 210, 23);

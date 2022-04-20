@@ -1,18 +1,18 @@
 <template>
   <div class="card">
-      <h2 class="subtitle is-3">Read A Book</h2>
-      <img class="img" src="/book-badge.png" alt="">
-      <p>Finish reading an entire book!</p>
-      <p class="has-text-weight-semibold">Number of minutes: 60</p>
-      <p class="has-text-weight-semibold">4/21/22 - 4/27/22</p>
-      <p class="has-text-weight-semibold">Number Available: 3</p>
-      <p class="has-text-weight-semibold">Available to: All</p>
+      <h2 class="subtitle is-3">Read 5 Hours</h2>
+      <img class="img" src="/trophy-badge.png" alt="">
+      <p>Read for 5 hours this week</p>
+      <p class="has-text-weight-semibold">Number of minutes: 300</p>
+      <p class="has-text-weight-semibold">4/17/22 - 4/23/22</p>
+      <p class="has-text-weight-semibold">Number Available: 2</p>
+      <p class="has-text-weight-semibold">Available to: Children</p>
   </div>
 </template>
 
 <script>
 export default {
-    name: "prize-card",
+    name: "prizetwo",
     prop: {
         prize: Object,
     }

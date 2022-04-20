@@ -77,7 +77,7 @@ export default {
 </script>
 
 <style>
-.card {
+/* .search-card {
     border: 2px solid black;
     border-radius: 10px;
     width: 250px;
@@ -99,5 +99,5 @@ export default {
 
 .img {
     height: 200px;
-}
+} */
 </style>
