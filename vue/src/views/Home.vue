@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <span class="icon"><i class="fas fa-train" ></i></span>
     <h1>{{ this.$store.state.user.name }}'s Library</h1>
     <list-books/>
   </div>

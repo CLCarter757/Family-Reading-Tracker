@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="create-family" v-if="this.$store.state.user.familyId < 1">
+    <div class="create-family" v-if="this.$store.state.user.familyId < 1" >
         <h2>Create Your Family</h2>
           <input
           type="text"
