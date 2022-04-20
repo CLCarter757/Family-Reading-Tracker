@@ -1,20 +1,25 @@
 <template>
-  <div class="card">
-      <h2 class="subtitle is-3">Read A Book</h2>
-      <img class="img" src="/book-badge.png" alt="">
-      <p>Finish reading an entire book!</p>
-      <p class="has-text-weight-semibold">Number of minutes: 60</p>
-      <p class="has-text-weight-semibold">4/21/22 - 4/27/22</p>
-      <p class="has-text-weight-semibold">Number Available: 3</p>
-      <p class="has-text-weight-semibold">Available to: All</p>
+  <div class = "card">
+
+<div class="title"> {{ prize.name }}</div>
+
+
+       <h2 class="d">{{prize.name}}</h2> 
+       <img class="img" src="/book-badge.png" alt="">
+      <p>{{ prize.description }}</p>
+      <p class="has-text-weight-semibold">Number of minutes: {{prize.milestone}}</p>
+      <p class="has-text-weight-semibold">{{prize.startDate}} - {{prize.endDate}}</p>
+      <p class="has-text-weight-semibold">Number Available: {{prize.maxPrizes}}</p>
+      <p class="has-text-weight-semibold">Available to: {{prize.userGroup}}</p>
+      
   </div>
 </template>
 
 <script>
 export default {
     name: "prize-card",
-    prop: {
-        prize: Object,
+    props: {
+        prize: Object
     }
 
 }
