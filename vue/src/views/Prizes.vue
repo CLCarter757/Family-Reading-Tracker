@@ -2,9 +2,9 @@
     <div>
         <div class="is-size-1">Prizes</div>
         <div class="column">
-        <button class="mark-read button is-primary is-small is-fullwidth is-rounded" v-on:click="goToNewPrize">Add Prize</button>
+        <button class="mark-read button is-primary is-small is-rounded" v-on:click="goToNewPrize">Add Prize</button>
         </div>
-        <h2>Prizes Available</h2>
+        <h2 class="is-size-3 is-underlined">Prizes Available</h2>
         <div class="prize-list">
             <prize-card 
             v-for="prize in prizesAvailable" 
@@ -13,7 +13,7 @@
             />   
         </div>
         
-        <h2>My Prizes</h2>
+        <h2 class="is-size-3 is-underlined">My Prizes</h2>
         <div class="prize-list">
             <prize-card 
             v-for="prize in prizesWon" 
