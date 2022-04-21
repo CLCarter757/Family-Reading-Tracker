@@ -1,10 +1,10 @@
 <template>
-  <div class="card" v-bind:class="{ favorited: book.favorited }">
-    <div class="column">
-    <h2 class="book-title has-tooltip-multiline has-tooltip-info has-tooltip-bottom" :data-tooltip="book.description">{{ book.title }}</h2>
+  <div class="card  has-tooltip-multiline has-tooltip-info has-tooltip-bottom" :data-tooltip="book.description" v-bind:class="{ favorited: book.favorited }">
+
+    <h2 class="book-title">{{ book.title }}</h2>
     
     <img class="img" v-if="book.isbn" v-bind:src="book.bookCoverUrl" />
-    </div>
+
     <h3 class="book-author">{{ book.authors }}</h3>
     
     <div class="button-container">
@@ -210,5 +210,8 @@ export default {
 .fa-star {
     color: rgb(243, 210, 23);
     cursor: pointer;
+}
+.tooltip {
+  min-width: 700px; 
 }
 </style>

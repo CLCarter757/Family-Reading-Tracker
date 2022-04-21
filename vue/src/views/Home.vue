@@ -11,7 +11,7 @@ import ListBooks from '../components/ListBooks.vue';
 export default {
   name: "home",
   components: {
-    ListBooks
+    ListBooks,
   }
 };
 </script>

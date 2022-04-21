@@ -24,6 +24,7 @@ export default new Vuex.Store({
     userBooks: [],
     familyBooks: [],
     family: [],
+    readingActivity: []
 
   },
   mutations: {
@@ -81,6 +82,9 @@ export default new Vuex.Store({
       const personToUpdate = state.family.find(person => person.id === data.id);
       const index = state.family.indexOf(personToUpdate);
       state.family.splice(index);
+    },
+    SET_READING_ACTIVITY(state, data) {
+      state.readingActivity = data;
     }
 
   }
