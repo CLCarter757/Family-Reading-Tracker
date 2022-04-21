@@ -1,10 +1,11 @@
 <template>
     <div>
-        <div class="is-size-1">Prizes</div>
-        <div class="column">
-        <button class="mark-read button is-primary is-small is-rounded" v-on:click="goToNewPrize">Add Prize</button>
-        </div>
+        <div class="title">Prizes</div>
+        
+        <button v-if="this.$store.state.user.familyRole == 'ROLE_PARENT'" class="mark-read button is-primary is-small is-rounded" v-on:click="goToNewPrize">Add Prize</button>
+        
         <h2 class="is-size-3 is-underlined">Prizes Available</h2>
+        
         <div class="prize-list">
             <prize-card 
             v-for="prize in prizesAvailable" 

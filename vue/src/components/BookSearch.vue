@@ -8,15 +8,16 @@
             <div class="control">
                 
               <div class="control">
-                <div class="select">
-                    <select v-model="searchType">
-                        <option value="title">Title</option>
-                        <option value="author">Author</option>
-                        <option value="isbn">ISBN</option>
-                    </select>
-                </div>                        
-                <p>
-                  <input  class="input" style="width: 60%" type="text" 
+                <p>  
+                    <span class="select ">
+                        <select v-model="searchType">
+                            <option value="title">Title</option>
+                            <option value="author">Author</option>
+                            <option value="isbn">ISBN</option>
+                        </select>
+                    </span>                        
+                
+                  <input  class="input" style="width: 45%" type="text" 
                      placeholder="Search . . ." v-model="searchText" required>
                   <button class="button">Submit</button>
                 </p>
@@ -70,7 +71,7 @@ export default {
 </script>
 
 <style>
-.book-search {
-
+.select {
+    display: inline;
 }
 </style>
