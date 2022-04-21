@@ -1,7 +1,9 @@
 <template>
     <div>
         <div class="is-size-1">Prizes</div>
+        <div class="column">
         <button class="mark-read button is-primary is-small is-fullwidth is-rounded" v-on:click="goToNewPrize">Add Prize</button>
+        </div>
         <h2>Prizes Available</h2>
         <div class="prize-list">
             <prize-card 
