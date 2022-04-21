@@ -21,7 +21,14 @@
             :prize = "prize"
             />   
         </div>
-        <h2>Recent Family Prizes Won</h2>
+        <button class="mark-read button is-success is-small is-rounded" v-on:click="toggleAll" >View All Family Prizes</button>
+        <div class="prize-list" v-if="isShowingAll">
+            <prize-card 
+            v-for="prize in allPrizes" 
+            v-bind:key="prize.prizeId" 
+            :prize = "prize"
+            />   
+        </div>
         
     </div>
 </template>
@@ -33,6 +40,12 @@ import PrizeCard from '../components/PrizeCard.vue';
 export default ({
     components: {
         PrizeCard
+    },
+    data() {
+        return {
+            isShowingAll: false
+
+        }
     },
     computed: {
         prizesAvailable() {
@@ -49,6 +62,9 @@ export default ({
                     return this.$store.state.user.username == winner.username  
                 }).length;
         });
+        },
+        allPrizes() {
+            return this.$store.state.prizes;
         }
 
     },
@@ -61,6 +77,14 @@ export default ({
         },
         goToNewPrize() {
             this.$router.push('/newprize');
+        },
+        toggleAll() {
+            if (this.isShowingAll) {
+                this.isShowingAll = false
+            } else {
+                this.isShowingAll = true
+            }
+        
         }
     
     },
