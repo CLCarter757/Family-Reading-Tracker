@@ -198,8 +198,8 @@ export default {
     cursor: pointer;
 }
 .iconz{
-    display: flex;
-    justify-content: space-between;
+    display: flex !important;
+    justify-content: space-between !important;
     height: 50px;
     padding: 10px;
     cursor: pointer;

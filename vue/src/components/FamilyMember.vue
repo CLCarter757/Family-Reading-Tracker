@@ -3,14 +3,13 @@
     <div class="center list flex-column">
       <div class="family-card flex-row open">
         <div class="flex-column info">
-          <div class="title">{{ person.name }}</div>
-          <div >{{person.username}}</div>
-          <div >
+          <div class="subtitle is-3 is-underlined" >{{ person.name }}</div>
+          <div class="subtitle is-5">{{person.username}}</div>
+          <div class="subtitle is-6">
             {{ person.familyRole == "ROLE_PARENT" ? "Parent" : "Child" }}
-          </div><br>
+          </div>
 
-           <router-link :to="`/family/${person.id}`">
-              Currently Reading </router-link>
+           
 
           <div  
             v-if="this.$store.state.user.familyRole == 'ROLE_PARENT' || this.$store.state.user.id == person.id" class="hidden bottom">
@@ -21,8 +20,9 @@
           <h3>Most Recent Reading </h3>
           <h2>Date: {{lastActivity.dateCreated}}</h2>
           <h2> {{lastActivity.format}}</h2>
-            <h2> Duration:{{lastActivity.time}}</h2>
-        
+            <h2> Minutes: {{lastActivity.time}}</h2>
+          <router-link :to="`/family/${person.id}`">
+              Currently Reading </router-link>
           <div class="hidden bottom">
             
             
@@ -31,14 +31,7 @@
           
         </div>
          <div class="flex-column info">
-          <h3>Notes </h3>
-          <h2></h2>
-          <h2> </h2>
-            <h2></h2>
-            
-        
-
-          
+          <img v-bind:bookCover="getBookCover(lastActivity)" :src="bookCover" alt="Book Cover">
         </div>
         
         <!-- <img
@@ -62,13 +55,16 @@ export default {
       lastActivity: {
        
       },
-      lastBookRead: {}
+      lastBookRead: {},
+      bookCover: '',
     };
   },
   created() {
     this.getReadingActivity();
   },
-  computed: {},
+  computed: {
+         
+  },
 
   methods: {
     getReadingActivity() {
@@ -96,6 +92,12 @@ export default {
             }
           })
       },
+    getBookCover(activity) {
+        const cover = this.$store.state.familyBooks.find(book => {
+          return book.userBookId == activity.userBookId
+        });
+        this.bookCover = cover.bookCoverUrl;
+      } 
    },   
 };
 </script>
@@ -120,6 +122,7 @@ export default {
 .family-card {
   background-color: rgba(255, 255, 255, 0.5);
   width: 720px;
+  height: 250px;
   margin-bottom: 10px;
   perspective: 600px;
   transition: all 0.1s;

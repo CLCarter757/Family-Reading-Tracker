@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div class="is-size-1">Prizes</div>
-        <button class="mark-read button is-primary is-small is-fullwidth is-rounded" v-on:click="goToNewPrize">Add Prize</button>
-        <h2>Prizes Available</h2>
+        <div class="title">Prizes</div>
+        <button v-if="this.$store.state.user.familyRole == 'ROLE_PARENT'" class="mark-read button is-primary  is-rounded" v-on:click="goToNewPrize">Add Prize</button>
+        <h2 class="subtitle">Prizes Available</h2>
         <div class="prize-list">
             <prize-card 
             v-for="prize in prizesAvailable" 
@@ -11,7 +11,7 @@
             />   
         </div>
         
-        <h2>My Prizes</h2>
+        <h2 class="subtitle">My Prizes</h2>
         <div class="prize-list">
             <prize-card 
             v-for="prize in prizesWon" 
@@ -19,7 +19,7 @@
             :prize = "prize"
             />   
         </div>
-        <h2>Recent Family Prizes Won</h2>
+        <h2 class="subtitle">Recent Family Prizes Won</h2>
         
     </div>
 </template>

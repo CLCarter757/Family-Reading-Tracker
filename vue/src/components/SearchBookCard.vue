@@ -3,8 +3,11 @@
     <h2 class="book-title">{{ book.title }}</h2>
     <img class="img" v-if="book.isbn" v-bind:src="book.bookCoverUrl" />
     <h3 class="book-author">{{ book.authors }}</h3>
-    <button v-show="inWishList" @click="removeFromWishList">Remove from Wish List</button>
-    <button v-show="!inWishList" @click="addToWishList">Add to Wish List</button>
+    <div class="control">
+        <button class="button is-info" v-show="inWishList" @click="removeFromWishList">Remove from Wish List</button>
+        <button class="button is-info" v-show="!inWishList" @click="addToWishList">Add to Wish List</button>
+    </div>
+    
 
     <div>
         

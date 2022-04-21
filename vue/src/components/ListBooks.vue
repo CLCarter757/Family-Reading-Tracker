@@ -67,4 +67,9 @@ export default {
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
+hr.solid{
+    border-top: 3px solid #bbb;
+    width: 50%;
+    justify-content: center;
+}
 </style>

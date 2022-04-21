@@ -1,8 +1,17 @@
 <template>
   <div>
+    <div class="create-family" v-if="this.$store.state.user.familyId < 1" >
+        <h2 class="subtitle is-5">Create Your Family</h2>
+
+        <p>
+          <input  class="input" style="width: 50%" type="text" 
+            v-model="newMember.familyName" placeholder="Name Your Family Name" required>
+          <button class="button" @click="createFamily">Submit</button>
+        </p>
+      </div>
     <family-member v-bind:person="person" :key="person.username"
       v-for="person in this.$store.state.family" @click="`/family/${person.id}`"></family-member>
-        <div class="add-member">
+        <div class="add-member" v-if="this.$store.state.user.familyId">
             <i class="fa-solid fa-square-plus mx-1 fa-2x" @click="toggleForm" v-show="this.$store.state.user.familyRole == 'ROLE_PARENT'"/>
             <div class="control has-icons-left has-icons-right" v-show="showForm">
               <p>
@@ -106,7 +115,9 @@ export default {
     padding: 10px;
 }
 .add-member {
-  display: flex
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
 }
 .fa-x{
   color: rgb(211, 1, 1);
