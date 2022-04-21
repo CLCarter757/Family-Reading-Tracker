@@ -24,13 +24,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin: 60px;
+  margin: 0px;
 }
 
 #nav {
   display: flex;
   justify-content: center;
   gap: 6%;
+  margin-bottom: 50px;
 }
 
 #nav > .nav {

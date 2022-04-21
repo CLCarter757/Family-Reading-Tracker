@@ -80,7 +80,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 .card {
     border-radius: 10px;
@@ -89,7 +89,7 @@ export default {
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.3);
     width: 250px;
-    height: 465px;
+    height: 475px;
     margin: 30px;
 }
 

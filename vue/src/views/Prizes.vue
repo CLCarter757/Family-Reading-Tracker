@@ -25,7 +25,6 @@
 </template>
 
 <script>
-
 import PrizeService from '../services/PrizeService';
 import PrizeCard from '../components/PrizeCard.vue';
 

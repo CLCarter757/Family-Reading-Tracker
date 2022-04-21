@@ -37,11 +37,6 @@ export default {
     align-items: center;
     flex-direction: column;
 }
-.fa-square-plus {
-  color: green;
-  height: 100px;
-  cursor: pointer;
-}
 
 .book-title {
     font-size: 1.5rem;
