@@ -6,11 +6,11 @@
     
   <form class="log-reading-form" v-on:submit.prevent = "logReading">
       <div class="form-style-5">
-<form>
+
 <fieldset>
 
 <label for="field3"><span>Date <span class="required">*</span></span><input type="date" class="input-field" name="field3" v-model="readingActivity.date" value="" /></label><br>
-<label for="field2"><span>Minutes<span class="required">*</span></span><input type="text" class="input-field" name="field2" value="" /></label><br>
+<label for="field2"><span>Minutes<span class="required">*</span></span><input type="text" class="input-field" name="field2" value="" v-model="readingActivity.time"/></label><br>
 <label for="field4"><span>Format</span><select name="field4" class="select-field"><br>
 <option value="paper">Paper</option><br>
 <option value="audio-book">Audio Book</option><br>
@@ -23,7 +23,7 @@
 <label for="field6"><span>Notes <span class="required">*</span></span><textarea name="field6" class="textarea-field" v-model="readingActivity.notes"></textarea></label><br>
 <label><span> </span><input type="submit" value="Submit" /></label>
 </fieldset>
-</form>
+
 </div>
   </form>
     </div>

@@ -3,7 +3,7 @@
     <div class="center list flex-column">
       <div class="family-card flex-row open">
         <div class="flex-column info">
-          <div >{{ person.name }}</div>
+          <div class="title">{{ person.name }}</div>
           <div >{{person.username}}</div>
           <div >
             {{ person.familyRole == "ROLE_PARENT" ? "Parent" : "Child" }}
@@ -119,8 +119,7 @@ export default {
 }
 .family-card {
   background-color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  min-width: 700px;
+  width: 720px;
   margin-bottom: 10px;
   perspective: 600px;
   transition: all 0.1s;
@@ -194,7 +193,7 @@ button.simple:hover {
 }
 .title {
   font-size: 2em;
-  color: #fff;
+  color: black;
   letter-spacing: 1px;
 }
 .author {
