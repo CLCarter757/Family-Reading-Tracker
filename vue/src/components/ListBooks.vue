@@ -1,8 +1,14 @@
 <template>
     <section>
-        <h2 class ="subtitle has-text-weight-semibold is-underlined">Currently Reading</h2>
-        <div class="reading-list">
-            <book-card v-for="book in reading()" v-bind:key="book.isbn" :book="book"/>
+        <div class="top">
+            <div class="activity">
+                <h2 class ="subtitle has-text-weight-semibold is-underlined">Reading Activity</h2>
+                <reading-activity-list class="activity-table"></reading-activity-list>
+            </div>
+            <div class="reading-list">
+                <h2 class ="subtitle has-text-weight-semibold is-underlined">Currently Reading</h2>
+                <book-card v-for="book in reading()" v-bind:key="book.isbn" :book="book"/>
+            </div>
         </div>
         <h2 class ="subtitle has-text-weight-semibold is-underlined">Wish List</h2>
         <div class="reading-list">
@@ -18,11 +24,13 @@
 <script>
 import BookCard from '@/components/BookCard.vue';
 import BookService from '../services/BookService';
+import ReadingActivityList from '../components/ReadingActivityList.vue'
 
 export default {
     name: 'list-books',
     components: {
-        BookCard
+        BookCard,
+        ReadingActivityList
     },
     data() {
         return {
@@ -66,5 +74,17 @@ export default {
     display:flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+}
+hr.solid{
+    border-top: 3px solid #bbb;
+    width: 50%;
+    justify-content: center;
+}
+.top {
+    display: flex;
+    
+}
+.activity-table {
+    align-items: center;
 }
 </style>
