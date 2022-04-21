@@ -30,7 +30,7 @@ export default {
 #nav {
   display: flex;
   justify-content: center;
-  gap: 9%;
+  gap: 6%;
   margin-bottom: 50px;
 }
 

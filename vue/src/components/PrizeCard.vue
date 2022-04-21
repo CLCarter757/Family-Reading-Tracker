@@ -1,7 +1,7 @@
 <template>
   <div class = "card">
 
-<div class="title"> {{ prize.name }}</div>
+
 
 
        <h2 class="d">{{prize.name}}</h2> 
@@ -30,7 +30,7 @@ export default {
     border: 2px solid black;
     border-radius: 10px;
     width: 250px;
-    height: 350px;
+    height: 400px;
     margin: 20px;
     display: flex;
     justify-content: center;
