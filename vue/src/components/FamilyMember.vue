@@ -1,17 +1,23 @@
 <template>
   <div>
     <div class="center list flex-column">
-      <div class="card flex-row open">
+      <div class="family-card flex-row open">
         <div class="flex-column info">
-          <div >{{ person.name }}</div>
+          <div class="title">{{ person.name }}</div>
           <div >{{person.username}}</div>
           <div >
             {{ person.familyRole == "ROLE_PARENT" ? "Parent" : "Child" }}
           </div><br>
-           <router-link :to="`/family/${person.id} `">
+
+           <router-link :to="`/family/${person.id}`">
               Currently Reading </router-link>
+
+          <div  
+            v-if="this.$store.state.user.familyRole == 'ROLE_PARENT' || this.$store.state.user.id == person.id" class="hidden bottom">
+            <i class="fa-solid fa-x" @click="deleteMember(person)"/> 
+          </div>              
         </div>
-        <div class="flex-column group">
+        <div class="flex-column info">
           <h3>Most Recent Reading </h3>
           <h2>Date: {{lastActivity.dateCreated}}</h2>
           <h2> {{lastActivity.format}}</h2>
@@ -24,18 +30,14 @@
           </div>
           
         </div>
-         <div class="flex-column group">
+         <div class="flex-column info">
           <h3>Notes </h3>
           <h2></h2>
           <h2> </h2>
             <h2></h2>
             
         
-          <div class="hidden bottom">
-            
-            
-            <button  @click.prevent="deleteMember(person)" >Remove</button> 
-          </div>
+
           
         </div>
         
@@ -45,6 +47,7 @@
         /> -->
       </div>
     </div>
+
   </div>
 </template>
 
@@ -81,10 +84,9 @@ export default {
       BookService.getBookById(this.lastActivity.userBookId).then(response=>{
         this.lastBookRead = response.data
       })
-    }
-   
-  },
-     deleteMember(person) {
+    },
+    
+    deleteMember(person) {
         if(confirm(`Remove this person from your family?`))
         FamilyService.deleteMember(this.$store.state.user.familyId, person.id)
           .then(response => {
@@ -94,6 +96,7 @@ export default {
             }
           })
       },
+   },   
 };
 </script>
 
@@ -107,16 +110,16 @@ export default {
   display: flex;
   flex-flow: column;
   align-items: center;
+  justify-content: center;
 }
 
 .list {
   border-radius: 3px;
   overflow: hidden;
 }
-.card {
-  background-color: silver;
-  cursor: pointer;
-  min-width: 700px;
+.family-card {
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 720px;
   margin-bottom: 10px;
   perspective: 600px;
   transition: all 0.1s;
@@ -124,6 +127,7 @@ export default {
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   height: 90px;
+  border-radius: 10px;
 }
 .bottom {
   height: 0px;
@@ -189,7 +193,7 @@ button.simple:hover {
 }
 .title {
   font-size: 2em;
-  color: #fff;
+  color: black;
   letter-spacing: 1px;
 }
 .author {
@@ -199,6 +203,8 @@ button.simple:hover {
 }
 
 .group {
-  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

@@ -1,16 +1,19 @@
 <template>
   <div>
-    <prize-card>Prize Card</prize-card>
+    <prize-card></prize-card>
+    <prize-card-2></prize-card-2>
   </div>
 </template>
 
 <script >
 import PrizeCard from '../components/PrizeCard.vue'
+import PrizeCard2 from '../components/PrizeCard2.vue'
 
 export default {
     name: 'prize',
     components: {
-      PrizeCard
+      PrizeCard, 
+      PrizeCard2
     }
 }
 </script>
