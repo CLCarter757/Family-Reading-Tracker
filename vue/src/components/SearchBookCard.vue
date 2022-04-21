@@ -1,7 +1,9 @@
 <template>
-  <div class="card" >
-    <h2 class="book-title">{{ book.title }}</h2>
-    <img class="img" v-if="book.isbn" v-bind:src="book.bookCoverUrl" />
+  <div class="card has-tooltip-multiline has-tooltip-info has-tooltip-bottom" :data-tooltip="book.description" >
+      
+    <h2 class="book-title " >{{ book.title }}</h2>
+   <img class="img" v-if="book.isbn" v-bind:src="book.bookCoverUrl" />
+    
     <h3 class="book-author">{{ book.authors }}</h3>
     <div class="control">
         <button class="button is-info" v-show="inWishList" @click="removeFromWishList">Remove from Wish List</button>
@@ -100,8 +102,16 @@ export default {
     background-color: lightgoldenrodyellow;
 }
 
-.card .book-title {
+.card > h2 {
     font-size: 1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.book-title { 
+    overflow: hidden;
+    text-overflow: ellipsis;
+
 }
 
 .card .book-author {
