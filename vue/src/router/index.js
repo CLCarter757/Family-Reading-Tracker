@@ -10,6 +10,7 @@ import Family from '../views/Family.vue'
 import Prizes from '../views/Prizes.vue'
 import SearchBooks from '../views/SearchBooks.vue'
 import FamilyMemberLibrary from '../views/FamilyMemberLibrary.vue'
+import NewPrize from '../components/NewPrize.vue'
 
 Vue.use(Router)
 
@@ -26,6 +27,14 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    {
+      path: '/newprize',
+      name: 'new-prize',
+      component: NewPrize,
+      meta: {
+        requiresAuth: true
+      }
+      },
     {
       path: '/',
       name: 'home',

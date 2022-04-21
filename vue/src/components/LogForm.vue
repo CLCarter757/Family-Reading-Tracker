@@ -25,45 +25,6 @@
 </fieldset>
 </form>
 </div>
-
-    <!-- <div>
-        <input class="title-input" type="text" placeholder="Title" v-model="readingActivity.title" />
-    </div>  
-    <div>
-        
-        <input class="author-input" type="text" placeholder="Author" v-model="readingActivity.author" />
-    </div> 
-    <div>
-        <input class="isbn-input" type="text" placeholder="ISBN" v-model="readingActivity.isbn" />
-    </div>   -->
-
-
-
-    <!-- <div>
-        <input class="date-input" type="date" v-model="readingActivity.date" />
-    </div>
-    <div>
-        <form>
-        <select name = "format" class="format-input" placeholder="Format" v-model="readingActivity.format" >
-            <option value="" disabled selected hidden>Format</option>
-            <option value="Paper">Paper</option>
-            <option value="Digital">Digital</option>
-            <option value="Audio Book">Audio Book</option>
-            <option value="Read-Aloud (Reader)">Read-Aloud (Reader)</option>
-            <option value="Read-Aloud (Listener)">Read-Aloud (Listener)</option>
-            <option value="Other">Other</option>
-        </select>
-        </form>
-    </div>      
-    <div>
-        <input class="time-input" type="number" placeholder="Minutes" v-model="readingActivity.time" />
-    </div>    
-    <div>
-        <input class="notes-input" type="text" placeholder="Notes" v-model="readingActivity.notes" />
-    </div>    
-    <div>
-        <button>Save</button>
-    </div> -->
   </form>
     </div>
 </template>
