@@ -154,17 +154,15 @@ export default {
 </script>
 
 <style>
-.card {
-    border: 2px solid black;
-    border-radius: 10px;
-    width: 250px;
-    height: 450px;
-    margin: 20px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
 
+.card {
+    border-radius: 10px;
+    backdrop-filter: hue-rotate(30px);
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 250px;
+    height: 465px;
 }
 
 .favorited {

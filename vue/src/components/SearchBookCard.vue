@@ -5,6 +5,10 @@
     <h3 class="book-author">{{ book.authors }}</h3>
     <button v-show="inWishList" @click="removeFromWishList">Remove from Wish List</button>
     <button v-show="!inWishList" @click="addToWishList">Add to Wish List</button>
+
+    <div>
+        
+    </div>
   </div>
 </template>
 
@@ -76,13 +80,17 @@ export default {
 }
 </script>
 
-<style>
-/* .search-card {
-    border: 2px solid black;
+<style scoped>
+
+.card {
     border-radius: 10px;
+    backdrop-filter: hue-rotate(30px);
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     width: 250px;
-    height: 450px;
-    margin: 20px;
+    height: 465px;
+    margin: 30px;
 }
 
 .card.read {
@@ -99,5 +107,5 @@ export default {
 
 .img {
     height: 200px;
-} */
+}
 </style>
