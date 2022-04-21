@@ -1,24 +1,29 @@
 <template>
-    <div>
+    <div class="book-search">
         <form @submit.prevent="submitSearch">
             <div class="control">
-                <div class="select">
-                    <select>
-                    <option value="title">Title</option>
-                    <option value="author">Author</option>
-                    <option value="isbn">ISBN</option>
-                    </select>
-                </div>
+
             </div>
-            <p class="control has-icons-left">
-                <input class="input " type="text" v-model="searchText" placeholder="Search">
-                <span class="icon is-left">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                </span>
-            </p>
+            
             <div class="control">
-                <button class="button is-primary">Submit</button>
-            </div>            
+                
+              <div class="control">
+                <div class="select">
+                    <select v-model="searchType">
+                        <option value="title">Title</option>
+                        <option value="author">Author</option>
+                        <option value="isbn">ISBN</option>
+                    </select>
+                </div>                        
+                <p>
+                  <input  class="input" style="width: 60%" type="text" 
+                     placeholder="Search . . ." v-model="searchText" required>
+                  <button class="button">Submit</button>
+                </p>
+                
+              </div>
+            </div>   
+                   
         </form>
 
         <section v-show="searchResults">
@@ -65,5 +70,7 @@ export default {
 </script>
 
 <style>
+.book-search {
 
+}
 </style>

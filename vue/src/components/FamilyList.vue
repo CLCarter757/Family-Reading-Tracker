@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="create-family" v-if="this.$store.state.user.familyId < 1" >
+    <!-- <div class="create-family" v-if="this.$store.state.user.familyId < 1" >
         <h2>Create Your Family</h2>
           <input
           type="text"
@@ -27,13 +27,13 @@
             <td>{{ person.username }}</td>
             <td>{{ person.familyRole == 'ROLE_PARENT' ? 'Parent' : 'Child' }}</td>
         </tr>
-      </div>
+      </div> -->
       
       <family-member @click="`/family/${person.id}`"
       v-for="person in this.$store.state.family" :key="person.username" v-bind:person="person"></family-member>
 
 
-      <div v-if="this.$store.state.user.familyId && this.$store.state.user.familyRole =='ROLE_PARENT'">
+      <!-- <div v-if="this.$store.state.user.familyId && this.$store.state.user.familyRole =='ROLE_PARENT'">
         <tr>
             <th>Name</th>
             <th>Username</th>
@@ -51,19 +51,27 @@
               <i class="fa-solid fa-x" @click="deleteMember(person)"/>
             </td>
         </tr>
-        <tr>
+        <tr> -->
           <div class="add-member">
 
 
-            <div>
-            <button class="simple"  @click="toggleForm" >Add Mamber</button> </div>
+            <!-- <div>
+            <button class="simple"  @click="toggleForm" >Add Mamber</button> </div> -->
               <!-- <input class="icon" type="image" src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
                 @click="toggleForm">Add Member/> -->
 
-              <i class="fa-solid fa-square-plus" @click="toggleForm"/>
+              <i class="fa-solid fa-square-plus mx-1 fa-2x" @click="toggleForm" v-show="this.$store.state.user.familyRole == 'ROLE_PARENT'"/>
+              <div class="control has-icons-left has-icons-right" v-show="showForm">
+                <p>
+                  <input  class="input" style="width: 60%" type="text" 
+                    v-model="newMember.username" placeholder="Username" required>
+                  <button class="button" @click="addMember">Submit</button>
+                </p>
+                
+              </div>
 
 
-              <input
+              <!-- <input
                   v-show="showForm"
                   type="text"
                   id="name"
@@ -73,10 +81,10 @@
                   required
                   autofocus
                 />
-                <button type="submit" v-show="showForm" v-on:click.prevent="addMember">Submit</button>
+                <button type="submit" v-show="showForm" v-on:click.prevent="addMember">Submit</button> -->
             </div>
-        </tr>
-    </div>
+        <!-- </tr> -->
+    <!-- </div> -->
   </div>  
 </template>
 
