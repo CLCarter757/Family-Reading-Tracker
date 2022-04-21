@@ -6,7 +6,7 @@
             <tr>
             <th>Title</th>
             <th>Date</th>
-            <th>Format</th>
+            <!-- <th>Format</th> -->
             <th>Minutes</th>
             <th>Notes</th>
         </tr>
@@ -15,7 +15,7 @@
             <tr v-for="readingActivity in this.$store.state.readingActivity" :key="readingActivity.recordId">
                 <td  v-bind:bookTitle="getBookTitle(readingActivity)">{{ bookTitle }}</td>
                 <td>{{readingActivity.dateCreated}}</td>
-                <td>{{readingActivity.format}}</td>
+                <!-- <td>{{readingActivity.format}}</td> -->
                 <td>{{readingActivity.time}}</td>
                 <td>{{readingActivity.notes}}</td>
             </tr>
