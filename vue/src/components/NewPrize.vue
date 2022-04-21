@@ -1,7 +1,8 @@
 <template>
 
     <div>
-        <p>Create a New Prize for the Family!</p>
+        <br>
+        <p class="has-text-weight-bold is-size-2"> Create a New Prize for the Family!</p>
 
     
   <form class="log-reading-form" v-on:submit.prevent="newPrize">
