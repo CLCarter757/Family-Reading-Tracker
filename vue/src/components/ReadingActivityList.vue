@@ -36,9 +36,10 @@ export default {
     },
     methods: {
         getBookTitle(activity) {
-            const activityBook = this.$store.state.userBooks.find(book => {
-                return book.userBookId == activity.userBookId
+            let activityBook =  this.$store.state.userBooks.find(book => {
+                return book.userBookId == activity.userBookId;
             });
+            
             this.bookTitle = activityBook.title;
         },
         setReadingActivity() {

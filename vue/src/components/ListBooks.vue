@@ -89,7 +89,7 @@ hr.solid{
 .activity {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin: 40px;
 }
 .library {

@@ -1,15 +1,15 @@
 <template>
     <section>
-        <h1>{{this.familyMember.name}}'s Library</h1>
-        <h2>Currently Reading</h2>
+        <h1 class="subtitle is-1">{{this.familyMember.name}}'s Library</h1>
+        <h2 class ="subtitle is-3 has-text-weight-semibold is-underlined">Currently Reading</h2>
         <div class="reading-list">
             <book-card v-for="book in reading()" v-bind:key="book.isbn" :book="book"/>
         </div>
-        <h2>Wish List </h2>
+        <h2 class ="subtitle is-3 has-text-weight-semibold is-underlined">Wish List </h2>
         <div class="reading-list">
             <book-card v-for="book in wishList()" v-bind:key="book.isbn" :book="book"/>
         </div>        
-        <h2>Finished Reading</h2>
+        <h2 class ="subtitle is-3 has-text-weight-semibold is-underlined">Finished Reading</h2>
         <div class="reading-list">
             <book-card v-for="book in completed()" v-bind:key="book.isbn" :book="book"/>
         </div>
@@ -21,10 +21,12 @@ import BookCard from '@/components/BookCard.vue';
 import BookService from '../services/BookService.js';
 import FamilyService from '../services/FamilyService.js';
 
+
 export default {
     name: 'member',
     components: {
-        BookCard
+        BookCard,
+
     },
     data() {
         return {
