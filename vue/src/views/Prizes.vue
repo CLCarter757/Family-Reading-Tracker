@@ -14,7 +14,7 @@
             />   
         </div>
         
-        <h2 class="is-size-3 is-underlined">My Prizes</h2>
+        <h2 class="is-size-3 is-underlined mt-5 mb-5">My Prizes</h2>
         <div class="prize-list">
             <prize-card 
             v-for="prize in prizesWon" 
