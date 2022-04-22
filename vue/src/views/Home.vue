@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1 class="title">{{ this.$store.state.user.name }}'s Library</h1>
+    <h1 class="subtitle is-1">{{ this.$store.state.user.name }}'s Library</h1>
     <list-books/>
   </div>
 </template>

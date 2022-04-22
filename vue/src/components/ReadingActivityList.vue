@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <table class="table">
+  <div class="table container">
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
         
         <thead>
             <tr>
             <th>Title</th>
             <th>Date</th>
-            <th>Format</th>
+            <!-- <th>Format</th> -->
             <th>Minutes</th>
             <th>Notes</th>
         </tr>
@@ -15,7 +15,7 @@
             <tr v-for="readingActivity in this.$store.state.readingActivity" :key="readingActivity.recordId">
                 <td  v-bind:bookTitle="getBookTitle(readingActivity)">{{ bookTitle }}</td>
                 <td>{{readingActivity.dateCreated}}</td>
-                <td>{{readingActivity.format}}</td>
+                <!-- <td>{{readingActivity.format}}</td> -->
                 <td>{{readingActivity.time}}</td>
                 <td>{{readingActivity.notes}}</td>
             </tr>

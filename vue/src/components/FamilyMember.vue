@@ -2,33 +2,24 @@
   <div>
     <div class="center list flex-column">
       <div class="family-card flex-row open">
-        <div class="flex-column info">
-          <div class="subtitle is-3 is-underlined" >{{ person.name }}</div>
+        <div class="user-info flex-column info">
+          <div class="subtitle is-2 is-underlined" >{{ person.name }}</div>
           <div class="subtitle is-5">{{person.username}}</div>
-          <div class="subtitle is-6">
+          <div class="subtitle is-size-6">
             {{ person.familyRole == "ROLE_PARENT" ? "Parent" : "Child" }}
           </div>
-
-           
-
-          <div  
-            v-if="this.$store.state.user.familyRole == 'ROLE_PARENT' || this.$store.state.user.id == person.id" class="hidden bottom">
-            <i class="fa-solid fa-x" @click="deleteMember(person)"/> 
-          </div>              
+           <i class="fa-solid fa-x" @click="deleteMember(person)"/>            
         </div>
         <div class="flex-column info">
-          <h3>Most Recent Reading </h3>
-          <h2>Date: {{lastActivity.dateCreated}}</h2>
-          <h2> {{lastActivity.format}}</h2>
+          <router-link class="is-info" :to="`/family/${person.id}`">
+              {{person.name}}'s Library </router-link><br>
+          <div v-if="this.$store.state.user.familyRole == 'ROLE_PARENT' || this.$store.state.user.id == person.id" class="hidden bottom">
+            <h2 class="subtitle is-6">Recent Reading:</h2>
+            <h2>Date: {{lastActivity.dateCreated}}</h2>
+            <h2> {{lastActivity.format}}</h2>
             <h2> Minutes: {{lastActivity.time}}</h2>
-          <router-link :to="`/family/${person.id}`">
-              Currently Reading </router-link>
-          <div class="hidden bottom">
             
-            
-            <!-- <button class="simple" >Remove</button> -->
-          </div>
-          
+          </div>  
         </div>
          <div class="flex-column info">
           <img v-bind:bookCover="getBookCover(lastActivity)" :src="bookCover" alt="Book Cover">
@@ -113,6 +104,7 @@ export default {
   flex-flow: column;
   align-items: center;
   justify-content: center;
+
 }
 
 .list {
@@ -120,7 +112,7 @@ export default {
   overflow: hidden;
 }
 .family-card {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.514);
   width: 720px;
   height: 250px;
   margin-bottom: 10px;
@@ -130,24 +122,18 @@ export default {
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   height: 90px;
-  border-radius: 10px;
+  
 }
 .bottom {
-  height: 0px;
   overflow: hidden;
-  width: 200px;
-  font-size: 12px;
-  color: #777;
-  font-weight: normal;
+  /* width: 200px; */
+  /* margin-top: 10px; */
+  height: 100%;
+  overflow: visible;
 }
 .open {
   padding: 30px;
   height: auto;
-}
-.bottom {
-  margin-top: 10px;
-  height: 100%;
-  overflow: visible;
 }
 .book {
   transform: rotateY(-50deg);
@@ -155,59 +141,39 @@ export default {
   transition: all 0.5s;
   transition-delay: 0.05s;
 }
-.info {
-  transform: translate(0, -10px);
-}
-.members {
-  padding: 15px 20px;
-  border-radius: 4px;
-  align-self: flex-start;
-}
-
-button.simple {
-  cursor: pointer;
-  color: #ccc;
-  border: none;
-  outline: none;
-  border-radius: 4px;
-  background-color: #1ea94b;
-  padding: 15px 20px;
-  font-family: "Montserrat";
-  font-weight: bold;
-  transition: all 0.1s;
-}
-button.simple:hover {
-  box-shadow: 0px 15px 20px -5px rgba(0, 0, 0, 0.3);
-  transform: translate(0, -2px);
-}
 
 .book {
-  transition: all 0.5s;
   width: 120px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
 .info {
-  transition: all 0.2s;
   min-width: 200px;
   padding: 0px 30px;
-  font-family: "Montserrat";
   font-weight: bold;
 }
-.title {
-  font-size: 2em;
-  color: black;
-  letter-spacing: 1px;
-}
-.author {
-  font-size: 20px;
-  font-weight: normal;
-  color: #888;
-}
-
 .group {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.family-card.flex-row.open {
+  min-height: 265px;
+}
+.hidden.bottom{
+  margin-bottom: auto;
+}
+.user-info{
+    min-width: 250px;
+    align-items: center;
+    margin: 10px;
+}
+.user-info.flex-column.info{
+  align-items:center;
+}
+i{
+  position: relative;
+  right: 120px;
+  bottom: 75px;
 }
 </style>

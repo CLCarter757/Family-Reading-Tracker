@@ -27,8 +27,8 @@
                    
         </form>
 
-        <section v-show="searchResults">
-            <h2 v-show="submitSearch">Results</h2>
+        <section class="results" v-show="searchResults">
+            <h2 v-show="submitSearch" class="subtitle is-3">Results</h2>
             <div class="reading-list">
                 <search-book-card v-for="book in $store.state.searchBook" v-bind:key="book.isbn" :book="book"/>
             </div>
@@ -73,5 +73,8 @@ export default {
 <style>
 .select {
     display: inline;
+}
+.results {
+    margin-top: 50px;
 }
 </style>

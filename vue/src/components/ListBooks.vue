@@ -1,20 +1,20 @@
 <template>
-    <section>
+    <section class="library">
         <div class="top">
             <div class="activity">
-                <h2 class ="subtitle has-text-weight-semibold is-underlined">Reading Activity</h2>
+                <h2 class ="subtitle is-3 has-text-weight-semibold is-underlined">Reading Activity</h2>
                 <reading-activity-list class="activity-table"></reading-activity-list>
             </div>
             <div class="reading-list">
-                <h2 class ="subtitle has-text-weight-semibold is-underlined">Currently Reading</h2>
+                <h2 class ="subtitle is-3 has-text-weight-semibold is-underlined">Currently Reading</h2>
                 <book-card v-for="book in reading()" v-bind:key="book.isbn" :book="book"/>
             </div>
         </div>
-        <h2 class ="subtitle has-text-weight-semibold is-underlined">Wish List</h2>
+        <h2 class ="subtitle is-3 has-text-weight-semibold is-underlined">Wish List</h2>
         <div class="reading-list">
             <book-card v-for="book in wishList()" v-bind:key="book.isbn" :book="book"/>
         </div>        
-        <h2 class ="subtitle has-text-weight-semibold is-underlined">Finished Reading</h2>
+        <h2 class ="subtitle is-3 has-text-weight-semibold is-underlined">Finished Reading</h2>
         <div class="reading-list">
             <book-card v-for="book in completed()" v-bind:key="book.isbn" :book="book"/>
         </div>
@@ -73,7 +73,8 @@ export default {
 .reading-list {
     display:flex;
     justify-content: space-evenly;
-    flex-wrap: wrap;
+    
+    
 }
 hr.solid{
     border-top: 3px solid #bbb;
@@ -82,9 +83,19 @@ hr.solid{
 }
 .top {
     display: flex;
-    
-}
-.activity-table {
     align-items: center;
+    margin: auto;
+}
+.activity {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 40px;
+}
+.library {
+    margin: 20px;
+}
+h2 {
+    margin-top: 20px;
 }
 </style>

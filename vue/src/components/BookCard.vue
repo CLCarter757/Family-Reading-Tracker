@@ -1,5 +1,5 @@
 <template>
-  <div class="card  has-tooltip-multiline has-tooltip-info has-tooltip-bottom" :data-tooltip="book.description" v-bind:class="{ favorited: book.favorited }">
+  <div class="card  ">
 
     <h2 class="book-title">{{ book.title }}</h2>
     
