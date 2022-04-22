@@ -5,7 +5,7 @@
       <p>{{ prize.description }}</p>
       <p class="has-text-weight-semibold">Number of minutes: {{prize.milestone}}</p>
       <p class="has-text-weight-semibold">{{prize.startDate}} - {{prize.endDate}}</p>
-      <p class="has-text-weight-semibold">Number Available: {{prize.maxPrizes}}</p>
+      <p class="has-text-weight-semibold">Max Available: {{prize.maxPrizes}}</p>
       <p class="has-text-weight-semibold">Available to: {{prize.userGroup}}</p>
       
   </div>
