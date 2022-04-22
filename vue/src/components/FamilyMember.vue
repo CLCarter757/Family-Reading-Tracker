@@ -1,3 +1,6 @@
+<!--
+This is a new login page style
+-->
 <template>
   <div>
     <div class="center list flex-column">
